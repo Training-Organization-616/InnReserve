@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>宿予約</title>
+</head>
+<body>
+	<h1>宿一覧</h1>
+	<table border="1">
+		<tr>
+			<th>NO</th>
+			<th>宿名</th>
+			<th>場所</th>
+			<th>電話番号</th>
+			<th>値段</th>
+			<th>詳細</th>
+		</tr>
+		<c:forEach items="${inns }" var="inn">
+			<tr>
+				<td>${inn.id }</td>
+				<td>${inn.name }</td>
+				<td>${inn.address }</td>
+				<td>${inn.tel }</td>
+				<td>${inn.price }</td>
+				<form action="/InnReserve/ReserveServlet?inn_id=${inn.id }"
+					method="post">
+					<td><button>詳細</button></td> <input
+						type="hidden" name="action" value="goinn">
+				</form>
+			</tr>
+		</c:forEach>
+	</table>
+	<a href="/InnReserve/ReserveServlet?action=reservelist">予約一覧</a>
+</body>
+</html>
