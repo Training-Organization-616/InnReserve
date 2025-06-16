@@ -63,7 +63,7 @@
 				<tr>
 					<th>予約</th>
 					<th>会員</th>
-					<th>宿名</th>
+					<th>宿</th>
 					<th>人数</th>
 					<th>日数</th>
 					<th>チェックイン日</th>
@@ -76,7 +76,7 @@
 					<tr>
 						<td>${item.id}</td>
 						<td>${item.customer_id}</td>
-						<td>${item.name }</td>
+						<td>${item.inn_id }</td>
 						<td>${item.people }</td>
 						<td>${item.stay_days }</td>
 						<td>${item.first_day }</td>
