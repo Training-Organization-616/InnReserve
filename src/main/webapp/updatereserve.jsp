@@ -43,8 +43,25 @@ int price = inn.getPrice();
 				<td><input type="date" name="check_in"value="${reserve.getFirst_day() }"></td>
 			</tr>
 		</table>
+		<dialog>
+		<p>この変更内容でよろしいですか?</p>
 		<button>変更</button>
 		<input type="hidden" name="action" value="update">
 	</form>
+	<button type="button" id="close">キャンセル</button>
+	</dialog>
+	<button id="show">変更</button>
+
+	<script type="text/javascript">
+		var dialog = document.querySelector('dialog');
+		var btn_show = document.getElementById('show');
+		var btn_close = document.getElementById('close');
+		btn_show.addEventListener('click', function() {
+			dialog.showModal();
+		}, false);
+		btn_close.addEventListener('click', function() {
+			dialog.close();
+		}, false);
+	</script>
 </body>
 </html>

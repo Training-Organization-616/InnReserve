@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="la.bean.ReserveBean"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% List<ReserveBean> reserves = (List<ReserveBean>)request.getAttribute("reserves"); %>
+<% int count =reserves.size(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,16 +43,39 @@
 					<td><button>変更</button></td> <input
 						type="hidden" name="action" value="edit">
 				</form>
-				<form action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&"
+				<form action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 					method="post">
-					<td><button>削除</button></td> <input
-						type="hidden" name="action" value="delete">
+					<td><button type="button" class="show">削除</button></td>
+					<dialog>
+					<p>本当に削除しますか?</p>
+					<button>削除</button>
+					<input type="hidden" name="action" value="delete">
 				</form>
+				<button type="button" class="close">キャンセル</button>
+				</dialog>
 			</c:if>
 		</c:forEach>
 			</tr>
 		</c:forEach>
 	</table>
 		<a href="/InnReserve/ReserveServlet?action=list">宿一覧</a>
+<script type="text/javascript">
+		var dialog = document.querySelectorAll('dialog');
+		var btn_show = document.getElementsByClassName('show');
+		var btn_close = document.getElementsByClassName('close');
+	
+		for (let i = 0; i < <%=count%>; i++) {
+			btn_show[i].addEventListener('click', function() {
+				dialog[i].showModal();
+			}, false);
+		}
+		for (let i = 0; i < <%=count%>; i++) {
+			btn_close[i].addEventListener('click', function() {
+				dialog[i].close();
+			}, false);
+		}
+
+	</script>
+
 </body>
 </html>

@@ -77,16 +77,49 @@ public class ReserveServlet extends HttpServlet {
 
 				//予約の確定
 			} else if (action.equals("reserve")) {
-				//				int customer_id=customer.getId();
+				int flag = 0;
+				int people = 0;
+				int stay_days = 0;
+				//int customer_id=customer.getId();
 				//入力された予約情報を型変換
 				int customer_id = 1;
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
-				int people = Integer.parseInt(request.getParameter("people"));
-				int stay_days = Integer.parseInt(request.getParameter("days"));
+
+				if (request.getParameter("people") == "") {
+					request.setAttribute("people_msg", "人数を入力してください");
+					flag = 1;
+				} else if (isNumber(request.getParameter("people"))) {
+					people = Integer.parseInt(request.getParameter("people"));
+				} else {
+					request.setAttribute("people_msg", "数字を入力してください");
+					flag = 1;
+				}
+				if (request.getParameter("days") == "") {
+					request.setAttribute("days_msg", "日数を入力してください");
+					flag = 1;
+				} else if (isNumber(request.getParameter("days"))) {
+					stay_days = Integer.parseInt(request.getParameter("days"));
+				} else {
+					request.setAttribute("days_msg", "数字を入力してください");
+					flag = 1;
+				}
 				String strDate = request.getParameter("check_in");
 				Date first_day = java.sql.Date.valueOf(strDate);
 				//合計金額は宿の金額*人数*宿泊日数で計算
 				int total_price = Integer.parseInt(request.getParameter("price")) * people * stay_days;
+
+				//入力された情報の正誤確認
+				if (people > 4) {
+					request.setAttribute("people_msg", "4以下の数字を入力してください");
+					flag = 1;
+				}
+
+				if (flag == 1) {
+					InnBean inn = dao.findInnById(inn_id);
+					request.setAttribute("inn", inn);
+					gotoPage(request, response, "/reserve.jsp");
+					return;
+				}
 
 				dao.addReserve(customer_id, inn_id, people, stay_days, first_day, total_price);
 				gotoPage(request, response, "/reservecomp.jsp");
@@ -169,6 +202,15 @@ public class ReserveServlet extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/errInternal.jsp");
+		}
+	}
+
+	public boolean isNumber(String val) {
+		try {
+			Integer.parseInt(val);
+			return true;
+		} catch (NumberFormatException nfex) {
+			return false;
 		}
 	}
 

@@ -20,22 +20,35 @@ int price = inn.getPrice();
 		method="post">
 		<table border="1">
 			<tr>
-				<th>宿泊日数</th>
+				<p>${days_msg}</p><th>宿泊日数</th>
 				<td>
-					<input type="text" name="days" cal="2">日
+					<input type="text" name="days">日
 				</td>
 			</tr>
 			<tr>
-				<th>宿泊人数</th>
+				<p>${people_msg}</p><th>宿泊人数</th>
 				<td>
-					<input type="text" name="people" cal="2">人
+					<input type="text" name="people">人
 				</td>
 			</tr>
+			<script type="text/javascript">
+    //今日の日時を表示
+        window.onload = function () {
+            //今日の日時を表示
+        	  var date = new Date();
+
+              var yyyy = date.getFullYear();
+              var mm = ("0"+(date.getMonth()+1)).slice(-2);
+              var dd = ("0"+date.getDate()).slice(-2);
+
+          document.getElementById("today").value=yyyy+'-'+mm+'-'+dd;
+        }
+</script>
 			<tr>
-				<th>チェックイン日</th>
-				<td><input type="date" name="check_in"></td>
-			</tr>
-		</table>
+				<p>${check_in_msg}</p><th>チェックイン日</th>
+				<td><input type="date" name="check_in" id="today"></td>
+			</tr>		
+			</table>
 		<button>予約</button>
 		<input type="hidden" name="action" value="reserve">
 	</form>
