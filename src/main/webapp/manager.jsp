@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -8,12 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- メニューのリンク --%>
-<jsp:include page="/managermenu.jsp" />
+	<%-- メニューのリンク --%>
+	<jsp:include page="/managermenu.jsp" />
 
-<%-- [menu=1]宿を選択 --%>
-<c:if test="${menu ==1}">
-<%-- 一覧表の作成 --%>
+	<%-- [menu=1]宿を選択 --%>
+	<c:if test="${menu ==1}">
+		<%-- 一覧表の作成 --%>
 			<table border="1" align="center">
 				<tr>
 					<th>NO</th>
@@ -36,29 +36,35 @@
 						<td>
 							<form action="/InnReserve/InnServlet" method="get">
 								<button class="button">変更</button>
-								<input type="hidden" name="action" value="edit"> 
-								<input type="hidden" name="userId" value="2"><%-- 管理者[userId:2] --%>
-								<input type="hidden" name="Id" value="${item.id }">
+								<input type="hidden" name="action" value="edit"> <input
+									type="hidden" name="userId" value="2">
+								<%-- 管理者[userId:2] --%>
+								<input type="hidden" name="id" value="${item.id }">
+								<input type="hidden" name="name" value="${item.name }">
+								<input type="hidden" name="address" value="${item.address }">
+								<input type="hidden" name="tel" value="${item.tel }">
+								<input type="hidden" name="price" value="${item.price }">
 							</form>
 						</td>
 						<%-- 削除ボタン --%>
 						<td>
 							<form action="/InnReserve/InnServlet" method="post">
-								<input type="hidden" name="action" value="delete">
-								 <input type="hidden" name="userId" value="2"><%-- 管理者[userId:2] --%>
-								 <input type="hidden" name="Id" value="${item.id}">
-								 <%-- 削除(ダイアログ付き) --%>
-								 <input type="submit" onclick="return DeleteCheck();" value="削除">
+								<input type="hidden" name="action" value="delete"> <input
+									type="hidden" name="userId" value="2">
+								<%-- 管理者[userId:2] --%>
+								<input type="hidden" name="id" value="${item.id}">
+								<%-- 削除(ダイアログ付き) --%>
+								<input type="submit" onclick="return DeleteCheck();" value="削除">
 							</form>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
-</c:if>
+	</c:if>
 
-<%-- [menu=2]予約を選択 --%>
-<c:if test="${menu ==2}">
-<%-- 一覧表の作成 --%>
+	<%-- [menu=2]予約を選択 --%>
+	<c:if test="${menu ==2}">
+		<%-- 一覧表の作成 --%>
 			<table border="1" align="center">
 				<tr>
 					<th>予約</th>
@@ -72,7 +78,7 @@
 					<th>削除</th>
 				</tr>
 				<%-- リストを名前[items]として取得 --%>
-				<c:forEach items="${items}" var="item">
+				<c:forEach items="${reserves}" var="item">
 					<tr>
 						<td>${item.id}</td>
 						<td>${item.customer_id}</td>
@@ -85,29 +91,31 @@
 						<td>
 							<form action="/InnReserve/ReserveServlet" method="get">
 								<button>変更</button>
-								<input type="hidden" name="action" value="edit"> 
-								<input type="hidden" name="userId" value="2"><%-- 管理者[userId:2] --%>
+								<input type="hidden" name="action" value="edit"> <input
+									type="hidden" name="userId" value="2">
+								<%-- 管理者[userId:2] --%>
 								<input type="hidden" name="Id" value="${item.id }">
 							</form>
 						</td>
 						<%-- 削除ボタン --%>
 						<td>
 							<form action="/InnReserve/ReserveServlet" method="get">
-								<input type="hidden" name="action" value="delete">
-								 <input type="hidden" name="userId" value="2"><%-- 管理者[userId:2] --%>
-								 <input type="hidden" name="Id" value="${item.id}">
-								 <%-- 削除(ダイアログ付き) --%>
-								 <input type="submit" onclick="return DeleteCheck();" value="削除">
+								<input type="hidden" name="action" value="delete"> <input
+									type="hidden" name="userId" value="2">
+								<%-- 管理者[userId:2] --%>
+								<input type="hidden" name="Id" value="${item.id}">
+								<%-- 削除(ダイアログ付き) --%>
+								<input type="submit" onclick="return DeleteCheck();" value="削除">
 							</form>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
-</c:if>
+	</c:if>
 
-<%-- [menu=3]ユーザーを選択 --%>
-<c:if test="${menu ==3}">
-<%-- 一覧表の作成 --%>
+	<%-- [menu=3]ユーザーを選択 --%>
+	<c:if test="${menu ==3}">
+		<%-- 一覧表の作成 --%>
 			<table border="1" align="center">
 				<tr>
 					<th>NO</th>
@@ -130,28 +138,30 @@
 						<td>
 							<form action="/InnReserve/InnServlet" method="get">
 								<button class="button">変更</button>
-								<input type="hidden" name="action" value="edit"> 
-								<input type="hidden" name="userId" value="2"><%-- 管理者[userId:2] --%>
+								<input type="hidden" name="action" value="edit"> <input
+									type="hidden" name="userId" value="2">
+								<%-- 管理者[userId:2] --%>
 								<input type="hidden" name="Id" value="${item.id }">
 							</form>
 						</td>
 						<%-- 削除ボタン --%>
 						<td>
 							<form action="/InnReserve/InnServlet" method="post">
-								<input type="hidden" name="action" value="delete">
-								 <input type="hidden" name="userId" value="2"><%-- 管理者[userId:2] --%>
-								 <input type="hidden" name="Id" value="${item.id}">
-								 <%-- 削除(ダイアログ付き) --%>
-								 <input type="submit" onclick="return DeleteCheck();" value="削除">
+								<input type="hidden" name="action" value="delete"> <input
+									type="hidden" name="userId" value="2">
+								<%-- 管理者[userId:2] --%>
+								<input type="hidden" name="Id" value="${item.id}">
+								<%-- 削除(ダイアログ付き) --%>
+								<input type="submit" onclick="return DeleteCheck();" value="削除">
 							</form>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
-</c:if>
+	</c:if>
 
 
-<%-- 削除ダイアログ処理 --%>
+	<%-- 削除ダイアログ処理 --%>
 	<script type="text/javascript">
 		function DeleteCheck() {
 			if (confirm("削除します。よろしいですか？")) {
