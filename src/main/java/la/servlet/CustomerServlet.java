@@ -60,14 +60,14 @@ public class CustomerServlet extends HttpServlet {
 
 				if (email.equals("") || password.equals("")) {
 					request.setAttribute("Login_message", "email または パスワードが記載されていません");
-					gotoPage(request, response, "/Customer_login.jsp");
+					gotoPage(request, response, "/Customer_Login.jsp");
 				}
 
 				CustomerBean Customer = dao.findCustomer(email, password);
 
 				if (Customer == null) {
 					request.setAttribute("Login_message", "email または パスワードが正しくありません");
-					gotoPage(request, response, "/Customer_login.jsp");
+					gotoPage(request, response, "/Customer_Login.jsp");
 				}
 
 				session.setAttribute("Customer", Customer);
