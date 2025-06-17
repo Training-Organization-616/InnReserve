@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
 	<%-- メニューのリンク --%>
@@ -18,6 +18,7 @@
 ${message }
 </c:if>
 	</p>
+	<div class="main">
 	<form action="/InnReserve/InnServlet" method="post">
 		<table border="1" align="center">
 			<tr>
@@ -38,7 +39,7 @@ ${message }
 				<td>￥<input type="text" name="price"></td>
 			</tr>
 		</table>
-		<button type="button" class="show">登録</button>
+		<button type="button" class="show" id="button">登録</button>
 		<dialog>
 		<p>この登録内容でよろしいですか?</p>
 		<button>登録</button>
@@ -46,6 +47,7 @@ ${message }
 		<button type="button" class="close">キャンセル</button>
 		</dialog>
 	</form>
+	</div>
 	<%-- 変更ダイアログ処理 --%>
 	<script type="text/javascript">
 		var dialog = document.querySelectorAll('dialog');
