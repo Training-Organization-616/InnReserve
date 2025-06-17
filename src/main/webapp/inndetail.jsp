@@ -25,7 +25,7 @@ int inn_id = inn.getId();
 		</c:otherwise>
 	</c:choose>
 	<h1>${inn.getName() }</h1>
-	<table border="1">
+	<table border="1"  align="center">
 		<tr>
 			<th>場所</th>
 			<td>${inn.getAddress() }</td>
