@@ -12,8 +12,8 @@
 <%-- userId:2(管理者) --%>
 <%-- menu:1(宿)2(予約)3(ユーザー) --%>
 <a href="/InnReserve/InnServlet?action=list&userId=2&menu=1" >宿</a>
-<a href="/InnReserve/ReserveServlet?action=reservelist&userId=2&menu=2" >予約</a>
-<a href="/InnReserve/CustomerServlet?action=list&userId=2&menu=3" >ユーザー</a>
+<a href="/InnReserve/ReserveServlet?action=reservelist" >予約</a>
+<a href="/InnReserve/CustomerServlet?action=list" >ユーザー</a>
 <a href="/InnReserve/InnServlet?action=regist" >新規宿登録</a>
 </body>
 </html>
