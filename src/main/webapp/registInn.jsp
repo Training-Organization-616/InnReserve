@@ -13,9 +13,11 @@
 	<%-- 管理者メニューのリンク --%>
 	<p><jsp:include page="/managermenu.jsp" /></p>
 	<%-- エラーメッセージを表示する --%>
-	<p><c:if test="${not empty message }">
+	<p>
+		<c:if test="${not empty message }">
 ${message }
-</c:if></p>
+</c:if>
+	</p>
 	<form action="/InnReserve/InnServlet" method="post">
 		<table border="1" align="center">
 			<tr>
@@ -36,8 +38,30 @@ ${message }
 				<td>￥<input type="text" name="price"></td>
 			</tr>
 		</table>
+		<button type="button" class="show">登録</button>
+		<dialog>
+		<p>この登録内容でよろしいですか?</p>
 		<button>登録</button>
 		<input type="hidden" name="action" value="add">
+		<button type="button" class="close">キャンセル</button>
+		</dialog>
 	</form>
+	<%-- 変更ダイアログ処理 --%>
+	<script type="text/javascript">
+		var dialog = document.querySelectorAll('dialog');
+		var btn_show = document.getElementsByClassName('show');
+		var btn_close = document.getElementsByClassName('close');
+
+		for (let i = 0; i < 1; i++) {
+			btn_show[i].addEventListener('click', function() {
+				dialog[i].showModal();
+			}, false);
+		}
+		for (let i = 0; i < 1; i++) {
+			btn_close[i].addEventListener('click', function() {
+				dialog[i].close();
+			}, false);
+		}
+	</script>
 </body>
 </html>
