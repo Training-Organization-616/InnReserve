@@ -41,7 +41,7 @@ ${Login_message}
 
 <form action="/InnReserve/CustomerServlet" method="post">
 	<input type="text" name="email" placeholder="メールアドレス" class="text_box"><br>
-	<input type="text" name="password" placeholder="パスワード" class="text_box"><br>
+	<input type="password" name="password" placeholder="パスワード" class="text_box"><br>
 	
 	<input type="hidden" name="action" value="login">
 	
