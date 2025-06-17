@@ -59,6 +59,38 @@ public class InnDAO {
 
 	}
 
+	//idから宿情報を取得
+	public InnBean findInnById(int inn_id) throws DAOException {
+		// SQL文の作成
+		String sql = "SELECT * FROM inn WHERE id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			st.setInt(1, inn_id);
+			try (// SQLの実行
+					ResultSet rs = st.executeQuery();) {
+				InnBean bean;
+				// 結果の取得および表示
+				if (rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					String address = rs.getString("address");
+					String tel = rs.getString("tel");
+					int price = rs.getInt("price");
+					bean = new InnBean(id, name, address, tel, price);
+				} else {
+					return null;
+				}
+				return bean;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
+
 	//宿の追加
 	public int addInn(String name, String address, String tel, int price)
 			throws DAOException {
