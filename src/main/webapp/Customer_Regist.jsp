@@ -41,8 +41,24 @@ ${Regist_message}
 	
 	<input type="hidden" name="action" value="add">
 	
-	<button>登録</button>
-</form>
+		<dialog>
+		<p>この内容でよろしいですか?</p>
+		<button>登録</button>
+	</form>
+	<button type="button" id="close">キャンセル</button>
+	</dialog>
+	<button id="show">登録</button>
 
+	<script type="text/javascript">
+		var dialog = document.querySelector('dialog');
+		var btn_show = document.getElementById('show');
+		var btn_close = document.getElementById('close');
+		btn_show.addEventListener('click', function() {
+			dialog.showModal();
+		}, false);
+		btn_close.addEventListener('click', function() {
+			dialog.close();
+		}, false);
+	</script>
 </body>
 </html>

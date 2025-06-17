@@ -40,9 +40,25 @@ ${Update_massage}
 	<input type="text" name="email" value="${email}" placeholder="メールアドレス" maxlength="50" class="text_box">
 	<input type="text" name="password" value="${password}" placeholder="パスワード" maxlength="20" class="text_box">
 	<input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box">
-		
-	<button>登録</button>
-</form>
+		<dialog>
+		<p>この変更内容でよろしいですか?</p>
+		<button>変更</button>
+	</form>
+	<button type="button" id="close">キャンセル</button>
+	</dialog>
+	<button id="show">変更</button>
+
+	<script type="text/javascript">
+		var dialog = document.querySelector('dialog');
+		var btn_show = document.getElementById('show');
+		var btn_close = document.getElementById('close');
+		btn_show.addEventListener('click', function() {
+			dialog.showModal();
+		}, false);
+		btn_close.addEventListener('click', function() {
+			dialog.close();
+		}, false);
+	</script>		
 
 </body>
 </html>

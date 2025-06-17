@@ -164,8 +164,7 @@ public class ReserveServlet extends HttpServlet {
 			} else if (action.equals("update")) {
 				//変更する情報を型変換
 				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
-				//				int customer_id=customer.getId();
-				int customer_id = 1;
+				int customer_id = customer.getId();
 				int people = Integer.parseInt(request.getParameter("people"));
 				int stay_days = Integer.parseInt(request.getParameter("days"));
 				String strDate = request.getParameter("check_in");
@@ -187,8 +186,7 @@ public class ReserveServlet extends HttpServlet {
 			} else if (action.equals("delete")) {
 				//予約番号を型変換
 				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
-				//				int customer_id=customer.getId();
-				int customer_id = 1;
+				int customer_id = customer.getId();
 
 				//予約番号からその予約を非表示にしてキャンセル
 				dao.deleteReserve(reserve_id);

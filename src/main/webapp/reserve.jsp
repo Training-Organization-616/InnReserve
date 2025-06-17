@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="la.bean.InnBean"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%
 InnBean inn = (InnBean) request.getAttribute("inn");
 %>
@@ -8,6 +10,8 @@ InnBean inn = (InnBean) request.getAttribute("inn");
 int inn_id = inn.getId();
 int price = inn.getPrice();
 %>
+<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); %>
+<% String today = sdf.format(new Date()); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,24 +35,13 @@ int price = inn.getPrice();
 					<input type="text" name="people">人
 				</td>
 			</tr>
-			<script type="text/javascript">
-    //今日の日時を表示
-        window.onload = function () {
-            //今日の日時を表示
-        	  var date = new Date();
 
-              var yyyy = date.getFullYear();
-              var mm = ("0"+(date.getMonth()+1)).slice(-2);
-              var dd = ("0"+date.getDate()).slice(-2);
-
-          document.getElementById("today").value=yyyy+'-'+mm+'-'+dd;
-        }
-</script>
 			<tr>
 				<p>${check_in_msg}</p><th>チェックイン日</th>
-				<td><input type="date" name="check_in" id="today"></td>
+				<td>
+				<div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>"></div></td>
 			</tr>		
-			</table>
+		</table>
 		<button>予約</button>
 		<input type="hidden" name="action" value="reserve">
 	</form>

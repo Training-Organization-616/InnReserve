@@ -7,6 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% List<ReserveBean> reserves = (List<ReserveBean>)request.getAttribute("reserves"); %>
 <% int count =reserves.size(); %>
+
 <!DOCTYPE html>
 <html>
 <head>

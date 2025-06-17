@@ -74,14 +74,12 @@ public class CustomerServlet extends HttpServlet {
 
 				session.setAttribute("Customer", Customer);
 
-				//ログイン分岐
-				if (Customer.getId() == 1) {
+				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////会員ページへ移動
 
-					gotoPage(request, response, "/test2.jsp"); //////////////////会員ページへ移動
+			} else if (action.equals("logout")) {//会員登録画面へ遷移
 
-				}
-
-				gotoPage(request, response, "/test.jsp"); ////////////////////要　宿一覧画面名
+				session.removeAttribute("Customer");
+				gotoPage(request, response, "/Customer_Login.jsp");
 
 			} else if (action.equals("regist")) {//会員登録画面へ遷移
 
