@@ -99,14 +99,6 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("Regist_message", "未記入の記入欄があります");
 					gotoPage(request, response, "/Customer_Login.jsp");
 				}
-				
-				if(name.length() > 20) {
-					request.setAttribute("Regist_message", "名前が入力されていません");
-					gotoPage(request, response, "/Customer_Login.jsp");
-				}else if(tel.length() > ){
-					request.setAttribute("Regist_message", "未記入の記入欄があります");
-					gotoPage(request, response, "/Customer_Login.jsp");
-				}
 
 				dao.addCustomer(name, tel, email, password);
 
