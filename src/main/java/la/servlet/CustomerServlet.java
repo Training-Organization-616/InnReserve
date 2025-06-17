@@ -3,6 +3,7 @@ package la.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -103,7 +104,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "/Customer_Regist.jsp");
 					return;
 				}
-
+				Pattern p = Pattern.compile(".*-.*-.*");
 				if (name.length() >= 20) {
 					request.setAttribute("Regist_message", "名前は20文字以下で入力してください");
 					gotoPage(request, response, "/Customer_Regist.jsp");
@@ -112,7 +113,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("Regist_message", "電話番号は20文字以下で入力してください");
 					gotoPage(request, response, "/Customer_Regist.jsp");
 					return;
-				} else if (!tel.contains("-")) {
+				} else if (p.matcher(tel).find() != true) {
 					request.setAttribute("Regist_message", "電話番号に「-：ハイフン」がありません");
 					gotoPage(request, response, "/Customer_Regist.jsp");
 					return;
@@ -208,8 +209,8 @@ public class CustomerServlet extends HttpServlet {
 				}
 
 				//エラー処理
-
-				if (!tel.contains("-")) {
+				Pattern p = Pattern.compile(".*-.*-.*");
+				if (p.matcher(tel).find() != true) {
 					request.setAttribute("Update_massage", "電話番号に「-：ハイフン」がありません");
 
 					CustomerBean Customer = dao.findByID(id);
