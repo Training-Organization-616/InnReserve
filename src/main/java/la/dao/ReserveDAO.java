@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import la.bean.InnBean;
 import la.bean.ReserveBean;
 
 public class ReserveDAO {
@@ -31,30 +30,33 @@ public class ReserveDAO {
 		}
 	}
 
-	public List<InnBean> findAllInn() throws DAOException {
+	public ReserveBean findById(int reserve_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT * FROM inn WHERE delete_flag = false ORDER BY id";
+		String sql = "SELECT * FROM reserve WHERE id = ?";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {
+			st.setInt(1, reserve_id);
 			try (// SQLの実行
 					ResultSet rs = st.executeQuery();) {
+				ReserveBean bean;
 				// 結果の取得および表示
-				List<InnBean> list = new ArrayList<InnBean>();
-				while (rs.next()) {
+				if (rs.next()) {
 					int id = rs.getInt("id");
-					String name = rs.getString("name");
-					String address = rs.getString("address");
-					String tel = rs.getString("tel");
-					int price = rs.getInt("price");
-					InnBean bean = new InnBean(id, name, address, tel, price);
-					list.add(bean);
+					int customer_id = rs.getInt("customer_id");
+					int inn_id = rs.getInt("inn_id");
+					int people = rs.getInt("people");
+					int stay_days = rs.getInt("stay_days");
+					Date first_day = rs.getDate("first_day");
+					int total_price = rs.getInt("total_price");
+					bean = new ReserveBean(id, customer_id, inn_id, people,
+							stay_days, first_day, total_price);
+				} else {
+					return null;
 				}
-
-				// カテゴリ一覧をListとして返す
-				return list;
+				return bean;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,30 +64,41 @@ public class ReserveDAO {
 		}
 	}
 
-	public InnBean findInnById(int inn_id) throws DAOException {
+	public List<ReserveBean> findByCustomerId(int customer_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT * FROM inn WHERE id = ?";
+		String sql = "SELECT * FROM reserve";
+
+		if (customer_id == 1) {
+			sql += " ORDER BY id";
+		} else {
+			sql += " WHERE customer_id = ? AND cancel_flag = false ORDER BY id";
+		}
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {
-			st.setInt(1, inn_id);
+			if (customer_id != 1) {
+				st.setInt(1, customer_id);
+			}
 			try (// SQLの実行
 					ResultSet rs = st.executeQuery();) {
-				InnBean bean;
 				// 結果の取得および表示
-				if (rs.next()) {
+				List<ReserveBean> list = new ArrayList<ReserveBean>();
+				while (rs.next()) {
 					int id = rs.getInt("id");
-					String name = rs.getString("name");
-					String address = rs.getString("address");
-					String tel = rs.getString("tel");
-					int price = rs.getInt("price");
-					bean = new InnBean(id, name, address, tel, price);
-				} else {
-					return null;
+					int inn_id = rs.getInt("inn_id");
+					int people = rs.getInt("people");
+					int stay_days = rs.getInt("stay_days");
+					Date first_day = rs.getDate("first_day");
+					int total_price = rs.getInt("total_price");
+					ReserveBean bean = new ReserveBean(id, customer_id, inn_id, people,
+							stay_days, first_day, total_price);
+					list.add(bean);
 				}
-				return bean;
+
+				// カテゴリ一覧をListとして返す
+				return list;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,74 +139,6 @@ public class ReserveDAO {
 			st.setDate(6, first_day);
 			st.setInt(7, total_price);
 			st.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new DAOException("レコードの取得に失敗しました。");
-		}
-	}
-
-	public List<ReserveBean> findByCustomerId(int customer_id) throws DAOException {
-		// SQL文の作成
-		String sql = "SELECT * FROM reserve WHERE customer_id = ? AND cancel_flag = false ORDER BY id";
-
-		try (// データベースへの接続
-				Connection con = DriverManager.getConnection(url, user, pass);
-				// PreparedStatementオブジェクトの取得
-				PreparedStatement st = con.prepareStatement(sql);) {
-			st.setInt(1, customer_id);
-			try (// SQLの実行
-					ResultSet rs = st.executeQuery();) {
-				// 結果の取得および表示
-				List<ReserveBean> list = new ArrayList<ReserveBean>();
-				while (rs.next()) {
-					int id = rs.getInt("id");
-					int inn_id = rs.getInt("inn_id");
-					int people = rs.getInt("people");
-					int stay_days = rs.getInt("stay_days");
-					Date first_day = rs.getDate("first_day");
-					int total_price = rs.getInt("total_price");
-					ReserveBean bean = new ReserveBean(id, customer_id, inn_id, people,
-							stay_days, first_day, total_price);
-					list.add(bean);
-				}
-
-				// カテゴリ一覧をListとして返す
-				return list;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new DAOException("レコードの取得に失敗しました。");
-		}
-	}
-
-	public ReserveBean findReserveById(int reserve_id) throws DAOException {
-		// SQL文の作成
-		String sql = "SELECT * FROM reserve WHERE id = ?";
-
-		try (// データベースへの接続
-				Connection con = DriverManager.getConnection(url, user, pass);
-				// PreparedStatementオブジェクトの取得
-				PreparedStatement st = con.prepareStatement(sql);) {
-			st.setInt(1, reserve_id);
-			try (// SQLの実行
-					ResultSet rs = st.executeQuery();) {
-				ReserveBean bean;
-				// 結果の取得および表示
-				if (rs.next()) {
-					int id = rs.getInt("id");
-					int customer_id = rs.getInt("customer_id");
-					int inn_id = rs.getInt("inn_id");
-					int people = rs.getInt("people");
-					int stay_days = rs.getInt("stay_days");
-					Date first_day = rs.getDate("first_day");
-					int total_price = rs.getInt("total_price");
-					bean = new ReserveBean(id, customer_id, inn_id, people,
-							stay_days, first_day, total_price);
-				} else {
-					return null;
-				}
-				return bean;
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの取得に失敗しました。");

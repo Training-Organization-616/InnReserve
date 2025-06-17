@@ -14,6 +14,15 @@
 <title>宿予約</title>
 </head>
 <body>
+	<jsp:include page="/menu.jsp" />
+	<c:choose>
+		<c:when test="${Customer.getId() eq 1 }">
+			<jsp:include page="/managermenu.jsp" />
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="/Customer_Menu.jsp" />			
+		</c:otherwise>
+	</c:choose>
 	<h1>予約一覧</h1>
 	<table border="1">
 		<tr>
