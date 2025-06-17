@@ -10,5 +10,5 @@
 			<a href="/InnReserve/CustomerServlet?action=logout">ログアウト</a>
 		</c:if>
 		<c:if test="${empty customer}">
-			<a href="/InnReserve/CusotmerServlet">ログイン</a> |
+			<a href="/InnReserve/CustomerServlet">ログイン</a> |
 </c:if>
