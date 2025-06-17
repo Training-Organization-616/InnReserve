@@ -161,8 +161,9 @@ public class CustomerServlet extends HttpServlet {
 				List<CustomerBean> Customers = dao.findAll();
 
 				request.setAttribute("Customers_list", Customers);
+				request.setAttribute("menu", 3);
 
-				gotoPage(request, response, "/test3.jsp");
+				gotoPage(request, response, "/manager.jsp");
 
 			} else if (action.equals("edit")) {//会員の情報変更画面へ遷移
 
