@@ -133,10 +133,10 @@ if(customers!=null){
 					</td>
 					<%-- 削除ボタン --%>
 					<td>
-						<form action="/InnReserve/InnServlet" method="post">
+						<form action="/InnReserve/CustomerServlet" method="post">
 							<input type="hidden" name="userId" value="2">
 							<%-- 管理者[userId:2] --%>
-							<input type="hidden" name="Id" value="${item.id}">
+							<input type="hidden" name="id" value="${item.id}">
 							<%-- 削除(ダイアログ付き) --%>
 							<button type="button" class="show">削除</button>
 							<dialog id="dialog"> 

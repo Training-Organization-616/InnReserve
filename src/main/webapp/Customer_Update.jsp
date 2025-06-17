@@ -48,6 +48,7 @@ ${Update_massage}
 	<input type="text" name="name" value="${name}"placeholder="名前" maxlength="20" class="text_box">
 	<input type="text" name="tel" value="${tel}" placeholder="電話番号" maxlength="20" class="text_box">
 	<input type="text" name="email" value="${email}" placeholder="メールアドレス" maxlength="50" class="text_box">
+	<input type="hidden" name="original_email" value="${original_email }">
 	<input type="text" name="password" value="${password}" placeholder="パスワード" maxlength="20" class="text_box">
 	<input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box">
 		<dialog>

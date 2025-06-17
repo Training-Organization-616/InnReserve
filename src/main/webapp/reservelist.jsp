@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% List<ReserveBean> reserves = (List<ReserveBean>)request.getAttribute("reserves"); %>
 <% int count =reserves.size(); %>
-
+<% int cnt=0; %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +40,8 @@
 		<c:forEach items="${inns }" var="inn">
 			<c:if test="${inn.getId() eq reserve.inn_id }">
 			<tr>
-				<td>${reserve.id }</td>
+			<% cnt++; %>
+				<td><%=cnt %></td>
 				<td>${inn.name }</td>
 				
 

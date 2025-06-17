@@ -36,6 +36,7 @@ public class CustomerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		// TODO Auto-generated method stub
 		try {
 
@@ -175,6 +176,7 @@ public class CustomerServlet extends HttpServlet {
 				request.setAttribute("name", Customer.getName());
 				request.setAttribute("tel", Customer.getTel());
 				request.setAttribute("email", Customer.getEmail());
+				request.setAttribute("original_email", Customer.getEmail());
 				//request.setAttribute("password", Customer.getPassword());
 
 				gotoPage(request, response, "/Customer_Update.jsp");
@@ -187,7 +189,7 @@ public class CustomerServlet extends HttpServlet {
 				String email = request.getParameter("email");
 				String password = request.getParameter("password");
 				String check_password = request.getParameter("check_password");
-
+				String origin_email = request.getParameter("original_email");
 				//エラー処理
 				if (name.equals("") || tel.equals("") || email.equals("") || password.equals("")
 						|| check_password.equals("")) {
@@ -199,6 +201,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("name", Customer.getName());
 					request.setAttribute("tel", Customer.getTel());
 					request.setAttribute("email", Customer.getEmail());
+					request.setAttribute("original_email", Customer.getEmail());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -207,7 +210,7 @@ public class CustomerServlet extends HttpServlet {
 				//エラー処理
 
 				if (!tel.contains("-")) {
-					request.setAttribute("Update_message", "電話番号に「-：ハイフン」がありません");
+					request.setAttribute("Update_massage", "電話番号に「-：ハイフン」がありません");
 
 					CustomerBean Customer = dao.findByID(id);
 
@@ -215,12 +218,13 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("name", Customer.getName());
 					request.setAttribute("tel", Customer.getTel());
 					request.setAttribute("email", Customer.getEmail());
+					request.setAttribute("original_email", Customer.getEmail());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
 
 				} else if (!password.equals(check_password)) {
-					request.setAttribute("Update_message", "パスワードに誤りがあります");
+					request.setAttribute("Update_massage", "パスワードに誤りがあります");
 
 					CustomerBean Customer = dao.findByID(id);
 
@@ -228,6 +232,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("name", Customer.getName());
 					request.setAttribute("tel", Customer.getTel());
 					request.setAttribute("email", Customer.getEmail());
+					request.setAttribute("original_email", Customer.getEmail());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -235,25 +240,27 @@ public class CustomerServlet extends HttpServlet {
 
 				List<CustomerBean> check_list = dao.findAll();
 
-				for (CustomerBean check_email : check_list) {
-					if (check_email.getEmail().equals(email)) {
-						request.setAttribute("Regist_message", "アドレスは既に使われてます");
+				if (!(email.equals(origin_email))) {
+					for (CustomerBean check_email : check_list) {
+						if (check_email.getEmail().equals(email)) {
+							request.setAttribute("Update_massage", "アドレスは既に使われてます");
 
-						CustomerBean Customer = dao.findByID(id);
+							CustomerBean Customer = dao.findByID(id);
 
-						request.setAttribute("id", Customer.getId());
-						request.setAttribute("name", Customer.getName());
-						request.setAttribute("tel", Customer.getTel());
-						request.setAttribute("email", Customer.getEmail());
+							request.setAttribute("id", Customer.getId());
+							request.setAttribute("name", Customer.getName());
+							request.setAttribute("tel", Customer.getTel());
+							request.setAttribute("email", Customer.getEmail());
+							request.setAttribute("original_email", Customer.getEmail());
 
-						gotoPage(request, response, "/Customer_Update.jsp");
-						return;
+							gotoPage(request, response, "/Customer_Update.jsp");
+							return;
+						}
 					}
 				}
 				//-----------------------------------------------------------
 
 				dao.updateCustomer(id, name, tel, email, password);
-
 				CustomerBean ADMIN = (CustomerBean) session.getAttribute("Customer");
 
 				if (ADMIN.getId() == 1) {
@@ -262,14 +269,16 @@ public class CustomerServlet extends HttpServlet {
 
 					request.setAttribute("Customers_list", Customers);
 
-					gotoPage(request, response, "/test3.jsp");
+					gotoPage(request, response, "/InnServlet?action=list");
 					return;
+
+				} else {
+					CustomerBean customer = dao.findByID(id);
+					session.setAttribute("Customer", customer);
 
 				}
 
-				request.setAttribute("Login_message", "アカウント情報を変更しました ログインしてください");
-
-				gotoPage(request, response, "/Customer_Login.jsp");
+				gotoPage(request, response, "/ReserveServlet?action=list");
 
 			} else if (action.equals("delete")) {//会員削除
 
@@ -285,14 +294,14 @@ public class CustomerServlet extends HttpServlet {
 
 					request.setAttribute("Customers_list", Customers);
 
-					gotoPage(request, response, "/test3.jsp");
+					gotoPage(request, response, "/InnServlet?action=list");
 					return;
 
 				}
 
 				session = request.getSession(false);
 
-				gotoPage(request, response, "/test.jsp"); //////////////////////要宿
+				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////////要宿
 
 			} else {
 				request.setAttribute("message", "正しく操作してください。");

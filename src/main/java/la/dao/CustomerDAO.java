@@ -27,7 +27,7 @@ public class CustomerDAO {
 	}
 
 	public List<CustomerBean> findAll() throws SQLException, DAOException {
-		String sql = " select * from customers";
+		String sql = " select * from customers ORDER BY id";
 
 		try (Connection con = DriverManager.getConnection(url, user, pass);
 				PreparedStatement st = con.prepareStatement(sql);
@@ -166,7 +166,7 @@ public class CustomerDAO {
 
 	public void deleteCustomer(int id) throws DAOException {
 
-		String sql = "Delete from customers where id = ?";
+		String sql = "UPDATE customers SET email = 'null', delete_flag = true WHERE id = ?";
 
 		try (Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
