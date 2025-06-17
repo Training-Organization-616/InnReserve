@@ -51,7 +51,7 @@ public class CustomerServlet extends HttpServlet {
 
 				session = request.getSession(false);
 
-				gotoPage(request, response, "/Customer_Login");
+				gotoPage(request, response, "/Customer_Login.jsp");
 
 			} else if (action.equals("login")) {//ログイン処理
 
@@ -60,26 +60,24 @@ public class CustomerServlet extends HttpServlet {
 
 				if (email.equals("") || password.equals("")) {
 					request.setAttribute("Login_message", "email または パスワードが記載されていません");
-					gotoPage(request, response, "/Customer_login.jsp");
+					gotoPage(request, response, "/Customer_Login.jsp");
 				}
 
 				CustomerBean Customer = dao.findCustomer(email, password);
 
 				if (Customer == null) {
 					request.setAttribute("Login_message", "email または パスワードが正しくありません");
-					gotoPage(request, response, "/Customer_login.jsp");
+					gotoPage(request, response, "/Customer_Login.jsp");
 				}
 
 				session.setAttribute("Customer", Customer);
 
-				//ログイン分岐
-				if (Customer.getId() == 1) {
+				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////宿一覧ページへ移動
 
-					gotoPage(request, response, "/test2.jsp"); //////////////////会員ページへ移動
+			} else if (action.equals("logout")) {//ログイン処理
 
-				}
-
-				gotoPage(request, response, "/test.jsp"); ////////////////////要　宿一覧画面名
+				session.removeAttribute("Customer");
+				gotoPage(request, response, "/Customer_Login.jsp"); //////////////////宿一覧ページへ移動
 
 			} else if (action.equals("regist")) {//会員登録画面へ遷移
 
@@ -97,7 +95,7 @@ public class CustomerServlet extends HttpServlet {
 				if (name.equals("") || tel.equals("") || email.equals("") || password.equals("")
 						|| check_password.equals("")) {
 					request.setAttribute("Regist_message", "未記入の記入欄があります");
-					gotoPage(request, response, "/Customer_Login.jsp");
+					gotoPage(request, response, "/Customer_Regist.jsp");
 				}
 
 				dao.addCustomer(name, tel, email, password);
