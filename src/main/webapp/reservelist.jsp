@@ -24,7 +24,7 @@
 		</c:otherwise>
 	</c:choose>
 	<h1>予約一覧</h1>
-	<table border="1">
+	<table border="1" align="center">
 		<tr>
 			<th>予約</th>
 			<th>宿名</th>
