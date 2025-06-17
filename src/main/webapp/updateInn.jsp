@@ -24,15 +24,15 @@ ${message }
 		<table border="1" align="center">
 			<tr>
 				<th>宿名</th>
-				<td><input type="text" name="name" value="${name }"></td>
+				<td><input type="text" name="name" value="${name }" maxlength="50"></td>
 			</tr>
 			<tr>
 				<th>場所</th>
-				<td><input type="text" name="address" value="${address }"></td>
+				<td><input type="text" name="address" value="${address }" maxlength="50"></td>
 			</tr>
 			<tr>
 				<th>電話番号</th>
-				<td><input type="text" name="tel" value="${tel }"></td>
+				<td><input type="text" name="tel" value="${tel }" placeholder="ハイフンを含めて入力してください。" maxlength="20"></td>
 			</tr>
 			<tr>
 				<th>値段</th>
@@ -45,7 +45,7 @@ ${message }
 			<%-- 変更(ダイアログ付き) --%>
 			<button type="button" class="show">変更</button>
 			<dialog>
-			<p>本当に変更しますか?</p>
+			<p>この変更内容でよろしいですか?</p>
 			<button>変更</button>
 			<input type="hidden" name="action" value="update">
 			<button type="button" class="close">キャンセル</button>
