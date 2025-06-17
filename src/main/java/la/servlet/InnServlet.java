@@ -2,6 +2,7 @@ package la.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,7 +72,50 @@ public class InnServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
-				int price = Integer.parseInt(request.getParameter("price"));
+				String stPrice = request.getParameter("price");
+
+				// 未入力エラー処理
+				if (name == "" || address == "" || tel == "" || stPrice == "") {
+					request.setAttribute("message", "値を入力してください。");
+					gotoPage(request, response, "/registInn.jsp");
+					return;
+				}
+
+				// 宿名が文字数オーバー
+				if (name.length() > 50) {
+					request.setAttribute("message", "宿名は50文字以内で入力してください。");
+					gotoPage(request, response, "/registInn.jsp");
+					return;
+				}
+
+				// 場所が文字数オーバー
+				if (address.length() > 50) {
+					request.setAttribute("message", "場所は50文字以内で入力してください。");
+					gotoPage(request, response, "/registInn.jsp");
+					return;
+				}
+
+				// 電話番号が文字数オーバー
+				if (tel.length() > 20) {
+					request.setAttribute("message", "電話番号は20文字以内で入力してください。");
+					gotoPage(request, response, "/registInn.jsp");
+					return;
+				}
+
+				// 電話番号に-がなく、形式が誤り
+				Pattern p = Pattern.compile("^[0-9]{2}-[0-9]{4}-[0-9]{4}$");
+				Pattern p2 = Pattern.compile("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
+				Pattern p3 = Pattern.compile("^[0-9]{4}-[0-9]{2}-[0-9]{4}$");
+				if (p.matcher(tel).find() != true) {
+					if (p2.matcher(tel).find() != true) {
+						if (p3.matcher(tel).find() != true) {
+							request.setAttribute("message", "電話番号は-を含めて入力してください。");
+							gotoPage(request, response, "/registInn.jsp");
+							return;
+						}
+					}
+				}
+				int price = Integer.parseInt(stPrice);
 				// 宿の追加
 				dao.addInn(name, address, tel, price);
 				// 宿一覧の取得
@@ -95,6 +139,11 @@ public class InnServlet extends HttpServlet {
 				request.setAttribute("address", address);
 				request.setAttribute("tel", tel);
 				request.setAttribute("price", price);
+
+				// 一覧の取得
+				List<InnBean> list = dao.findAllInn();
+				// リクエストスコープで一覧を渡す
+				request.setAttribute("items", list);
 				// 宿情報変更画面へ遷移
 				gotoPage(request, response, "/updateInn.jsp");
 			} else if (action.equals("update")) {// 変更ボタン押下
@@ -104,7 +153,51 @@ public class InnServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
-				int price = Integer.parseInt(request.getParameter("price"));
+				String stPrice = request.getParameter("price");
+
+				// 未入力エラー処理
+				if (name == "" || address == "" || tel == "" || stPrice == "") {
+					request.setAttribute("message", "値を入力してください。");
+					gotoPage(request, response, "/updateInn.jsp");
+					return;
+				}
+
+				// 宿名が文字数オーバー
+				if (name.length() > 50) {
+					request.setAttribute("message", "宿名は50文字以内で入力してください。");
+					gotoPage(request, response, "/updateInn.jsp");
+					return;
+				}
+
+				// 場所が文字数オーバー
+				if (address.length() > 50) {
+					request.setAttribute("message", "場所は50文字以内で入力してください。");
+					gotoPage(request, response, "/updateInn.jsp");
+					return;
+				}
+
+				// 電話番号が文字数オーバー
+				if (tel.length() > 20) {
+					request.setAttribute("message", "電話番号は20文字以内で入力してください。");
+					gotoPage(request, response, "/updateInn.jsp");
+					return;
+				}
+
+				// 電話番号に-がなく、形式が誤り
+				Pattern p = Pattern.compile("^[0-9]{2}-[0-9]{4}-[0-9]{4}$");
+				Pattern p2 = Pattern.compile("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
+				Pattern p3 = Pattern.compile("^[0-9]{4}-[0-9]{2}-[0-9]{4}$");
+				if (p.matcher(tel).find() != true) {
+					if (p2.matcher(tel).find() != true) {
+						if (p3.matcher(tel).find() != true) {
+							request.setAttribute("message", "電話番号は-を含めて入力してください。");
+							gotoPage(request, response, "/updateInn.jsp");
+							return;
+						}
+					}
+				}
+				int price = Integer.parseInt(stPrice);
+
 				// 宿情報の変更
 				dao.updateInn(id, name, address, tel, price);
 				// 宿一覧の取得
