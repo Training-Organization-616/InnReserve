@@ -12,7 +12,7 @@
 <%-- action:list --%>
 <%-- CustomerId=sessionのCustomerId--%>
 <%-- menu:1(宿)2(予約)3(ユーザー) --%>
-<a href="/InnReserve/InnServlet?action=list" >宿一覧</a>
+<a href="/InnReserve/ReserveServlet?action=list" >宿一覧</a>
 <a href="/InnReserve/ReserveServlet?action=reservelist" >予約一覧</a>
 </body>
 </html>

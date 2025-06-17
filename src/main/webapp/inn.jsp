@@ -11,10 +11,10 @@
 	<jsp:include page="/menu.jsp" />
 	<c:choose>
 		<c:when test="${Customer.getId() eq 1 }">
-			<jsp:include page="/managermenu.jsp" />
+	<p><jsp:include page="/managermenu.jsp" /></p>
 		</c:when>
 		<c:otherwise>
-			<jsp:include page="/Customer_Menu.jsp" />			
+		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>
 		</c:otherwise>
 	</c:choose>
 	<h1>宿一覧</h1>
@@ -42,6 +42,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="/InnReserve/ReserveServlet?action=reservelist">予約一覧</a>
 </body>
 </html>

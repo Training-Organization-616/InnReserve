@@ -15,7 +15,16 @@ int inn_id = inn.getId();
 <title>宿予約</title>
 </head>
 <body>
-<h1>${inn.getName() }</h1>
+	<jsp:include page="/menu.jsp" />
+	<c:choose>
+		<c:when test="${Customer.getId() eq 1 }">
+	<p><jsp:include page="/managermenu.jsp" /></p>
+		</c:when>
+		<c:otherwise>
+		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>
+		</c:otherwise>
+	</c:choose>
+	<h1>${inn.getName() }</h1>
 	<table border="1">
 		<tr>
 			<th>場所</th>

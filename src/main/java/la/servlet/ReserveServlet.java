@@ -162,14 +162,51 @@ public class ReserveServlet extends HttpServlet {
 
 				//予約情報の変更
 			} else if (action.equals("update")) {
-				//変更する情報を型変換
-				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
+				int flag = 0;
+				int people = 0;
+				int stay_days = 0;
 				int customer_id = customer.getId();
-				int people = Integer.parseInt(request.getParameter("people"));
-				int stay_days = Integer.parseInt(request.getParameter("days"));
+				//入力された予約情報を型変換
+				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
+				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+
+				if (request.getParameter("people") == "") {
+					request.setAttribute("people_msg", "人数を入力してください");
+					flag = 1;
+				} else if (isNumber(request.getParameter("people"))) {
+					people = Integer.parseInt(request.getParameter("people"));
+				} else {
+					request.setAttribute("people_msg", "数字を入力してください");
+					flag = 1;
+				}
+				if (request.getParameter("days") == "") {
+					request.setAttribute("days_msg", "日数を入力してください");
+					flag = 1;
+				} else if (isNumber(request.getParameter("days"))) {
+					stay_days = Integer.parseInt(request.getParameter("days"));
+				} else {
+					request.setAttribute("days_msg", "数字を入力してください");
+					flag = 1;
+				}
 				String strDate = request.getParameter("check_in");
 				Date first_day = java.sql.Date.valueOf(strDate);
+				//合計金額は宿の金額*人数*宿泊日数で計算
 				int total_price = Integer.parseInt(request.getParameter("price")) * people * stay_days;
+
+				//入力された情報の正誤確認
+				if (people > 4) {
+					request.setAttribute("people_msg", "4以下の数字を入力してください");
+					flag = 1;
+				}
+
+				if (flag == 1) {
+					ReserveBean reserve = dao.findById(reserve_id);
+					request.setAttribute("reserve", reserve);
+					InnBean inn = inndao.findInnById(inn_id);
+					request.setAttribute("inn", inn);
+					gotoPage(request, response, "/updatereserve.jsp");
+					return;
+				}
 
 				//予約情報の変更
 				dao.updateReserve(reserve_id, people, stay_days, first_day, total_price);

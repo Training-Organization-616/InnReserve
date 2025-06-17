@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="la.bean.ReserveBean"%>
 <%@ page import="la.bean.InnBean"%>
 <%
@@ -22,20 +23,29 @@ int price = inn.getPrice();
 <title>宿予約</title>
 </head>
 <body>
-<h1>${inn.getName() }</h1>
-	<form action="/InnReserve/ReserveServlet?reserve_id=<%=reserve_id%>&price=<%=price %>"
+	<jsp:include page="/menu.jsp" />
+	<c:choose>
+		<c:when test="${Customer.getId() eq 1 }">
+	<p><jsp:include page="/managermenu.jsp" /></p>
+		</c:when>
+		<c:otherwise>
+		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>
+		</c:otherwise>
+	</c:choose>
+	<h1>${inn.getName() }</h1>
+	<form action="/InnReserve/ReserveServlet?reserve_id=<%=reserve_id%>&price=<%=price %>&inn_id=<%=inn_id %>"
 		method="post">
 		<table border="1">
 			<tr>
 				<th>宿泊日数</th>
 				<td>
-					<input type="text" name="days" cal="2" value="${reserve.getStay_days() }">
+					<p>${days_msg}</p><input type="text" name="days" cal="2" value="${reserve.getStay_days() }">
 				</td>
 			</tr>
 			<tr>
 				<th>宿泊人数</th>
 				<td>
-					<input type="text" name="people" cal="2"value="${reserve.getPeople() }">
+					<p>${people_msg}</p><input type="text" name="people" cal="2"value="${reserve.getPeople() }">
 				</td>
 			</tr>
 			<tr>
