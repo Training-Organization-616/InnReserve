@@ -60,14 +60,16 @@ public class CustomerServlet extends HttpServlet {
 
 				if (email.equals("") || password.equals("")) {
 					request.setAttribute("Login_message", "email または パスワードが記載されていません");
-					gotoPage(request, response, "/Customer_login.jsp");
+					gotoPage(request, response, "/Customer_Login.jsp");
+					return;
 				}
 
 				CustomerBean Customer = dao.findCustomer(email, password);
 
 				if (Customer == null) {
 					request.setAttribute("Login_message", "email または パスワードが正しくありません");
-					gotoPage(request, response, "/Customer_login.jsp");
+					gotoPage(request, response, "/Customer_Login.jsp");
+					return;
 				}
 
 				session.setAttribute("Customer", Customer);
@@ -97,16 +99,54 @@ public class CustomerServlet extends HttpServlet {
 				if (name.equals("") || tel.equals("") || email.equals("") || password.equals("")
 						|| check_password.equals("")) {
 					request.setAttribute("Regist_message", "未記入の記入欄があります");
-					gotoPage(request, response, "/Customer_Login.jsp");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
 				}
-				
-				if(name.length() > 20) {
-					request.setAttribute("Regist_message", "名前が入力されていません");
-					gotoPage(request, response, "/Customer_Login.jsp");
-				}else if(tel.length() > ){
-					request.setAttribute("Regist_message", "未記入の記入欄があります");
-					gotoPage(request, response, "/Customer_Login.jsp");
+
+				if (name.length() >= 20) {
+					request.setAttribute("Regist_message", "名前は20文字以下で入力してください");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
+				} else if (tel.length() >= 20) {
+					request.setAttribute("Regist_message", "電話番号は20文字以下で入力してください");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
+				} else if (!tel.contains("-")) {
+					request.setAttribute("Regist_message", "電話番号に「-：ハイフン」がありません");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
+				} else if (email.length() >= 50) {
+					request.setAttribute("Regist_message", "メールアドレスは50文字以内で入力してください");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
+					//} else if (!email.contains("@")) {
+					//	request.setAttribute("Regist_message", "メールアドレスに「@」がありません");
+					//	gotoPage(request, response, "/Customer_Regist.jsp");
+					//	return;
+				} else if (email.length() >= 50) {
+					request.setAttribute("Regist_message", "メールアドレスは50文字以内で入力してください");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
+				} else if (password.length() >= 20) {
+					request.setAttribute("Regist_message", "パスワードは20文字以下で入力してください");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
+				} else if (!password.equals(check_password)) {
+					request.setAttribute("Regist_message", "パスワードに誤りがあります");
+					gotoPage(request, response, "/Customer_Regist.jsp");
+					return;
 				}
+
+				List<CustomerBean> check_list = dao.findAll();
+
+				for (CustomerBean check_email : check_list) {
+					if (check_email.getEmail().equals(email)) {
+						request.setAttribute("Regist_message", "アドレスは既に使われてます");
+						gotoPage(request, response, "/Customer_Regist.jsp");
+						return;
+					}
+				}
+				//-----------------------------------------------------------
 
 				dao.addCustomer(name, tel, email, password);
 
@@ -160,7 +200,56 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("email", Customer.getEmail());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
+					return;
 				}
+
+				//エラー処理
+
+				if (!tel.contains("-")) {
+					request.setAttribute("Update_message", "電話番号に「-：ハイフン」がありません");
+
+					CustomerBean Customer = dao.findByID(id);
+
+					request.setAttribute("id", Customer.getId());
+					request.setAttribute("name", Customer.getName());
+					request.setAttribute("tel", Customer.getTel());
+					request.setAttribute("email", Customer.getEmail());
+
+					gotoPage(request, response, "/Customer_Update.jsp");
+					return;
+
+				} else if (!password.equals(check_password)) {
+					request.setAttribute("Update_message", "パスワードに誤りがあります");
+
+					CustomerBean Customer = dao.findByID(id);
+
+					request.setAttribute("id", Customer.getId());
+					request.setAttribute("name", Customer.getName());
+					request.setAttribute("tel", Customer.getTel());
+					request.setAttribute("email", Customer.getEmail());
+
+					gotoPage(request, response, "/Customer_Update.jsp");
+					return;
+				}
+
+				List<CustomerBean> check_list = dao.findAll();
+
+				for (CustomerBean check_email : check_list) {
+					if (check_email.getEmail().equals(email)) {
+						request.setAttribute("Regist_message", "アドレスは既に使われてます");
+
+						CustomerBean Customer = dao.findByID(id);
+
+						request.setAttribute("id", Customer.getId());
+						request.setAttribute("name", Customer.getName());
+						request.setAttribute("tel", Customer.getTel());
+						request.setAttribute("email", Customer.getEmail());
+
+						gotoPage(request, response, "/Customer_Update.jsp");
+						return;
+					}
+				}
+				//-----------------------------------------------------------
 
 				dao.updateCustomer(id, name, tel, email, password);
 
@@ -173,6 +262,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("Customers_list", Customers);
 
 					gotoPage(request, response, "/test3.jsp");
+					return;
 
 				}
 
@@ -195,6 +285,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("Customers_list", Customers);
 
 					gotoPage(request, response, "/test3.jsp");
+					return;
 
 				}
 
@@ -230,5 +321,6 @@ public class CustomerServlet extends HttpServlet {
 			IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
+		return;
 	}
 }

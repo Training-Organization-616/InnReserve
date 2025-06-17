@@ -33,7 +33,7 @@ div{
 
 
 
-<span class="centor">ログイン</span>
+<span class="centor">ログイン</span><br>
 
 ${Login_Unkown}
 ${Login_message}

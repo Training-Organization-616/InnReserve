@@ -33,11 +33,11 @@ div{
 ${Regist_message}
 
 <form action="/InnReserve/CustomerServlet" method="post">
-	<input type="text" name="name" placeholder="名前" class="text_box">
-	<input type="text" name="tel" placeholder="電話番号" class="text_box">
-	<input type="text" name="email" placeholder="メールアドレス" class="text_box">
-	<input type="text" name="password" placeholder="パスワード" class="text_box">
-	<input type="text" name="check_password" placeholder="パスワード(確認)" class="text_box">
+	<input type="text" name="name" placeholder="名前：20文字以下" maxlength="20" class="text_box">
+	<input type="text" name="tel" placeholder="電話番号" maxlength="20" class="text_box">
+	<input type="text" name="email" placeholder="メールアドレス：５０文字以下" maxlength="50" class="text_box">
+	<input type="text" name="password" placeholder="パスワード：２０文字以下"maxlength="20" class="text_box">
+	<input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box">
 	
 	<input type="hidden" name="action" value="add">
 	
