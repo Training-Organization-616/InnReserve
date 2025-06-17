@@ -47,7 +47,7 @@
 				<td>${reserve.people }</td>
 				<td>${reserve.stay_days }</td>
 				<td>${reserve.first_day }</td>
-				<td>${reserve.total_price }</td>
+				<td>￥${reserve.total_price }</td>
 				<form action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 					method="post">
 					<td><button>変更</button></td> <input

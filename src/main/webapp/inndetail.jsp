@@ -36,7 +36,7 @@ int inn_id = inn.getId();
 		</tr>
 		<tr>
 			<th>値段</th>
-			<td>${inn.getPrice() }</td>
+			<td>￥${inn.getPrice() }</td>
 		</tr>
 	</table>
 		<form action="/InnReserve/ReserveServlet?inn_id=${inn.id }"

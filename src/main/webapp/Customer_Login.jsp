@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@ div{
 }
 </style>
 
-
+	<h1><a href="/InnReserve/ReserveServlet?action=list">宿予約システム</a></h1>
 
 <span class="centor">ログイン</span><br>
 

@@ -62,7 +62,7 @@ if(customers!=null){
 					<td>${item.name }</td>
 					<td>${item.address }</td>
 					<td>${item.tel }</td>
-					<td>${item.price }</td>
+					<td>￥${item.price }</td>
 					<%-- 変更ボタン --%>
 					<td>
 						<form action="/InnReserve/InnServlet" method="get">

@@ -73,7 +73,11 @@ public class CustomerServlet extends HttpServlet {
 				}
 
 				session.setAttribute("Customer", Customer);
-				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////会員ページへ移動
+				if (Customer.getId() == 1) {
+					gotoPage(request, response, "/InnServlet?action=list"); //////////////////管理人ページへ移動
+				} else {
+					gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////会員ページへ移動
+				}
 			} else if (action.equals("logout")) {//会員登録画面へ遷移
 
 				session.removeAttribute("Customer");

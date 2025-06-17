@@ -36,7 +36,7 @@ ${message }
 			</tr>
 			<tr>
 				<th>値段</th>
-				<td><input type="text" name="price" value="${price }"></td>
+				<td>￥<input type="text" name="price" value="${price }"></td>
 			</tr>
 		</table>
 		<form action="/InnReserve/InnServlet" method="post">

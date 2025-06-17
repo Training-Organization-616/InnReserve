@@ -33,7 +33,7 @@ ${message }
 			</tr>
 			<tr>
 				<th>値段</th>
-				<td><input type="text" name="price"></td>
+				<td>￥<input type="text" name="price"></td>
 			</tr>
 		</table>
 		<button>登録</button>

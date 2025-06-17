@@ -33,7 +33,7 @@
 				<td>${inn.name }</td>
 				<td>${inn.address }</td>
 				<td>${inn.tel }</td>
-				<td>${inn.price }</td>
+				<td>￥${inn.price }</td>
 				<form action="/InnReserve/ReserveServlet?inn_id=${inn.id }"
 					method="post">
 					<td><button>詳細</button></td> <input
