@@ -18,7 +18,7 @@
 		</c:otherwise>
 	</c:choose>
 	<h1>宿一覧</h1>
-	<table border="1">
+	<table border="1" align="center">
 		<tr>
 			<th>NO</th>
 			<th>宿名</th>
