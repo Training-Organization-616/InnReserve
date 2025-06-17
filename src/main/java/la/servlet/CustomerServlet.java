@@ -51,7 +51,7 @@ public class CustomerServlet extends HttpServlet {
 
 				session = request.getSession(false);
 
-				gotoPage(request, response, "/Customer_Login");
+				gotoPage(request, response, "/Customer_Login.jsp");
 
 			} else if (action.equals("login")) {//ログイン処理
 
@@ -96,6 +96,14 @@ public class CustomerServlet extends HttpServlet {
 				//エラー処理
 				if (name.equals("") || tel.equals("") || email.equals("") || password.equals("")
 						|| check_password.equals("")) {
+					request.setAttribute("Regist_message", "未記入の記入欄があります");
+					gotoPage(request, response, "/Customer_Login.jsp");
+				}
+				
+				if(name.length() > 20) {
+					request.setAttribute("Regist_message", "名前が入力されていません");
+					gotoPage(request, response, "/Customer_Login.jsp");
+				}else if(tel.length() > ){
 					request.setAttribute("Regist_message", "未記入の記入欄があります");
 					gotoPage(request, response, "/Customer_Login.jsp");
 				}
