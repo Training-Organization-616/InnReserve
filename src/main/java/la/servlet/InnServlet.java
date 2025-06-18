@@ -108,17 +108,11 @@ public class InnServlet extends HttpServlet {
 				}
 
 				// 電話番号に-がなく、形式が誤り
-				Pattern p = Pattern.compile("^[0-9]{2}-[0-9]{4}-[0-9]{4}$");
-				Pattern p2 = Pattern.compile("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
-				Pattern p3 = Pattern.compile("^[0-9]{4}-[0-9]{2}-[0-9]{4}$");
+				Pattern p = Pattern.compile(".*-.*-.*");
 				if (p.matcher(tel).find() != true) {
-					if (p2.matcher(tel).find() != true) {
-						if (p3.matcher(tel).find() != true) {
-							request.setAttribute("message", "電話番号は-を含めて入力してください。");
-							gotoPage(request, response, "/registInn.jsp");
-							return;
-						}
-					}
+					request.setAttribute("message", "電話番号は-を含めて入力してください。");
+					gotoPage(request, response, "/registInn.jsp");
+					return;
 				}
 				int price = Integer.parseInt(stPrice);
 				// 宿の追加
@@ -193,18 +187,12 @@ public class InnServlet extends HttpServlet {
 				}
 
 				// 電話番号に-がなく、形式が誤り
-				Pattern p = Pattern.compile("^[0-9]{2}-[0-9]{4}-[0-9]{4}$");
-				Pattern p2 = Pattern.compile("^[0-9]{3}-[0-9]{4}-[0-9]{4}$");
-				Pattern p3 = Pattern.compile("^[0-9]{4}-[0-9]{2}-[0-9]{4}$");
+				Pattern p = Pattern.compile(".*-.*-.*");
 				if (p.matcher(tel).find() != true) {
-					if (p2.matcher(tel).find() != true) {
-						if (p3.matcher(tel).find() != true) {
-							request.setAttribute("message", "電話番号は-を含めて入力してください。");
-							request.setAttribute("inn_id", id);
-							gotoPage(request, response, "/updateInn.jsp");
-							return;
-						}
-					}
+					request.setAttribute("message", "電話番号は-を含めて入力してください。");
+					request.setAttribute("inn_id", id);
+					gotoPage(request, response, "/updateInn.jsp");
+					return;
 				}
 				int price = Integer.parseInt(stPrice);
 
