@@ -30,7 +30,7 @@ public class InnDAO {
 	// 全ての宿情報を取得する
 	public List<InnBean> findAllInn() throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT * FROM inn WHERE delete_flag = false ORDER BY id";
+		String sql = "SELECT * FROM inn ORDER BY id";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);

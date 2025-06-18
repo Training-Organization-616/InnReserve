@@ -158,6 +158,7 @@ public class InnServlet extends HttpServlet {
 				// 未入力エラー処理
 				if (name == "" || address == "" || tel == "" || stPrice == "") {
 					request.setAttribute("message", "値を入力してください。");
+					request.setAttribute("inn_id", id);
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
@@ -165,6 +166,7 @@ public class InnServlet extends HttpServlet {
 				// 宿名が文字数オーバー
 				if (name.length() > 50) {
 					request.setAttribute("message", "宿名は50文字以内で入力してください。");
+					request.setAttribute("inn_id", id);
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
@@ -172,6 +174,7 @@ public class InnServlet extends HttpServlet {
 				// 場所が文字数オーバー
 				if (address.length() > 50) {
 					request.setAttribute("message", "場所は50文字以内で入力してください。");
+					request.setAttribute("inn_id", id);
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
@@ -179,6 +182,7 @@ public class InnServlet extends HttpServlet {
 				// 電話番号が文字数オーバー
 				if (tel.length() > 20) {
 					request.setAttribute("message", "電話番号は20文字以内で入力してください。");
+					request.setAttribute("inn_id", id);
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
@@ -191,6 +195,7 @@ public class InnServlet extends HttpServlet {
 					if (p2.matcher(tel).find() != true) {
 						if (p3.matcher(tel).find() != true) {
 							request.setAttribute("message", "電話番号は-を含めて入力してください。");
+							request.setAttribute("inn_id", id);
 							gotoPage(request, response, "/updateInn.jsp");
 							return;
 						}
