@@ -25,6 +25,18 @@ public class ReserveBean implements Serializable {
 		this.cancel_flag = false;
 	}
 
+	public ReserveBean(int id, int customer_id, int inn_id, int people,
+			int stay_days, Date first_day, int total_price, boolean cancel_flag) {
+		this.id = id;
+		this.cutomer_id = customer_id;
+		this.inn_id = inn_id;
+		this.people = people;
+		this.stay_days = stay_days;
+		this.first_day = first_day;
+		this.total_price = total_price;
+		this.cancel_flag = cancel_flag;
+	}
+
 	public int getId() {
 		return id;
 	}

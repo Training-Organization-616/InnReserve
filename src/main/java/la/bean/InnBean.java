@@ -19,6 +19,15 @@ public class InnBean implements Serializable {
 		this.delete_flag = false;
 	}
 
+	public InnBean(int id, String name, String address, String tel, int price, boolean delete_flag) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.tel = tel;
+		this.price = price;
+		this.delete_flag = delete_flag;
+	}
+
 	public InnBean() {
 
 	}

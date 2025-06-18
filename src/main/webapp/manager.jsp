@@ -35,6 +35,7 @@ if(customers!=null){
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
 	<%-- メニューのリンク --%>
@@ -57,7 +58,14 @@ if(customers!=null){
 			</tr>
 			<%-- リストを名前[items]として取得 --%>
 			<c:forEach items="${items}" var="item">
-				<tr>
+				<c:choose>
+					<c:when test="${item.delete_flag}">
+						<tr class="delete_item">
+					</c:when>
+					<c:otherwise>
+						<tr>
+					</c:otherwise>
+				</c:choose>
 					<td>${item.id}</td>
 					<td>${item.name }</td>
 					<td>${item.address }</td>
@@ -115,8 +123,15 @@ if(customers!=null){
 			</tr>
 			<%-- リストを名前[items]として取得 --%>
 			<c:forEach items="${Customers_list}" var="item">
-				<tr>
-					<td>${item.id}</td>
+				<c:choose>
+					<c:when test="${ item.delete_flag}">
+						<tr class="delete_item">
+					</c:when>
+					<c:otherwise>
+						<tr>
+					</c:otherwise>
+					</c:choose>
+						<td>${item.id}</td>
 					<td>${item.name }</td>
 					<td>${item.tel }</td>
 					<td>${item.email }</td>

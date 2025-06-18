@@ -22,3 +22,6 @@
 #mgmenu{
 	text-align: left;
 }
+.delete_item{
+	background-color: rgb(180, 180, 180);
+}

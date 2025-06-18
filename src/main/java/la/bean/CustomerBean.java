@@ -19,6 +19,15 @@ public class CustomerBean implements Serializable {
 		this.delete_flag = false;
 	}
 
+	public CustomerBean(int id, String name, String tel, String email, String password, boolean delete_flag) {
+		this.id = id;
+		this.name = name;
+		this.tel = tel;
+		this.email = email;
+		this.password = password;
+		this.delete_flag = delete_flag;
+	}
+
 	public CustomerBean() {
 
 	}

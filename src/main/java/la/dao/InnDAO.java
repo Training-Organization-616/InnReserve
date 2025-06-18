@@ -46,7 +46,8 @@ public class InnDAO {
 					String address = rs.getString("address");
 					String tel = rs.getString("tel");
 					int price = rs.getInt("price");
-					InnBean bean = new InnBean(id, name, address, tel, price);
+					Boolean delete_flag = rs.getBoolean("delete_flag");
+					InnBean bean = new InnBean(id, name, address, tel, price, delete_flag);
 					list.add(bean);
 				}
 				// 商品一覧をListとして返す
@@ -79,7 +80,8 @@ public class InnDAO {
 					String address = rs.getString("address");
 					String tel = rs.getString("tel");
 					int price = rs.getInt("price");
-					bean = new InnBean(id, name, address, tel, price);
+					Boolean delete_flag = rs.getBoolean("delete_flag");
+					bean = new InnBean(id, name, address, tel, price, delete_flag);
 				} else {
 					return null;
 				}
