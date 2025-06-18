@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="la.bean.ReserveBean"%>
 <%@ page import="la.bean.InnBean"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%
 ReserveBean reserve = (ReserveBean)request.getAttribute("reserve");
 %>
@@ -16,6 +18,8 @@ InnBean inn = (InnBean) request.getAttribute("inn");
 int inn_id = inn.getId();
 int price = inn.getPrice();
 %>
+<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); %>
+<% String today = sdf.format(new Date()); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +54,7 @@ int price = inn.getPrice();
 			</tr>
 			<tr>
 				<th>チェックイン日</th>
-				<td><input type="date" name="check_in"value="${reserve.getFirst_day() }"></td>
+				<td><p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="${reserve.getFirst_day() }" min="<%= today %>"></div></td>
 			</tr>
 		</table>
 		<dialog>

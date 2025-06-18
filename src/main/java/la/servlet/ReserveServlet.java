@@ -84,6 +84,8 @@ public class ReserveServlet extends HttpServlet {
 				int flag = 0;
 				int people = 0;
 				int stay_days = 0;
+				String strDate;
+				Date first_day = null;
 				int customer_id = customer.getId();
 				//入力された予約情報を型変換
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
@@ -106,8 +108,13 @@ public class ReserveServlet extends HttpServlet {
 					request.setAttribute("days_msg", "数字を入力してください");
 					flag = 1;
 				}
-				String strDate = request.getParameter("check_in");
-				Date first_day = java.sql.Date.valueOf(strDate);
+				if (request.getParameter("check_in") == "") {
+					request.setAttribute("check_in_msg", "日付を入力してください");
+					flag = 1;
+				} else {
+					strDate = request.getParameter("check_in");
+					first_day = java.sql.Date.valueOf(strDate);
+				}
 				//合計金額は宿の金額*人数*宿泊日数で計算
 				int total_price = Integer.parseInt(request.getParameter("price")) * people * stay_days;
 
@@ -165,6 +172,8 @@ public class ReserveServlet extends HttpServlet {
 				int flag = 0;
 				int people = 0;
 				int stay_days = 0;
+				String strDate;
+				Date first_day = null;
 				int customer_id = customer.getId();
 				//入力された予約情報を型変換
 				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
@@ -188,8 +197,13 @@ public class ReserveServlet extends HttpServlet {
 					request.setAttribute("days_msg", "数字を入力してください");
 					flag = 1;
 				}
-				String strDate = request.getParameter("check_in");
-				Date first_day = java.sql.Date.valueOf(strDate);
+				if (request.getParameter("check_in") == "") {
+					request.setAttribute("check_in_msg", "日付を入力してください");
+					flag = 1;
+				} else {
+					strDate = request.getParameter("check_in");
+					first_day = java.sql.Date.valueOf(strDate);
+				}
 				//合計金額は宿の金額*人数*宿泊日数で計算
 				int total_price = Integer.parseInt(request.getParameter("price")) * people * stay_days;
 

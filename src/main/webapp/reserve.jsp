@@ -35,22 +35,22 @@ int price = inn.getPrice();
 		method="post">
 		<table border="1" align="center">
 			<tr>
-				<p>${days_msg}</p><th>宿泊日数</th>
+				<th>宿泊日数</th>
 				<td>
-					<input type="text" name="days">日
+					<p>${days_msg}</p><input type="text" name="days">日
 				</td>
 			</tr>
 			<tr>
-				<p>${people_msg}</p><th>宿泊人数</th>
+				<th>宿泊人数</th>
 				<td>
-					<input type="text" name="people">人
+					<p>${people_msg}</p><input type="text" name="people">人
 				</td>
 			</tr>
 
 			<tr>
 				<th>チェックイン日</th>
 				<td>
-				<div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>"></div></td>
+				<p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>"></div></td>
 			</tr>		
 		</table>
 		<button>予約</button>
