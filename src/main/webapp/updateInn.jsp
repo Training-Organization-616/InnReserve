@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
-<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
+<style>
+body{
+	text-align: center;
+}
+</style>
 	<%-- メニューのリンク --%>
 	<jsp:include page="/menu.jsp" />
 	<%-- 管理者メニューのリンク --%>
