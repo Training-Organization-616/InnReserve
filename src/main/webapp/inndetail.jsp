@@ -12,9 +12,13 @@ int inn_id = inn.getId();
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
-<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
+<style>
+body{
+	text-align: center;
+}
+</style>
 	<jsp:include page="/menu.jsp" />
 	<c:choose>
 		<c:when test="${Customer.getId() eq 1 }">
