@@ -29,6 +29,10 @@ div{
 button{
 	display:inline-block;
 }
+
+body{
+	text-align: center;
+}
 </style>
 
 	<jsp:include page="/menu.jsp" />
