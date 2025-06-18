@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
