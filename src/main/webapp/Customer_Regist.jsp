@@ -21,26 +21,37 @@ div{
 	text-align: center;
 }
 .text_box{
-	width: 100%;
-	font-size: 10px;
+	width:95%;
+	size: 50px;
 	
+}
+
+button{
+	display:inline-block;
 }
 </style>
 
 	<jsp:include page="/menu.jsp" />
 <br>
 
-<span class="centor">新規会員登録</span>
+<h1 style="text-align: center;">新規会員登録</h1>
 
 ${Regist_message}
 
 <form action="/InnReserve/CustomerServlet" method="post">
-	<input type="text" name="name" placeholder="名前：20文字以下" maxlength="20" class="text_box">
-	<input type="text" name="tel" placeholder="電話番号" maxlength="20" class="text_box">
-	<input type="text" name="email" placeholder="メールアドレス：５０文字以下" maxlength="50" class="text_box">
-	<input type="text" name="password" placeholder="パスワード：２０文字以下"maxlength="20" class="text_box">
-	<input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box">
+<table border="1" align="center">
+	<tr><th>名前</th>
+		<td style="width: 300px;"><input type="text" name="name" placeholder="名前：20文字以下" maxlength="20" class="text_box"></td></tr>
+	<tr><th>電話番号</th>
+		<td><input type="text" name="tel" placeholder="電話番号" maxlength="20" class="text_box"></td></tr>
+	<tr><th>アドレス</th>
+		<td><input type="text" name="email" placeholder="メールアドレス：５０文字以下" maxlength="50" class="text_box"></td></tr>
+	<tr><th>パスワード</th>
+		<td><input type="text" name="password" placeholder="パスワード：２０文字以下"maxlength="20" class="text_box"></td></tr>
+	<tr><th>パスワード確認</th>
+		<td><input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box"></td></tr>
 	
+</table>	
 	<input type="hidden" name="action" value="add">
 	
 		<dialog>
@@ -49,7 +60,9 @@ ${Regist_message}
 	</form>
 	<button type="button" id="close">キャンセル</button>
 	</dialog>
-	<button id="show">登録</button>
+	<table align="center">
+	<tr><td><button id="show" class="centor">登録</button></td></tr>
+	</table>
 
 	<script type="text/javascript">
 		var dialog = document.querySelector('dialog');
