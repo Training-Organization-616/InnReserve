@@ -59,7 +59,7 @@ body{
 			</tr>
 			<tr>
 				<th>チェックイン日</th>
-				<td><p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="${reserve.getFirst_day() }" min="<%= today %>"></div></td>
+				<td><p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>"></div></td>
 			</tr>
 		</table>
 		<dialog>
