@@ -38,6 +38,11 @@ if(customers!=null){
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
+<style>
+body{
+	text-align: center;
+}
+</style>
 	<%-- メニューのリンク --%>
 	<jsp:include page="/menu.jsp" />
 	<%-- 管理者メニューのリンク --%>
