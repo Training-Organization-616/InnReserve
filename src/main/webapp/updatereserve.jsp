@@ -27,6 +27,11 @@ int price = inn.getPrice();
 <title>宿予約</title>
 </head>
 <body>
+<style>
+body{
+	text-align: center;
+}
+</style>
 	<jsp:include page="/menu.jsp" />
 	<c:choose>
 		<c:when test="${Customer.getId() eq 1 }">
@@ -39,7 +44,7 @@ int price = inn.getPrice();
 	<h1>${inn.getName() }</h1>
 	<form action="/InnReserve/ReserveServlet?reserve_id=<%=reserve_id%>&price=<%=price %>&inn_id=<%=inn_id %>"
 		method="post">
-		<table border="1">
+		<table border="1" align="center">
 			<tr>
 				<th>宿泊日数</th>
 				<td>
