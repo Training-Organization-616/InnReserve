@@ -301,6 +301,7 @@ public class CustomerServlet extends HttpServlet {
 				}
 
 				session = request.getSession(false);
+				session.removeAttribute("Customer");
 
 				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////////要宿
 

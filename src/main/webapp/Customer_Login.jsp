@@ -26,31 +26,45 @@ div{
 	text-align: center;
 }
 .text_box{
-	width: 100px;
-	font-size: 10px;
+	
+	height: 100%;
+	width: 95%;
+	font-size: 12px;
 	
 }
 </style>
 
 	<h1><a href="/InnReserve/ReserveServlet?action=list">宿予約システム</a></h1>
 
-<span class="centor">ログイン</span><br>
+<h1 class="centor">ログイン</h1><br>
 
 ${Login_Unkown}
 ${Login_message}
 
 <form action="/InnReserve/CustomerServlet" method="post">
-	<input type="text" name="email" placeholder="メールアドレス" class="text_box"><br>
-	<input type="password" name="password" placeholder="パスワード" class="text_box"><br>
+<table  border="1" align="center">
+	<tr><th>アドレス</th><td style="width: 200px; "><input type="text" name="email" placeholder="メールアドレス" class="text_box"></td></tr>
+	<tr><th>パスワード</th><td><input type="password" name="password" placeholder="パスワード" class="text_box"></td></tr>
+
+</table>
+
+<input type="hidden" name="action" value="login">
 	
-	<input type="hidden" name="action" value="login">
-	
+<table align="center">
+<tr><td>
 	<button>ログイン</button>
-</form>
-<form action="/InnReserve/Customer_Regist.jsp" method="get">
+	</form>
+	</td>
+	<td style="width: 80px"></td>
+	<td>
+	<form action="/InnReserve/Customer_Regist.jsp" method="get">
 	<input type="hidden" name="action" value="regist" >
 	<button>新規登録</button>
-</form>
+	</form>
+	</td></tr>	
+</table>	
+
+
 </div>
 
 
