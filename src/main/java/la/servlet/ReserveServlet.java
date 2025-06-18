@@ -147,19 +147,11 @@ public class ReserveServlet extends HttpServlet {
 				//予約一覧画面の表示
 			} else if (action.equals("reservelist")) {
 				//宿名や宿金額を持ってくるために全宿を検索
-				if (customer == null) {
-					view_id = 0;
-				} else {
-					view_id = customer.getId();
-				}
+				view_id = customer.getId();
 				//全宿をリストに入れる
 				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
 
-				if (customer == null) {
-					gotoPage(request, response, "/Customer_Login.jsp");
-					return;
-				}
 				int customer_id = customer.getId();
 				//int customer_id = 1;
 				List<CustomerBean> customers = customerdao.findAll();
@@ -197,6 +189,7 @@ public class ReserveServlet extends HttpServlet {
 				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 
+				view_id = customer.getId();
 				if (request.getParameter("people") == "") {
 					request.setAttribute("people_msg", "人数を入力してください");
 					flag = 1;
@@ -259,6 +252,7 @@ public class ReserveServlet extends HttpServlet {
 				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
 				int customer_id = customer.getId();
 
+				view_id = customer.getId();
 				//予約番号からその予約を非表示にしてキャンセル
 				dao.deleteReserve(reserve_id);
 
