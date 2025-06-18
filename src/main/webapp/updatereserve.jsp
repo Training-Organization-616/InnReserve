@@ -65,22 +65,24 @@ body{
 		<dialog>
 		<p>この変更内容でよろしいですか?</p>
 		<button>変更</button>
-		<input type="hidden" name="action" value="update">
 	</form>
+		<input type="hidden" name="action" value="update">
 	<button type="button" id="close">キャンセル</button>
 	</dialog>
 	<button id="show">変更</button>
 
 	<script type="text/javascript">
-		var dialog = document.querySelector('dialog');
-		var btn_show = document.getElementById('show');
-		var btn_close = document.getElementById('close');
-		btn_show.addEventListener('click', function() {
-			dialog.showModal();
-		}, false);
-		btn_close.addEventListener('click', function() {
-			dialog.close();
-		}, false);
-	</script>
+		const dialog = document.querySelector('dialog');
+		// ダイアログを開く
+		document.getElementById('show').addEventListener('click', function() {
+		  dialog.showModal();
+		});
+	 
+	// ダイアログを閉じる
+		document.getElementById('close').addEventListener('click', function() {
+		  dialog.close();
+		});
+
+		</script>
 </body>
 </html>

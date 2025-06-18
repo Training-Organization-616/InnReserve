@@ -249,7 +249,7 @@ public class ReserveServlet extends HttpServlet {
 
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
 				request.setAttribute("reserves", reserves);
-				gotoPage(request, response, "/reservelist.jsp");
+				gotoPage(request, response, "/inn.jsp");
 
 				//予約キャンセル
 			} else if (action.equals("delete")) {
