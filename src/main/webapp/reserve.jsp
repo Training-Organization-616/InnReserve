@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="la.bean.InnBean"%>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -18,6 +17,7 @@ int price = inn.getPrice();
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
+<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/menu.jsp" />
@@ -30,9 +30,10 @@ int price = inn.getPrice();
 		</c:otherwise>
 	</c:choose>
 	<h1>${inn.getName() }</h1>
+	<div class="main">
 	<form action="/InnReserve/ReserveServlet?inn_id=<%=inn_id%>&price=<%=price %>"
 		method="post">
-		<table border="1">
+		<table border="1" align="center">
 			<tr>
 				<p>${days_msg}</p><th>宿泊日数</th>
 				<td>
@@ -55,5 +56,6 @@ int price = inn.getPrice();
 		<button>予約</button>
 		<input type="hidden" name="action" value="reserve">
 	</form>
+	</div>
 </body>
 </html>
