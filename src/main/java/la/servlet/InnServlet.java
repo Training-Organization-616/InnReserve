@@ -10,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import la.bean.CustomerBean;
 import la.bean.InnBean;
 import la.dao.DAOException;
 import la.dao.InnDAO;
@@ -33,6 +35,8 @@ public class InnServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		CustomerBean Customer = (CustomerBean) session.getAttribute("Customer");
 		// パラメータ解析
 
 		// InnDAOの取得
@@ -43,12 +47,14 @@ public class InnServlet extends HttpServlet {
 			// セッション管理している会員情報の取得
 			String customer = request.getParameter("customer");
 			customer = "manager";
+			int view_id = 0;
+
 			// アクションがなしかlistの場合
 			if (action == null || action.length() == 0 || action.equals("list")) {
 				// 会員セッションが存在しないか会員の場合
 				if (customer == null || customer.equals("user")) {
-					// 宿一覧の取得
-					List<InnBean> list = dao.findAllInn();
+					//全宿をリストに入れる
+					List<InnBean> list = dao.findAllInn(0);
 					// リクエストスコープで一覧を渡す
 					request.setAttribute("items", list);
 					request.setAttribute("menu", 1);
@@ -56,7 +62,7 @@ public class InnServlet extends HttpServlet {
 					gotoPage(request, response, "manager/.jsp");
 				} else if (customer.equals("manager")) {// 管理者の場合
 					// 宿一覧の取得
-					List<InnBean> list = dao.findAllInn();
+					List<InnBean> list = dao.findAllInn(Customer.getId());
 					// リクエストスコープで一覧を渡す
 					request.setAttribute("items", list);
 					request.setAttribute("menu", 1);
@@ -119,7 +125,7 @@ public class InnServlet extends HttpServlet {
 				// 宿の追加
 				dao.addInn(name, address, tel, price);
 				// 宿一覧の取得
-				List<InnBean> list = dao.findAllInn();
+				List<InnBean> list = dao.findAllInn(Customer.getId());
 				// リクエストスコープで一覧を渡す
 				request.setAttribute("items", list);
 				request.setAttribute("menu", 1);
@@ -141,7 +147,7 @@ public class InnServlet extends HttpServlet {
 				request.setAttribute("price", price);
 
 				// 一覧の取得
-				List<InnBean> list = dao.findAllInn();
+				List<InnBean> list = dao.findAllInn(Customer.getId());
 				// リクエストスコープで一覧を渡す
 				request.setAttribute("items", list);
 				// 宿情報変更画面へ遷移
@@ -206,7 +212,7 @@ public class InnServlet extends HttpServlet {
 				// 宿情報の変更
 				dao.updateInn(id, name, address, tel, price);
 				// 宿一覧の取得
-				List<InnBean> list = dao.findAllInn();
+				List<InnBean> list = dao.findAllInn(Customer.getId());
 				// リクエストスコープで一覧を渡す
 				request.setAttribute("items", list);
 				request.setAttribute("menu", 1);
@@ -218,7 +224,7 @@ public class InnServlet extends HttpServlet {
 				// 宿情報の削除
 				dao.deleteInn(id);
 				// 宿一覧の取得
-				List<InnBean> list = dao.findAllInn();
+				List<InnBean> list = dao.findAllInn(Customer.getId());
 				// リクエストスコープで一覧を渡す
 				request.setAttribute("items", list);
 				request.setAttribute("menu", 1);

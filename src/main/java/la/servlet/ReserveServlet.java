@@ -48,11 +48,16 @@ public class ReserveServlet extends HttpServlet {
 			//DAOの定義	
 			ReserveDAO dao = new ReserveDAO();
 			InnDAO inndao = new InnDAO();
-
+			int view_id = 0;
 			//宿一覧の表示
 			if (action == null || action.length() == 0 || action.equals("list")) {
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
 				//全宿をリストに入れる
-				List<InnBean> inns = inndao.findAllInn();
+				List<InnBean> inns = inndao.findAllInn(view_id);
 
 				request.setAttribute("inns", inns);
 				gotoPage(request, response, "/inn.jsp");
@@ -137,7 +142,13 @@ public class ReserveServlet extends HttpServlet {
 				//予約一覧画面の表示
 			} else if (action.equals("reservelist")) {
 				//宿名や宿金額を持ってくるために全宿を検索
-				List<InnBean> inns = inndao.findAllInn();
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
+				//全宿をリストに入れる
+				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
 
 				if (customer == null) {
@@ -226,7 +237,7 @@ public class ReserveServlet extends HttpServlet {
 				dao.updateReserve(reserve_id, people, stay_days, first_day, total_price);
 
 				//変更したのち、予約一覧画面を表示
-				List<InnBean> inns = inndao.findAllInn();
+				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
 
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
@@ -243,7 +254,7 @@ public class ReserveServlet extends HttpServlet {
 				dao.deleteReserve(reserve_id);
 
 				//キャンセルしたのち、予約一覧画面を表示
-				List<InnBean> inns = inndao.findAllInn();
+				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
 
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);

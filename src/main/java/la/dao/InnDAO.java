@@ -28,15 +28,19 @@ public class InnDAO {
 	}
 
 	// 全ての宿情報を取得する
-	public List<InnBean> findAllInn() throws DAOException {
+	public List<InnBean> findAllInn(int customer_id) throws DAOException {
 		// SQL文の作成
-		String sql = "SELECT * FROM inn ORDER BY id";
+		String sql = "SELECT * FROM inn";
+		if (customer_id == 1) {
+			sql += " ORDER BY id";
+		} else {
+			sql += " WHERE delete_flag = false ORDER BY id";
+		}
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
 				PreparedStatement st = con.prepareStatement(sql);) {
-
 			try (ResultSet rs = st.executeQuery();) {
 				// 結果の取得
 				List<InnBean> list = new ArrayList<InnBean>();
