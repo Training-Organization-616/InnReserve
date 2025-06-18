@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
+<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
 
@@ -50,7 +51,8 @@ ${Login_message}
 
 <input type="hidden" name="action" value="login">
 	
-<table align="center">
+<div>
+<table align="center" border="">
 <tr><td>
 	<button>ログイン</button>
 	</form>
@@ -63,7 +65,6 @@ ${Login_message}
 	</form>
 	</td></tr>	
 </table>	
-
 
 </div>
 

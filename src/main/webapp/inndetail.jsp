@@ -12,6 +12,7 @@ int inn_id = inn.getId();
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
+<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
 </head>
 <body>
 <style>

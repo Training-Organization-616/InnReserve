@@ -25,3 +25,46 @@
 .delete_item{
 	background-color: rgb(180, 180, 180);
 }
+
+a:link {
+ color:white;
+}
+
+a:visited {
+ color:white;
+}
+
+a:hover{
+	color: red;
+}
+
+
+body{
+	background-color: darkseagreen;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	
+}
+
+table{
+	border: 1px;
+	background-color: black;
+	
+}
+
+th{
+	background-color: darkslategray;
+	color: white;
+}
+
+td{
+	background-color: lightgoldenrodyellow;
+
+}
+
+*{
+	text-decoration: none;
+}
+
+button{
+	background-color: lightyellow;
+}

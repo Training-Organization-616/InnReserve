@@ -40,8 +40,8 @@ body{
 			<c:if test="${Customer.getId() eq 1 }">
 				<th>予約者名</th>
 			</c:if>
-			<th>人数</th>
 			<th>日数</th>
+			<th>人数</th>
 			<th>チェックイン日</th>
 			<th>合計金額</th>
 			<th>変更</th>
@@ -69,8 +69,8 @@ body{
 						</c:if>
 
 
-						<td>${reserve.people }</td>
 						<td>${reserve.stay_days }</td>
+						<td>${reserve.people }</td>
 						<td>${reserve.first_day }</td>
 						<td>￥${reserve.total_price }</td>
 						<form
