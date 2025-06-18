@@ -247,9 +247,11 @@ public class ReserveServlet extends HttpServlet {
 				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
 
+				List<CustomerBean> customers = customerdao.findAll();
+				request.setAttribute("customers", customers);
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
 				request.setAttribute("reserves", reserves);
-				gotoPage(request, response, "/inn.jsp");
+				gotoPage(request, response, "/reservelist.jsp");
 
 				//予約キャンセル
 			} else if (action.equals("delete")) {
@@ -263,6 +265,8 @@ public class ReserveServlet extends HttpServlet {
 				//キャンセルしたのち、予約一覧画面を表示
 				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
+				List<CustomerBean> customers = customerdao.findAll();
+				request.setAttribute("customers", customers);
 
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
 				request.setAttribute("reserves", reserves);
