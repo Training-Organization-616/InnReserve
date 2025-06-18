@@ -67,37 +67,70 @@ ${Update_massage}
 	</tr>	
 	<input type="hidden" name="original_email" value="${original_email }">
 </table>
-		<dialog>
+		<dialog id="dialog1">
 		<p>この変更内容でよろしいですか?</p>
 		<button>変更</button>
 	</form>
-	<button type="button" id="close">キャンセル</button>
+	<button type="button" class="close">キャンセル</button>
 	</dialog>
-		
 <table align="center">
 	<tr><td>
-	<button id="show">変更</button>
+	<button class="show" data-dialog="dialog1">変更</button>
 	</td>
 	<td style="width: 80px"></td>
 	<td>
-	<form action="/InnReserve/CustomerServlet" method="post">
-	<input type="hidden" name="action" value="delete">
-	<input type="hidden" name="id" value="${id}">
-	<button>削除</button> 
-	</form>
+		<form action="/InnReserve/CustomerServlet" method="post">
+		<input type="hidden" name="action" value="delete">
+		<input type="hidden" name="id" value="${id}">
+
+		<dialog id="dialog2">
+		<p>本当に削除してもよろしいですか?</p>
+		<button>削除</button>
+		</form>
+	<button type="button" class="close">キャンセル</button>
+		</dialog>
+	<button class="show" data-dialog="dialog2">削除</button> 
 	</td></tr>	
 </table>
 
 	<script type="text/javascript">
-		var dialog = document.querySelector('dialog');
-		var btn_show = document.getElementById('show');
-		var btn_close = document.getElementById('close');
-		btn_show.addEventListener('click', function() {
-			dialog.showModal();
-		}, false);
-		btn_close.addEventListener('click', function() {
-			dialog.close();
-		}, false);
+		var dialogs = document.querySelectorAll('dialog');
+		const open = document.querySelectorAll('.show');
+		open.forEach(button => {
+		  button.addEventListener('click', () => {
+		    const dialogId = button.getAttribute('data-dialog');
+		    const dialog = document.getElementById(dialogId);
+		    dialog.showModal();
+		    dialog.classList.add('show');
+		  });
+		});
+		const close = document.querySelectorAll('.close');
+		close.forEach(button => {
+		  button.addEventListener('click', () => {
+		  const dialog = button.closest('dialog');
+		  dialog.classList.remove('show');
+		  setTimeout(() => dialog.close(), 0);
+		  });
+		});
+
+<!--		var btn_show = document.getElementById('show');-->
+<!--		var btn_close = document.getElementById('close');-->
+<!--		btn_show.addEventListener('click', function() {-->
+<!--			dialog.showModal();-->
+<!--		}, false);-->
+<!--		btn_close.addEventListener('click', function() {-->
+<!--			dialog.close();-->
+<!--		}, false);-->
+		
+<!--		var dialog2 = document.querySelector('dialog2');-->
+<!--		var btn_show2 = document.getElementById('show2');-->
+<!--		var btn_close2 = document.getElementById('close2');-->
+<!--		btn_show2.addEventListener('click', function() {-->
+<!--			dialog2.showModal();-->
+<!--		}, false);-->
+<!--		btn_close2.addEventListener('click', function() {-->
+<!--			dialog2.close();-->
+<!--		}, false);-->
 	</script>		
 
 </body>

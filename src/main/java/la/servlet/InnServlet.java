@@ -47,7 +47,6 @@ public class InnServlet extends HttpServlet {
 			// セッション管理している会員情報の取得
 			String customer = request.getParameter("customer");
 			customer = "manager";
-			int view_id = 0;
 
 			// アクションがなしかlistの場合
 			if (action == null || action.length() == 0 || action.equals("list")) {
