@@ -16,6 +16,7 @@ body{
 </style>
 	<%-- メニューのリンク --%>
 	<p id="menu"><jsp:include page="/menu.jsp" /></p>
+	<h1>新規宿登録</h1>
 	<%-- エラーメッセージを表示する --%>
 	<p>
 		<c:if test="${not empty message }">
@@ -26,20 +27,20 @@ ${message }
 		<table border="1" align="center">
 			<tr>
 				<th>宿名</th>
-				<td><input type="text" name="name" maxlength="50"></td>
+				<td><input type="text" name="name" maxlength="50" size="30" placeholder="50文字以下"></td>
 			</tr>
 			<tr>
 				<th>場所</th>
-				<td><input type="text" name="address" maxlength="50"></td>
+				<td><input type="text" name="address" maxlength="50" size="30" placeholder="50文字以下"></td>
 			</tr>
 			<tr>
 				<th>電話番号</th>
 				<td><input type="text" name="tel"
-					placeholder="ハイフンを含めて入力してください。" maxlength="20"></td>
+					placeholder="ハイフンを含める" maxlength="20" size="30"></td>
 			</tr>
 			<tr>
 				<th>値段</th>
-				<td>￥<input type="text" name="price"></td>
+				<td>￥<input type="text" name="price" size="30"></td>
 			</tr>
 		</table>
 		<button type="button" class="show" id="button">登録</button>
