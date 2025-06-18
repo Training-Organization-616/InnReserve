@@ -2,6 +2,7 @@ package la.servlet;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import la.bean.CustomerBean;
 import la.bean.InnBean;
 import la.bean.ReserveBean;
+import la.dao.CustomerDAO;
 import la.dao.DAOException;
 import la.dao.InnDAO;
 import la.dao.ReserveDAO;
@@ -48,6 +50,7 @@ public class ReserveServlet extends HttpServlet {
 			//DAOの定義	
 			ReserveDAO dao = new ReserveDAO();
 			InnDAO inndao = new InnDAO();
+			CustomerDAO customerdao = new CustomerDAO();
 			int view_id = 0;
 			//宿一覧の表示
 			if (action == null || action.length() == 0 || action.equals("list")) {
@@ -58,6 +61,8 @@ public class ReserveServlet extends HttpServlet {
 				}
 				//全宿をリストに入れる
 				List<InnBean> inns = inndao.findAllInn(view_id);
+				List<CustomerBean> customers = customerdao.findAll();
+				request.setAttribute("customers", customers);
 
 				request.setAttribute("inns", inns);
 				gotoPage(request, response, "/inn.jsp");
@@ -157,6 +162,8 @@ public class ReserveServlet extends HttpServlet {
 				}
 				int customer_id = customer.getId();
 				//int customer_id = 1;
+				List<CustomerBean> customers = customerdao.findAll();
+				request.setAttribute("customers", customers);
 
 				//会員IDから予約一覧を検索し表示
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
@@ -269,6 +276,9 @@ public class ReserveServlet extends HttpServlet {
 			e.printStackTrace();
 			request.setAttribute("message", "内部エラーが発生しました。");
 			gotoPage(request, response, "/errInternal.jsp");
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 	}
 

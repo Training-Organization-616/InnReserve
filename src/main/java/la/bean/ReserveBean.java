@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class ReserveBean implements Serializable {
 	private int id;
-	private int cutomer_id;
+	private int customer_id;
 	private int inn_id;
 	private int people;
 	private int stay_days;
@@ -16,7 +16,7 @@ public class ReserveBean implements Serializable {
 	public ReserveBean(int id, int customer_id, int inn_id, int people,
 			int stay_days, Date first_day, int total_price) {
 		this.id = id;
-		this.cutomer_id = customer_id;
+		this.customer_id = customer_id;
 		this.inn_id = inn_id;
 		this.people = people;
 		this.stay_days = stay_days;
@@ -28,7 +28,7 @@ public class ReserveBean implements Serializable {
 	public ReserveBean(int id, int customer_id, int inn_id, int people,
 			int stay_days, Date first_day, int total_price, boolean cancel_flag) {
 		this.id = id;
-		this.cutomer_id = customer_id;
+		this.customer_id = customer_id;
 		this.inn_id = inn_id;
 		this.people = people;
 		this.stay_days = stay_days;
@@ -45,12 +45,12 @@ public class ReserveBean implements Serializable {
 		this.id = id;
 	}
 
-	public int getCutomer_id() {
-		return cutomer_id;
+	public int getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setCutomer_id(int cutomer_id) {
-		this.cutomer_id = cutomer_id;
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
 	public int getInn_id() {

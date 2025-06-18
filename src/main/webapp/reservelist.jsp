@@ -35,7 +35,11 @@ body{
 	<table border="1" align="center">
 		<tr>
 			<th>予約</th>
+
 			<th>宿名</th>
+			<c:if test="${Customer.getId() eq 1 }">
+				<th>予約者名</th>
+			</c:if>
 			<th>人数</th>
 			<th>日数</th>
 			<th>チェックイン日</th>
@@ -45,6 +49,9 @@ body{
 		</tr>
 		<c:forEach items="${reserves }" var="reserve">
 			<c:forEach items="${inns }" var="inn">
+				<c:forEach items="${customers }" var="customer">
+				<c:if test="${customer.getId() eq reserve.customer_id }">
+				
 				<c:if test="${inn.getId() eq reserve.inn_id }">
 				<c:choose>
 					<c:when test="${reserve.cancel_flag eq true }">
@@ -55,7 +62,11 @@ body{
 					</c:otherwise>
 				</c:choose>						<% cnt++; %>
 						<td><%=cnt %></td>
+						
 						<td>${inn.name }</td>
+						<c:if test="${Customer.getId() eq 1 }">
+							<td>${customer.name }</td>
+						</c:if>
 
 
 						<td>${reserve.people }</td>
@@ -80,6 +91,8 @@ body{
 						<button type="button" class="close">キャンセル</button>
 						</dialog>
 				</c:if>
+					</c:if>
+				</c:forEach>
 			</c:forEach>
 			</tr>
 		</c:forEach>

@@ -88,6 +88,7 @@ public class ReserveDAO {
 				List<ReserveBean> list = new ArrayList<ReserveBean>();
 				while (rs.next()) {
 					int id = rs.getInt("id");
+					customer_id = rs.getInt("customer_id");
 					int inn_id = rs.getInt("inn_id");
 					int people = rs.getInt("people");
 					int stay_days = rs.getInt("stay_days");
