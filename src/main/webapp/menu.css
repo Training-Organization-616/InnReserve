@@ -56,7 +56,7 @@ th{
 	color: white;
 }
 
-td{
+tr{
 	background-color: lightgoldenrodyellow;
 
 }
@@ -70,5 +70,4 @@ button{
 }
 .twobutton{
 	background-color: darkseagreen;
-
 }
