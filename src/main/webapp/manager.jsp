@@ -122,7 +122,6 @@ body{
 				<th>名前</th>
 				<th>電話番号</th>
 				<th>メールアドレス</th>
-				<th>パスワード</th>
 				<th>変更</th>
 				<th>削除</th>
 			</tr>
@@ -140,7 +139,6 @@ body{
 					<td>${item.name }</td>
 					<td>${item.tel }</td>
 					<td>${item.email }</td>
-					<td>${item.password }</td>
 					<%-- 変更ボタン --%>
 					<td>
 						<form action="/InnReserve/CustomerServlet" method="get">
