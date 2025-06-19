@@ -35,9 +35,7 @@ div{
 }
 </style>
 
-	<h1><a href="/InnReserve/ReserveServlet?action=list">宿予約システム</a></h1>
-
-<h1 class="centor">ログイン</h1><br>
+	<jsp:include page="/menu.jsp" />
 
 ${Login_Unkown}
 ${Login_message}

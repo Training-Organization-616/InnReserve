@@ -73,6 +73,11 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "/Customer_Login.jsp");
 					return;
 				}
+				if (email.equals("null")) {
+					request.setAttribute("Login_message", "存在しないアカウントです");
+					gotoPage(request, response, "/Customer_Login.jsp");
+					return;
+				}
 
 				session.setAttribute("Customer", Customer);
 				if (Customer.getId() == 1) {
