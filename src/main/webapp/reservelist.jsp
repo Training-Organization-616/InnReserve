@@ -13,11 +13,12 @@
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
-<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/menu.css"
+	rel="stylesheet">
 </head>
 <body>
-<style>
-body{
+	<style>
+body {
 	text-align: center;
 }
 </style>
@@ -50,47 +51,48 @@ body{
 		<c:forEach items="${reserves }" var="reserve">
 			<c:forEach items="${inns }" var="inn">
 				<c:forEach items="${customers }" var="customer">
-				<c:if test="${customer.getId() eq reserve.customer_id }">
-				
-				<c:if test="${inn.getId() eq reserve.inn_id }">
-				<c:choose>
-					<c:when test="${reserve.cancel_flag eq true }">
-						<tr class="delete_item">
-					</c:when>
-					<c:otherwise>
-						<tr>
-					</c:otherwise>
-				</c:choose>						<% cnt++; %>
-						<td><%=cnt %></td>
-						
-						<td>${inn.name }</td>
-						<c:if test="${Customer.getId() eq 1 }">
-							<td>${customer.name }</td>
+					<c:if test="${customer.getId() eq reserve.customer_id }">
+
+						<c:if test="${inn.getId() eq reserve.inn_id }">
+							<c:choose>
+								<c:when test="${reserve.cancel_flag eq true }">
+									<tr class="delete_item">
+								</c:when>
+								<c:otherwise>
+									<tr>
+								</c:otherwise>
+							</c:choose>
+							<% cnt++; %>
+							<td><%=cnt %></td>
+
+							<td>${inn.name }</td>
+							<c:if test="${Customer.getId() eq 1 }">
+								<td>${customer.name }</td>
+							</c:if>
+
+
+							<td>${reserve.stay_days }</td>
+							<td>${reserve.people }</td>
+							<td>${reserve.first_day }</td>
+							<td>￥${reserve.total_price }</td>
+							<form
+								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
+								method="post">
+								<td><button>変更</button></td> <input type="hidden" name="action"
+									value="edit">
+							</form>
+							<form
+								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
+								method="post">
+								<td><button type="button" class="show">削除</button></td>
+								<dialog>
+								<p>本当に削除しますか?</p>
+								<button>削除</button>
+								<input type="hidden" name="action" value="delete">
+							</form>
+							<button type="button" class="close">キャンセル</button>
+							</dialog>
 						</c:if>
-
-
-						<td>${reserve.stay_days }</td>
-						<td>${reserve.people }</td>
-						<td>${reserve.first_day }</td>
-						<td>￥${reserve.total_price }</td>
-						<form
-							action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
-							method="post">
-							<td><button>変更</button></td> <input type="hidden" name="action"
-								value="edit">
-						</form>
-						<form
-							action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
-							method="post">
-							<td><button type="button" class="show">削除</button></td>
-							<dialog>
-							<p>本当に削除しますか?</p>
-							<button>削除</button>
-							<input type="hidden" name="action" value="delete">
-						</form>
-						<button type="button" class="close">キャンセル</button>
-						</dialog>
-				</c:if>
 					</c:if>
 				</c:forEach>
 			</c:forEach>

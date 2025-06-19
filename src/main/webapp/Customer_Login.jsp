@@ -52,13 +52,12 @@ ${Login_message}
 <input type="hidden" name="action" value="login">
 	
 <div>
-<table align="center" border="">
-<tr><td>
+<table align="center" width="300px"  class="twobutton">
+<tr><td class="twobutton">
 	<button>ログイン</button>
 	</form>
 	</td>
-	<td style="width: 80px"></td>
-	<td>
+	<td class="twobutton">
 	<form action="/InnReserve/Customer_Regist.jsp" method="get">
 	<input type="hidden" name="action" value="regist" >
 	<button>新規登録</button>

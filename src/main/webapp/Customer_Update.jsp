@@ -78,12 +78,11 @@ ${Update_massage}
 	</form>
 	<button type="button" class="close">キャンセル</button>
 	</dialog>
-<table align="center">
-	<tr><td>
+<table align="center" class="twobutton" width="300px">
+	<tr><td class="twobutton">
 	<button class="show" data-dialog="dialog1">変更</button>
 	</td>
-	<td style="width: 80px"></td>
-	<td>
+	<td class="twobutton">
 		<form action="/InnReserve/CustomerServlet" method="post">
 		<input type="hidden" name="action" value="delete">
 		<input type="hidden" name="id" value="${id}">
@@ -94,7 +93,7 @@ ${Update_massage}
 		</form>
 	<button type="button" class="close">キャンセル</button>
 		</dialog>
-	<button class="show" data-dialog="dialog2">削除</button> 
+	<button class="show"  data-dialog="dialog2" >削除</button> 
 	</td></tr>	
 </table>
 
