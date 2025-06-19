@@ -71,3 +71,19 @@ button{
 .twobutton{
 	background-color: darkseagreen;
 }
+
+
+.menu{
+	background-color: darkred;
+	margin-top: -16px;
+	font-size: 30px;
+}	
+
+dialog{
+	background-color: lightgoldenrodyellow;
+}
+
+button{
+	color: black;
+	background-color: rgb(230,230,230);
+}

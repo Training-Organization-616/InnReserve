@@ -2,7 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div style="background-color: orange; color: black; ">
+<style>
+h1{
+	font-size: 50px;
+}
+</style>
+
+<div style="background-color: orange; color: black;  margin-top: -30px;">
 		<c:choose>
 		 <c:when test="${Customer.getId() eq 1 }">
 	<h1><a href="/InnReserve/InnServlet?action=list">宿予約システム</a></h1>
@@ -11,7 +17,7 @@
 	<h1><a href="/InnReserve/ReserveServlet?action=list">宿予約システム</a></h1>
 		</c:otherwise>
 			</c:choose>
-	<p align="right">
+	<p align="right" style="margin-top: -30px;">
 		<c:if test="${not empty Customer}">
 こんにちは、${Customer.name}さん<br>
 		<c:choose>

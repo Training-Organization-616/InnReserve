@@ -12,9 +12,14 @@
 <%-- action:list --%>
 <%-- CustomerId=sessionのCustomerId--%>
 <%-- menu:1(宿)2(予約)3(ユーザー) --%>
-<a href="/InnReserve/ReserveServlet?action=list" >宿一覧</a>
+
+<div class="menu">
+<a href="/InnReserve/ReserveServlet?action=list">宿一覧</a>
+<span  style="margin-right: 50px;"></span>
+
 <c:if test="${Customer ne null }">
 <a href="/InnReserve/ReserveServlet?action=reservelist" >予約一覧</a>
 </c:if>
+</div>
 </body>
 </html>
