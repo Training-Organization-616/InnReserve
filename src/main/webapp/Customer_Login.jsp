@@ -52,7 +52,7 @@ ${Login_message}
 <input type="hidden" name="action" value="login">
 	
 <div>
-<table align="center" width="300px"  class="twobutton">
+<table align="center" width="300px"  style="background-color: darkseagreen;">
 <tr><td class="twobutton">
 	<button>ログイン</button>
 	</form>

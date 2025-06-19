@@ -65,8 +65,8 @@ ${Regist_message}
 	</form>
 	<button type="button" id="close">キャンセル</button>
 	</dialog>
-	<table align="center">
-	<tr><td><button id="show" class="centor">登録</button></td></tr>
+	<table align="center" style="background-color: darkseagreen;">
+	<tr><td class="twobutton"><button id="show" class="centor">登録</button></td></tr>
 	</table>
 
 	<script type="text/javascript">
