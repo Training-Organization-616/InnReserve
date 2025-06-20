@@ -7,24 +7,37 @@ public class InnBean implements Serializable {
 	private String name;
 	private String address;
 	private String tel;
-	private int price;
+	private int min_price;
+	private String picture;
 	private boolean delete_flag;
 
-	public InnBean(int id, String name, String address, String tel, int price) {
+	public InnBean(int id, String name, String address, String tel, int min_price, String picture) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.tel = tel;
-		this.price = price;
+		this.min_price = min_price;
+		this.picture = picture;
 		this.delete_flag = false;
 	}
 
-	public InnBean(int id, String name, String address, String tel, int price, boolean delete_flag) {
+	public InnBean(int id, String name, String address, String tel, String picture, boolean delete_flag) {
 		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.tel = tel;
-		this.price = price;
+		this.picture = picture;
+		this.delete_flag = delete_flag;
+	}
+
+	public InnBean(int id, String name, String address, String tel, int min_price, String picture,
+			boolean delete_flag) {
+		this.id = id;
+		this.name = name;
+		this.address = address;
+		this.tel = tel;
+		this.min_price = min_price;
+		this.picture = picture;
 		this.delete_flag = delete_flag;
 	}
 
@@ -64,12 +77,20 @@ public class InnBean implements Serializable {
 		this.tel = tel;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getMin_price() {
+		return min_price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setMin_price(int min_price) {
+		this.min_price = min_price;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 	public boolean isDelete_flag() {
