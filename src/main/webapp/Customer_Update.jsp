@@ -64,13 +64,22 @@ ${Update_massage}
 	<tr><th>アドレス</th>
 		<td><input type="text" name="email" value="${email}" placeholder="メールアドレス" maxlength="50" class="text_box"></td>
 	</tr>
+	<c:choose>
+	<c:when test="${Customer.getId() ne 1 || id eq 1}">
 	<tr><th>パスワード</th>
-		<td><input type="text" name="password" value="${password}" placeholder="パスワード" maxlength="20" class="text_box"></td>
+		<td><input type="text" name="password" value="${original_password}" placeholder="パスワード" maxlength="20" class="text_box"></td>
 	</tr>
 	<tr><th>パスワード確認</th>
 		<td><input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box"></td>
 	</tr>	
+	</c:when>
+	<c:otherwise>
+	<input type="hidden" name="password" value="${original_password}">
+	<input type="hidden" name="check_password" value="${original_password}">
+	</c:otherwise>
+	</c:choose>
 	<input type="hidden" name="original_email" value="${original_email }">
+	<input type="hidden" name="original_password" value="${original_password }">
 </table>
 		<dialog id="dialog1">
 		<p>この変更内容でよろしいですか?</p>

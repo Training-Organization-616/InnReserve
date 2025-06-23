@@ -38,12 +38,13 @@ ${message }
 			</tr>
 			<tr>
 				<th>画像</th>
-				<td><input type="text" name="picture" value="${picture }"></td>
+				<td><input type="file" name="picture"></td>
 			</tr>
 		</table>
 		<form action="/InnReserve/InnServlet" method="post">
 			<input type="hidden" name="id" value="${inn_id}">
 			<input type="hidden" name="action" value="update">
+			<input type="hidden" name="original_picture" value="${picture }">
 			<%-- 変更(ダイアログ付き) --%>
 			<button type="button" class="show">変更</button>
 			<dialog>
