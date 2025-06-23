@@ -116,6 +116,14 @@ body{
 
 	<%-- [menu=3]ユーザーを選択 --%>
 	<c:if test="${menu ==3}">
+	<%-- 検索 --%>
+			<form action="/InnReserve/CustomerServlet" method="get">
+			<input type="text" name="name" placeholder="?名前:" maxlength="50">
+			<input type="text" name="email" placeholder="?メールアドレス:"
+				maxlength="50">
+			<button>検索</button>
+			<input type="hidden" name="action" value="search">
+		</form>
 	<h1>ユーザ一覧</h1>
 		<%-- 一覧表の作成 --%>
 		<table border="1" align="center">
