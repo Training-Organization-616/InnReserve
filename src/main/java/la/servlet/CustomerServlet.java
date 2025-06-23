@@ -310,6 +310,14 @@ public class CustomerServlet extends HttpServlet {
 
 				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////////要宿
 
+			} else if (action.equals("search")) {//会員検索
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+
+				List<CustomerBean> Customers = dao.findByNameAndEmail(name, email);// 検索メソッド
+				request.setAttribute("Customers_list", Customers);
+				request.setAttribute("menu", 3);
+				gotoPage(request, response, "/manager.jsp");
 			} else {
 				request.setAttribute("message", "正しく操作してください。");
 				gotoPage(request, response, "/errInternal.jsp");
