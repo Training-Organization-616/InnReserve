@@ -42,7 +42,7 @@
 						<a
 							href="/InnReserve/ReserveServlet?inn_id=${inn.id }&action=goinn" />
 						<%-- <a href="/"> --%>
-						<img src="${inn.picture }" width="300" height="150">
+						<img src="${inn.picture }" width="300" height="150" class="headline">
 <!--						<img src="./hotel.png" width="300" height="150">-->
 						<div>
 							<span class="block truncate font-bold text-xl text-color-bk">${inn.name }</span>

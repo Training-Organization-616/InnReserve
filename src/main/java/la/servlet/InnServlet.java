@@ -193,7 +193,11 @@ public class InnServlet extends HttpServlet {
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
+
 				String picture = request.getParameter("picture");
+				if (picture == "") {
+					picture = request.getParameter("original_picture");
+				}
 				// 宿情報の変更
 				dao.updateInn(id, name, address, tel, picture);
 				// 宿一覧の取得
