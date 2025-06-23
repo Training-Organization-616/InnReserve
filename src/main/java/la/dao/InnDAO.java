@@ -157,7 +157,7 @@ public class InnDAO {
 	public void calcMinPrice(int id) throws DAOException {
 		// SQL文の作成
 		int min_price = 0;
-		String sql = "SELECT min(price) FROM plan";
+		String sql = "SELECT min(price) FROM plan WHERE delete_flag = false";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
@@ -190,7 +190,7 @@ public class InnDAO {
 	/**
 	 * 削除処理
 	 */
-	public int deleteInn(int id) throws DAOException {
+	public void deleteInn(int id) throws DAOException {
 		// SQL文の作成
 		String sql = "UPDATE inn SET delete_flag = true WHERE id = ?";
 
@@ -201,7 +201,7 @@ public class InnDAO {
 			// コードを指定
 			st.setInt(1, id);
 			// SQLの実行
-			int rows = st.executeUpdate();
+			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
@@ -215,8 +215,67 @@ public class InnDAO {
 			// コードを指定
 			st.setInt(1, id);
 			// SQLの実行
-			int rows = st.executeUpdate();
-			return rows;
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+		sql = "UPDATE plan SET delete_flag = true WHERE inn_id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+	}
+
+	public void trueDeleteInn(int id) throws DAOException {
+		// SQL文の作成
+		String sql = "DELETE FROM reserve WHERE inn_id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+		sql = "DELETE FROM plan WHERE inn_id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+		sql = "DELETE FROM inn WHERE id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");

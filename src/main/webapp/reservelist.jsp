@@ -81,6 +81,21 @@ body {
 								<td><button>変更</button></td> <input type="hidden" name="action"
 									value="edit">
 							</form>
+						<c:choose>
+						<c:when test="${ reserve.cancel_flag eq true}">
+							<form
+								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
+								method="post">
+								<td><button type="button" class="show">削除</button></td>
+								<dialog>
+								<p>本当に削除しますか?</p>
+								<button>削除</button>
+								<input type="hidden" name="action" value="truedelete">
+							</form>
+							<button type="button" class="close">キャンセル</button>
+							</dialog>
+							</c:when>
+						<c:otherwise>
 							<form
 								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 								method="post">
@@ -92,6 +107,8 @@ body {
 							</form>
 							<button type="button" class="close">キャンセル</button>
 							</dialog>
+						</c:otherwise>
+						</c:choose>
 						</c:if>
 					</c:if>
 				</c:forEach>

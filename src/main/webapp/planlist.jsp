@@ -41,15 +41,8 @@ body {
 			<th>最大人数</th>
 			<th>プラン金額</th>
 			<th>詳細</th>
-		<c:choose>
-			<c:when test="${Customer.getId() eq 1 }">
-				<th>変更</th>
-				<th>削除</th>
-			</c:when>
-			<c:otherwise>
-			<th>予約</th>
-			</c:otherwise>
-		</c:choose>
+			<th>変更</th>
+			<th>削除</th>
 			
 		</tr>
 		<c:forEach items="${plans }" var="plan">
@@ -70,8 +63,6 @@ body {
 							<td>${plan.max_people }</td>
 							<td>${plan.price }</td>
 							<td>${plan.detail }</td>
-							<c:choose>
-							<c:when test="${Customer.getId() eq 1 }">
 							<form
 								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
 								method="post">
@@ -82,6 +73,22 @@ body {
 								<input type="hidden" name="price" value="${plan.price }">
 								<input type="hidden" name="detail" value="${plan.detail }">
 							</form>
+							
+							<c:choose>
+							<c:when test="${plan.delete_flag eq true  }">
+							<form
+								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
+								method="post">
+								<td><button type="button" class="show">削除</button></td>
+								<dialog>
+								<p>本当に削除しますか?</p>
+								<button>削除</button>
+								<input type="hidden" name="action" value="truedelete">
+							</form>
+							<button type="button" class="close">キャンセル</button>
+							</dialog>
+							</c:when>
+							<c:otherwise>
 							<form
 								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
 								method="post">
@@ -93,12 +100,6 @@ body {
 							</form>
 							<button type="button" class="close">キャンセル</button>
 							</dialog>
-							</c:when>
-							<c:otherwise>
-							<form action="/Innreserve/ReserveServlet?plan_id=${plan.id }" method="post">
-							<td><button>予約</button></td>
-							<input type="hidden" name="action" value="goreserve">
-							</form>
 							</c:otherwise>
 							</c:choose>
 						</c:if>

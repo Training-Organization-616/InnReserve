@@ -216,6 +216,19 @@ public class InnServlet extends HttpServlet {
 
 				// 管理画面へ遷移
 				gotoPage(request, response, "/manager.jsp");
+			} else if (action.equals("truedelete")) {// 削除ボタン押下
+				// 宿idの取得
+				int id = Integer.parseInt(request.getParameter("id"));
+				// 宿情報の削除
+				dao.trueDeleteInn(id);
+				// 宿一覧の取得
+				List<InnBean> list = dao.findAllInn(Customer.getId());
+				// リクエストスコープで一覧を渡す
+				request.setAttribute("items", list);
+				request.setAttribute("menu", 1);
+
+				// 管理画面へ遷移
+				gotoPage(request, response, "/manager.jsp");
 			}
 
 		} catch (DAOException e) {

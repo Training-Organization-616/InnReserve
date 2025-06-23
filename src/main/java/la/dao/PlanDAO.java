@@ -131,7 +131,7 @@ public class PlanDAO {
 
 	} //宿の追加
 
-	public int addPlan(int inn_id, String title, int max_people, int price, String detail)
+	public void addPlan(int inn_id, String title, int max_people, int price, String detail)
 			throws DAOException {
 		// SQL文の作成
 		String sql = "INSERT INTO plan(inn_id, title, max_people, price, detail, delete_flag) VALUES(?, ?, ?, ?, ?, false)";
@@ -148,8 +148,7 @@ public class PlanDAO {
 			st.setString(5, detail);
 
 			// SQLの実行
-			int rows = st.executeUpdate();
-			return rows;
+			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
@@ -159,7 +158,7 @@ public class PlanDAO {
 	/**
 	 * 更新処理
 	 */
-	public int updatePlan(int id, int inn_id, String title, int max_people, int price, String detail)
+	public void updatePlan(int id, int inn_id, String title, int max_people, int price, String detail)
 			throws DAOException {
 		// SQL文の作成
 		String sql = "UPDATE plan SET inn_id = ?, title=?, max_people=?, price = ?, detail = ? WHERE id = ?";
@@ -178,8 +177,7 @@ public class PlanDAO {
 			st.setInt(6, id);
 
 			// SQLの実行
-			int rows = st.executeUpdate();
-			return rows;
+			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
@@ -189,7 +187,7 @@ public class PlanDAO {
 	/**
 	 * 削除処理
 	 */
-	public int deletePlan(int id) throws DAOException {
+	public void deletePlan(int id) throws DAOException {
 		// SQL文の作成
 		String sql = "UPDATE plan SET delete_flag = true WHERE id = ?";
 
@@ -200,7 +198,7 @@ public class PlanDAO {
 			// コードを指定
 			st.setInt(1, id);
 			// SQLの実行
-			int rows = st.executeUpdate();
+			st.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
@@ -214,8 +212,40 @@ public class PlanDAO {
 			// コードを指定
 			st.setInt(1, id);
 			// SQLの実行
-			int rows = st.executeUpdate();
-			return rows;
+			st.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+	}
+
+	public void trueDeletePlan(int id) throws DAOException {
+		String sql = "DELETE FROM reserve WHERE plan_id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+		sql = "DELETE FROM plan WHERE id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");

@@ -56,8 +56,7 @@ public class PlanServlet extends HttpServlet {
 					view_id = customer.getId();
 				}
 
-				//				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
-				int inn_id = 1;
+				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 
 				List<PlanBean> plans = plandao.findByInnId(inn_id, view_id);
 				InnBean inn = inndao.findInnById(inn_id);
@@ -242,6 +241,30 @@ public class PlanServlet extends HttpServlet {
 				view_id = customer.getId();
 				//予約番号からそのプランを非表示
 				plandao.deletePlan(plan_id);
+				inndao.calcMinPrice(inn_id);
+
+				//キャンセルしたのち、プラン一覧画面を表示
+				InnBean inn = inndao.findInnById(inn_id);
+
+				request.setAttribute("inn", inn);
+				List<PlanBean> plans = plandao.findByInnId(inn_id, view_id);
+				request.setAttribute("plans", plans);
+
+				gotoPage(request, response, "/planlist.jsp");
+
+			} else if (action.equals("truedelete")) {
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
+				//予約番号を型変換
+				int plan_id = Integer.parseInt(request.getParameter("plan_id"));
+				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+
+				view_id = customer.getId();
+				//予約番号からそのプランを非表示
+				plandao.trueDeletePlan(plan_id);
 				inndao.calcMinPrice(inn_id);
 
 				//キャンセルしたのち、プラン一覧画面を表示
