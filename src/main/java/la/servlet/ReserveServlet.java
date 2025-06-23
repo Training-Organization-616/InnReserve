@@ -15,10 +15,12 @@ import javax.servlet.http.HttpSession;
 
 import la.bean.CustomerBean;
 import la.bean.InnBean;
+import la.bean.PlanBean;
 import la.bean.ReserveBean;
 import la.dao.CustomerDAO;
 import la.dao.DAOException;
 import la.dao.InnDAO;
+import la.dao.PlanDAO;
 import la.dao.ReserveDAO;
 
 /**
@@ -51,6 +53,7 @@ public class ReserveServlet extends HttpServlet {
 			ReserveDAO dao = new ReserveDAO();
 			InnDAO inndao = new InnDAO();
 			CustomerDAO customerdao = new CustomerDAO();
+			PlanDAO plandao = new PlanDAO();
 			int view_id = 0;
 			//宿一覧の表示
 			if (action == null || action.length() == 0 || action.equals("list")) {
@@ -69,11 +72,22 @@ public class ReserveServlet extends HttpServlet {
 
 				//宿詳細画面の表示
 			} else if (action.equals("goinn")) {
+
+				//ユーザーID取得
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
 				//宿情報を検索
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 				InnBean inn = inndao.findInnById(inn_id);
 
+				//プラン検索
+				List<PlanBean> plans = plandao.findByInnId(inn_id, view_id);
+
 				request.setAttribute("inn", inn);
+				request.setAttribute("plans", plans);
 				gotoPage(request, response, "/inndetail.jsp");
 
 				//宿予約画面の表示
@@ -82,15 +96,35 @@ public class ReserveServlet extends HttpServlet {
 					gotoPage(request, response, "/Customer_Login.jsp");
 				} else {
 					//宿情報を検索
-					int inn_id = Integer.parseInt(request.getParameter("inn_id"));
-					InnBean inn = inndao.findInnById(inn_id);
+					//プラン情報を検索
 
+					int plan_id = Integer.parseInt(request.getParameter("plan_id"));
+					int max_people = Integer.parseInt(request.getParameter("max_people"));
+					int price = Integer.parseInt(request.getParameter("price"));
+					int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+
+					request.setAttribute("plan_id", plan_id);
+					request.setAttribute("max_people", max_people);
+					request.setAttribute("price", price);
+					request.setAttribute("inn_id", inn_id);
+
+					PlanBean plan = plandao.findById(plan_id);
+					request.setAttribute("Plan", plan);
+
+					InnBean inn = inndao.findInnById(inn_id);
 					request.setAttribute("inn", inn);
 					gotoPage(request, response, "/reserve.jsp");
 				}
 
 				//予約の確定
 			} else if (action.equals("reserve")) {
+
+				//追加要素
+				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+				int plan_id = Integer.parseInt(request.getParameter("plan_id"));
+				int max_people = Integer.parseInt(request.getParameter("max_people"));
+				int price = Integer.parseInt(request.getParameter("price"));
+
 				int flag = 0;
 				int people = 0;
 				int stay_days = 0;
@@ -98,7 +132,6 @@ public class ReserveServlet extends HttpServlet {
 				Date first_day = null;
 				int customer_id = customer.getId();
 				//入力された予約情報を型変換
-				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 
 				if (request.getParameter("people") == "") {
 					request.setAttribute("people_msg", "人数を入力してください");
@@ -129,12 +162,19 @@ public class ReserveServlet extends HttpServlet {
 				int total_price = Integer.parseInt(request.getParameter("price")) * people * stay_days;
 
 				//入力された情報の正誤確認
-				if (people > 4) {
-					request.setAttribute("people_msg", "4以下の数字を入力してください");
+				if (people > max_people) {
+					request.setAttribute("people_msg", "人以下の数字を入力してください");
 					flag = 1;
 				}
 
 				if (flag == 1) {
+					request.setAttribute("plan_id", plan_id);
+					request.setAttribute("max_people", max_people);
+					request.setAttribute("price", price);
+					request.setAttribute("inn_id", inn_id);
+					PlanBean plan = plandao.findById(plan_id);
+					request.setAttribute("Plan", plan);
+
 					InnBean inn = inndao.findInnById(inn_id);
 					request.setAttribute("inn", inn);
 					gotoPage(request, response, "/reserve.jsp");

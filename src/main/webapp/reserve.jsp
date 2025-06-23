@@ -6,10 +6,7 @@
 <%
 InnBean inn = (InnBean) request.getAttribute("inn");
 %>
-<%
-int inn_id = inn.getId();
-int price = inn.getPrice();
-%>
+
 <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); %>
 <% String today = sdf.format(new Date()); %>
 <!DOCTYPE html>
@@ -34,10 +31,15 @@ body{
 		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>			
 		</c:otherwise>
 	</c:choose>
-	<h1>${inn.getName() }</h1>
+	<h1>${inn.name}の予約：プラン${plan_id}:${Plan.title}</h1>
+	
 	<div class="main">
-	<form action="/InnReserve/ReserveServlet?inn_id=<%=inn_id%>&price=<%=price %>"
-		method="post">
+	<form action="/InnReserve/ReserveServlet" method="post">
+	<input type="hidden" name="inn_id" value="${inn_id}">
+	<input type="hidden" name="price" value="${price}">
+	<input type="hidden" name="plan_id" value="${plan_id}">
+	<input type="hidden" name="max_people" value="${max_people}">
+	
 		<table border="1" align="center">
 			<tr>
 				<th>宿泊日数</th>
@@ -48,7 +50,7 @@ body{
 			<tr>
 				<th>宿泊人数</th>
 				<td>
-					<p>${people_msg}</p><input type="text" name="people">人
+					<p>${people_msg}</p><input type="text" name="people">人 / ${max_people}人
 				</td>
 			</tr>
 
