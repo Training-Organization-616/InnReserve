@@ -183,7 +183,8 @@ public class CustomerServlet extends HttpServlet {
 				request.setAttribute("tel", Customer.getTel());
 				request.setAttribute("email", Customer.getEmail());
 				request.setAttribute("original_email", Customer.getEmail());
-				//request.setAttribute("password", Customer.getPassword());
+				request.setAttribute("password", Customer.getPassword());
+				request.setAttribute("original_password", Customer.getPassword());
 
 				gotoPage(request, response, "/Customer_Update.jsp");
 
@@ -208,6 +209,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("tel", Customer.getTel());
 					request.setAttribute("email", Customer.getEmail());
 					request.setAttribute("original_email", Customer.getEmail());
+					request.setAttribute("original_password", Customer.getPassword());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -225,6 +227,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("tel", Customer.getTel());
 					request.setAttribute("email", Customer.getEmail());
 					request.setAttribute("original_email", Customer.getEmail());
+					request.setAttribute("original_password", Customer.getPassword());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -239,6 +242,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("tel", Customer.getTel());
 					request.setAttribute("email", Customer.getEmail());
 					request.setAttribute("original_email", Customer.getEmail());
+					request.setAttribute("original_password", Customer.getPassword());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -258,6 +262,7 @@ public class CustomerServlet extends HttpServlet {
 							request.setAttribute("tel", Customer.getTel());
 							request.setAttribute("email", Customer.getEmail());
 							request.setAttribute("original_email", Customer.getEmail());
+							request.setAttribute("original_password", Customer.getPassword());
 
 							gotoPage(request, response, "/Customer_Update.jsp");
 							return;

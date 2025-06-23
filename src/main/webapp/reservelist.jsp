@@ -45,8 +45,10 @@ body {
 			<th>人数</th>
 			<th>チェックイン日</th>
 			<th>合計金額</th>
+			<c:if test="${Customer.getId() eq 1 }">
 			<th>変更</th>
-			<th>削除</th>
+			</c:if>
+			<th>キャンセル</th>
 		</tr>
 		<c:forEach items="${reserves }" var="reserve">
 			<c:forEach items="${inns }" var="inn">
@@ -75,23 +77,43 @@ body {
 							<td>${reserve.people }</td>
 							<td>${reserve.first_day }</td>
 							<td>￥${reserve.total_price }</td>
+							<c:if test="${Customer.getId() eq 1 }">
 							<form
 								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 								method="post">
 								<td><button>変更</button></td> <input type="hidden" name="action"
 									value="edit">
 							</form>
+							</c:if>
+						<c:choose>
+						<c:when test="${ reserve.cancel_flag eq true}">
 							<form
 								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 								method="post">
 								<td><button type="button" class="show">削除</button></td>
 								<dialog>
 								<p>本当に削除しますか?</p>
+								<p>※二度と復旧はできません</p>
 								<button>削除</button>
+								<input type="hidden" name="action" value="truedelete">
+							</form>
+							<button type="button" class="close">キャンセル</button>
+							</dialog>
+							</c:when>
+						<c:otherwise>
+							<form
+								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
+								method="post">
+								<td><button type="button" class="show">キャンセル</button></td>
+								<dialog>
+								<p>本当にキャンセルしますか?</p>
+								<button>OK</button>
 								<input type="hidden" name="action" value="delete">
 							</form>
 							<button type="button" class="close">キャンセル</button>
 							</dialog>
+						</c:otherwise>
+						</c:choose>
 						</c:if>
 					</c:if>
 				</c:forEach>

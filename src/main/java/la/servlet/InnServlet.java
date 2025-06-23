@@ -193,7 +193,11 @@ public class InnServlet extends HttpServlet {
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
+
 				String picture = request.getParameter("picture");
+				if (picture == "") {
+					picture = request.getParameter("original_picture");
+				}
 				// 宿情報の変更
 				dao.updateInn(id, name, address, tel, picture);
 				// 宿一覧の取得
@@ -216,6 +220,28 @@ public class InnServlet extends HttpServlet {
 
 				// 管理画面へ遷移
 				gotoPage(request, response, "/manager.jsp");
+			} else if (action.equals("truedelete")) {// 削除ボタン押下
+				// 宿idの取得
+				int id = Integer.parseInt(request.getParameter("id"));
+				// 宿情報の削除
+				dao.trueDeleteInn(id);
+				// 宿一覧の取得
+				List<InnBean> list = dao.findAllInn(Customer.getId());
+				// リクエストスコープで一覧を渡す
+				request.setAttribute("items", list);
+				request.setAttribute("menu", 1);
+
+				// 管理画面へ遷移
+				gotoPage(request, response, "/manager.jsp");
+			} else if (action.equals("search")) {// 検索ボタン押下
+				String name = request.getParameter("name");
+				String address = request.getParameter("address");
+				String min_price = request.getParameter("min_price");
+				String max_price = request.getParameter("max_price");
+
+				List<InnBean> inns = dao.findByNameAndAddressAndPrice(name, address, min_price, max_price);// 検索メソッド
+				request.setAttribute("inns", inns);
+				gotoPage(request, response, "/inn.jsp");
 			}
 
 		} catch (DAOException e) {

@@ -78,9 +78,10 @@ body{
 					<td>${item.tel }</td>
 					<td>￥${item.min_price }</td>
 					<td>
-						<form action="/InnReserve/PlanServlet?inn_id=${item.id }" method="get">
+						<form action="/InnReserve/PlanServlet" method="get">
 						<button class="button">一覧</button>
 						<input type="hidden" name="action" value="list">
+						<input type="hidden" name="inn_id" value="${item.id }">
 						</form>
 					</td>
 					<%-- 変更ボタン --%>
@@ -99,7 +100,25 @@ body{
 					</td>
 					<td>
 						<%-- 削除ボタン --%>
-						<form action="/InnReserve/InnServlet" method="post">
+						<c:choose>
+						<c:when test="${item.delete_flag eq true }">
+							<form action="/InnReserve/InnServlet" method="post">
+							<input type="hidden" name="action" value="truedelete"> <input
+								type="hidden" name="userId" value="2">
+							<%-- 管理者[userId:2] --%>
+							<input type="hidden" name="id" value="${item.id}">
+							<%-- 削除(ダイアログ付き) --%>
+							<button type="button" class="show">削除</button>
+							<dialog>
+							<p>本当に削除しますか?</p>
+							<button>削除</button>
+							<input type="hidden" name="action" value="delete">
+							<button type="button" class="close">キャンセル</button>
+							</dialog>
+						</form>
+						</c:when>
+						<c:otherwise>
+							<form action="/InnReserve/InnServlet" method="post">
 							<input type="hidden" name="action" value="delete"> <input
 								type="hidden" name="userId" value="2">
 							<%-- 管理者[userId:2] --%>
@@ -113,6 +132,8 @@ body{
 							<button type="button" class="close">キャンセル</button>
 							</dialog>
 						</form>
+						</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 			</c:forEach>

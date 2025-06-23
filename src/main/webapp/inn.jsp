@@ -6,49 +6,64 @@
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
-<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/menu.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
-<style>
-body{
-	text-align: center;
-}
-</style>
-	<jsp:include page="/menu.jsp" />
+	<div class="text-center"><jsp:include page="/menu.jsp" /></div>
 	<c:choose>
 		<c:when test="${Customer.getId() eq 1 }">
-	<p><jsp:include page="/managermenu.jsp" /></p>
+			<div class="text-center"><jsp:include page="/managermenu.jsp" /></div>
 		</c:when>
 		<c:otherwise>
-		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>
+			<div class="text-center">
+				<jsp:include page="/Customer_Menu.jsp" /></div>
+			<%-- 検索 --%>
+			<div class="text-center background-box border m-1 bg-white">
+				<form action="/InnReserve/InnServlet" method="get">
+					<span>宿名<input type="text" name="name" placeholder="?宿名:"
+						maxlength="50"></span> <span>場所<input type="text"
+						name="address" placeholder="?場所:" maxlength="50"></span> <span>金額<input
+						type="text" name="min_price" maxlength="10">円 <span>～</span>
+						<span><input type="text" name="max_price" maxlength="10">円</span>
+						<button class="button">検索</button> <input type="hidden"
+						name="action" value="search">
+				</form>
+			</div>
 		</c:otherwise>
 	</c:choose>
-	<h1>宿一覧</h1>
-	<table border="1" align="center">
-		<tr>
-			<th>NO</th>
-			<th>宿名</th>
-			<th>場所</th>
-			<th>電話番号</th>
-			<th>最小金額</th>
-			<th>画像</th>
-			<th>詳細</th>
-		</tr>
-		<c:forEach items="${inns }" var="inn">
-			<tr>
-				<td>${inn.id }</td>
-				<td>${inn.name }</td>
-				<td>${inn.address }</td>
-				<td>${inn.tel }</td>
-				<td>￥${inn.min_price }</td>
-				<td>${inn.picture }</td>
-				<form action="/InnReserve/ReserveServlet?inn_id=${inn.id }"
-					method="post">
-					<td><button>詳細</button></td> <input
-						type="hidden" name="action" value="goinn">
-				</form>
-			</tr>
-		</c:forEach>
-	</table>
+	<h1 class="text-left">|宿一覧</h1>
+	<ul>
+		<div class="flex">
+			<c:forEach items="${inns }" var="inn">
+				<li class="flex relative ml-1 mr-4">
+					<div class="background border">
+						<a
+							href="/InnReserve/ReserveServlet?inn_id=${inn.id }&action=goinn" />
+						<%-- <a href="/"> --%>
+						<img src="${inn.picture }" width="300" height="150" class="headline">
+<!--						<img src="./hotel.png" width="300" height="150">-->
+						<div>
+							<span class="block truncate font-bold text-xl text-color-bk">${inn.name }</span>
+						</div>
+						<div class="text-sm text-gray-700">
+							<span class="block truncate">${inn.address }</span>
+						</div>
+						<div class="text-right">
+							<span class="block"> <span
+								class="inline-block text-color-bk">1名 (税込)</span> <span
+								class="inline-block text-color-bk"> <span
+									class="block truncate text-2xl font-bold text-color-bk">${inn.min_price }円
+										<span class="text-color-bk">～</span>
+								</span>
+							</span>
+							</span>
+						</div>
+					</div>
+				</li>
+			</c:forEach>
+		</div>
+	</ul>
 </body>
 </html>
