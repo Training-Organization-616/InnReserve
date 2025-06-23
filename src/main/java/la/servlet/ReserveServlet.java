@@ -3,6 +3,7 @@ package la.servlet;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -128,7 +129,7 @@ public class ReserveServlet extends HttpServlet {
 				int flag = 0;
 				int people = 0;
 				int stay_days = 0;
-				String strDate;
+				String strDate = "";
 				Date first_day = null;
 				int customer_id = customer.getId();
 				//入力された予約情報を型変換
@@ -158,8 +159,6 @@ public class ReserveServlet extends HttpServlet {
 					strDate = request.getParameter("check_in");
 					first_day = java.sql.Date.valueOf(strDate);
 				}
-				//合計金額は宿の金額*人数*宿泊日数で計算
-				int total_price = Integer.parseInt(request.getParameter("price")) * people * stay_days;
 
 				//入力された情報の正誤確認
 				if (people > max_people) {
@@ -181,8 +180,71 @@ public class ReserveServlet extends HttpServlet {
 					return;
 				}
 
-				dao.addReserve(customer_id, inn_id, people, stay_days, first_day, total_price);
-				gotoPage(request, response, "/reservecomp.jsp");
+				//dao.addReserve(customer_id, inn_id, people, stay_days, first_day, total_price);
+
+				//合計金額は宿の金額*人数*宿泊日数で計算
+				int total_price = price * people * stay_days;
+
+				//宿泊日の加算処理(カレンダー型に変換
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(first_day);
+				//日時の加算
+				calendar.add(Calendar.DATE, stay_days);
+				//java.sql.date型に変換
+				Date finally_day = new Date(calendar.getTime().getTime());
+
+				//カスタマーのポイントに必要
+				int cus_point = customer.getPoint();
+
+				request.setAttribute("inn_id", inn_id);
+				request.setAttribute("plan_id", plan_id);
+				request.setAttribute("cus_point", cus_point);
+				//request.setAttribute("customer_id", customer_id);
+				request.setAttribute("total_price", total_price);
+				request.setAttribute("first_day", strDate);
+				request.setAttribute("finally_day", finally_day);
+
+				gotoPage(request, response, "/payment.jsp");
+
+				//予約確認画面(new
+			} else if (action.equals("comfirm")) {
+
+				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+				int plan_id = Integer.parseInt(request.getParameter("plan_id"));
+				int total_price = Integer.parseInt(request.getParameter("total_price"));
+				int how_usepoint = Integer.parseInt(request.getParameter("how_usepoint"));
+				request.setAttribute("how_usepoint", 23);
+
+				String usePoint = request.getParameter("usePoint");
+
+				//チェックイン日ーチェックアウト日（チェックアウトはデータ外）
+				String first = request.getParameter("first_day");
+				first = request.getParameter("check_in");
+				Date first_day = java.sql.Date.valueOf(first);
+
+				String finally_d = request.getParameter("finally_day");
+				finally_d = request.getParameter("check_in");
+				Date finally_day = java.sql.Date.valueOf(finally_d);
+
+				//if (usePoint.equals("no")) {
+				//	how_usepoint = 0;
+				//}
+
+				InnBean inn = inndao.findInnById(inn_id);
+				PlanBean plan = plandao.findById(plan_id);
+				CustomerBean customer_date = customerdao.findByID(customer.getId());
+				total_price -= how_usepoint;
+				//System.out.println(inn + "+" + plan + "+" + total_price + "+" + how_usepoint + first_day + finally_day);
+
+				request.setAttribute("inn", inn);
+				request.setAttribute("plan", plan);
+				request.setAttribute("customer", customer_date);
+				request.setAttribute("total_price", total_price);
+				request.setAttribute("how_usepoint", 23);
+				request.setAttribute("first_day", first_day);
+				request.setAttribute("finally_day", finally_day);
+
+				gotoPage(request, response, "/reservecheck.jsp");
 
 				//予約一覧画面の表示
 			} else if (action.equals("reservelist")) {

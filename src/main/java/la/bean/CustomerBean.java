@@ -8,23 +8,27 @@ public class CustomerBean implements Serializable {
 	private String tel;
 	private String email;
 	private String password;
+	private int point;
 	private boolean delete_flag;
 
-	public CustomerBean(int id, String name, String tel, String email, String password) {
+	public CustomerBean(int id, String name, String tel, String email, String password, int point) {
 		this.id = id;
 		this.name = name;
 		this.tel = tel;
 		this.email = email;
 		this.password = password;
+		this.point = point;
 		this.delete_flag = false;
 	}
 
-	public CustomerBean(int id, String name, String tel, String email, String password, boolean delete_flag) {
+	public CustomerBean(int id, String name, String tel, String email, String password, int point,
+			boolean delete_flag) {
 		this.id = id;
 		this.name = name;
 		this.tel = tel;
 		this.email = email;
 		this.password = password;
+		this.point = point;
 		this.delete_flag = delete_flag;
 	}
 
@@ -79,4 +83,13 @@ public class CustomerBean implements Serializable {
 	public void setDelete_flag(boolean delete_flag) {
 		this.delete_flag = delete_flag;
 	}
+
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 }

@@ -44,13 +44,19 @@ body{
 			<tr>
 				<th>宿泊日数</th>
 				<td>
-					<p>${days_msg}</p><input type="text" name="days">日
+					<p>${days_msg}</p><input type="number" name="days">日
 				</td>
 			</tr>
 			<tr>
 				<th>宿泊人数</th>
 				<td>
-					<p>${people_msg}</p><input type="text" name="people">人 / ${max_people}人
+					<p>${people_msg}</p>
+					<select name="people">
+					<c:forEach begin="1" end="${max_people}" varStatus="num">
+						<option value="${num.count}">${num.count}</option>
+					</c:forEach>
+					</select>
+					人 / ${max_people}人
 				</td>
 			</tr>
 

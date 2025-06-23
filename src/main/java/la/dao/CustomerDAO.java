@@ -39,9 +39,10 @@ public class CustomerDAO {
 				String tel = rs.getString("tel");
 				String email = rs.getString("email");
 				String password = rs.getString("password");
+				int point = rs.getInt("point");
 				Boolean delete_flag = rs.getBoolean("delete_flag");
 
-				CustomerBean bean = new CustomerBean(id, name, tel, email, password, delete_flag);
+				CustomerBean bean = new CustomerBean(id, name, tel, email, password, point, delete_flag);
 				Customer_List.add(bean);
 			}
 			return Customer_List;
@@ -66,9 +67,10 @@ public class CustomerDAO {
 					String tel = rs.getString("tel");
 					String email = rs.getString("email");
 					String password = rs.getString("password");
+					int point = rs.getInt("point");
 					Boolean delete_flag = rs.getBoolean("delete_flag");
 
-					CustomerBean bean = new CustomerBean(id, name, tel, email, password, delete_flag);
+					CustomerBean bean = new CustomerBean(id, name, tel, email, password, point, delete_flag);
 
 					return bean;
 				} else {
@@ -101,9 +103,10 @@ public class CustomerDAO {
 					String tel = rs.getString("tel");
 					email = rs.getString("email");
 					password = rs.getString("password");
+					int point = rs.getInt("point");
 					Boolean delete_flag = rs.getBoolean("delete_flag");
 
-					CustomerBean bean = new CustomerBean(id, name, tel, email, password, delete_flag);
+					CustomerBean bean = new CustomerBean(id, name, tel, email, password, point, delete_flag);
 
 					return bean;
 				} else {
@@ -232,9 +235,10 @@ public class CustomerDAO {
 					String tel = rs.getString("tel");
 					String email = rs.getString("email");
 					String password = rs.getString("password");
+					int point = rs.getInt("point");
 					Boolean delete_flag = rs.getBoolean("delete_flag");
 
-					CustomerBean bean = new CustomerBean(id, name, tel, email, password, delete_flag);
+					CustomerBean bean = new CustomerBean(id, name, tel, email, password, point, delete_flag);
 					Customer_List.add(bean);
 				}
 				// 商品一覧をListとして返す
