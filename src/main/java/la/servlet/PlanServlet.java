@@ -120,13 +120,25 @@ public class PlanServlet extends HttpServlet {
 				gotoPage(request, response, "/planlist.jsp");
 
 			} else if (action.equals("edit")) {
-				//宿情報を表示
+				int id = Integer.parseInt(request.getParameter("plan_id"));
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+
+				String title = request.getParameter("title");
+				int max_people = Integer.parseInt(request.getParameter("max_people"));
+				int price = Integer.parseInt(request.getParameter("price"));
+				String detail = request.getParameter("detail");
+				// 宿情報をリクエストスコープで渡す
+				request.setAttribute("plan_id", id);
+				request.setAttribute("inn_id", inn_id);
+				request.setAttribute("title", title);
+				request.setAttribute("max_people", max_people);
+				request.setAttribute("price", price);
+				request.setAttribute("detail", detail);
+				//宿情報を表示
 				InnBean inn = inndao.findInnById(inn_id);
 				request.setAttribute("inn", inn);
 
 				//予約番号から予約情報を表示
-				int id = Integer.parseInt(request.getParameter("plan_id"));
 				PlanBean plan = plandao.findById(id);
 				request.setAttribute("plan", plan);
 
@@ -134,6 +146,11 @@ public class PlanServlet extends HttpServlet {
 
 				//予約情報の変更
 			} else if (action.equals("update")) {
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
 				int flag = 0;
 				String title = "";
 				int max_people = 0;
@@ -154,7 +171,7 @@ public class PlanServlet extends HttpServlet {
 					request.setAttribute("max_people_msg", "人数を入力してください");
 					flag = 1;
 				} else if (isNumber(request.getParameter("max_people"))) {
-					max_people = Integer.parseInt(request.getParameter("people"));
+					max_people = Integer.parseInt(request.getParameter("max_people"));
 				} else {
 					request.setAttribute("people_msg", "数字を入力してください");
 					flag = 1;
@@ -185,7 +202,10 @@ public class PlanServlet extends HttpServlet {
 				//プラン情報の変更
 				plandao.updatePlan(plan_id, inn_id, title, max_people, price, detail);
 
-				//変更したのち、予約一覧画面を表示
+				//変更したのち、プラン一覧画面を表示
+				InnBean inn = inndao.findInnById(inn_id);
+				request.setAttribute("inn", inn);
+
 				List<PlanBean> plans = plandao.findByInnId(inn_id, view_id);
 				request.setAttribute("plans", plans);
 
@@ -193,15 +213,23 @@ public class PlanServlet extends HttpServlet {
 
 				//予約キャンセル
 			} else if (action.equals("delete")) {
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
 				//予約番号を型変換
 				int plan_id = Integer.parseInt(request.getParameter("plan_id"));
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 
 				view_id = customer.getId();
-				//予約番号からその予約を非表示にしてキャンセル
+				//予約番号からそのプランを非表示
 				plandao.deletePlan(plan_id);
 
-				//キャンセルしたのち、予約一覧画面を表示
+				//キャンセルしたのち、プラン一覧画面を表示
+				InnBean inn = inndao.findInnById(inn_id);
+
+				request.setAttribute("inn", inn);
 				List<PlanBean> plans = plandao.findByInnId(inn_id, view_id);
 				request.setAttribute("plans", plans);
 

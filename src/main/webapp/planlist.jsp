@@ -77,6 +77,10 @@ body {
 								method="post">
 								<td><button>変更</button></td> <input type="hidden" name="action"
 									value="edit">
+								<input type="hidden" name="title" value="${plan.title }">
+								<input type="hidden" name="max_people" value="${plan.max_people}">
+								<input type="hidden" name="price" value="${plan.price }">
+								<input type="hidden" name="detail" value="${plan.detail }">
 							</form>
 							<form
 								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
