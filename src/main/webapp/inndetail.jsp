@@ -29,10 +29,24 @@ body{
 		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>
 		</c:otherwise>
 	</c:choose>
-	<h1>${inn.getName()}のプラン一覧</h1>
+	
+	<h1>${inn.getName()}</h1>
+    <img src="${inn.picture }" width="300" height="150">
 	<div class="main">
 	
 	<table border="1" align="center">
+		<tr>
+			<th>住所</th>
+			<td>${inn.getAddress() }</td>
+		</tr>
+		<tr>	
+			<th>電話番号</th>
+			<td>${inn.getTel() }</td>
+		</tr>
+	</table>
+	
+	<h1>プラン一覧</h1>
+  	<table border="1" align="center">
 		<tr>
 			<th>NO</th>
 			<th>プラン名</th>
