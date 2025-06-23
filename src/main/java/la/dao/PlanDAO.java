@@ -134,7 +134,7 @@ public class PlanDAO {
 	public int addPlan(int inn_id, String title, int max_people, int price, String detail)
 			throws DAOException {
 		// SQL文の作成
-		String sql = "INSERT INTO (inn_id, title, max_people, price, detail, delete_flag) VALUES(?, ?, ?, ?, ?, false)";
+		String sql = "INSERT INTO plan(inn_id, title, max_people, price, detail, delete_flag) VALUES(?, ?, ?, ?, ?, false)";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);

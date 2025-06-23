@@ -58,7 +58,7 @@ body{
 				<th>場所</th>
 				<th>電話番号</th>
 				<th>最小金額</th>
-				<th>画像</th>
+				<th>プラン一覧</th>
 				<th>変更</th>
 				<th>削除</th>
 			</tr>
@@ -77,7 +77,12 @@ body{
 					<td>${item.address }</td>
 					<td>${item.tel }</td>
 					<td>￥${item.min_price }</td>
-					<td>${item.picture }</td>
+					<td>
+						<form action="/InnReserve/PlanServlet?inn_id=${item.id }" method="get">
+						<button class="button">一覧</button>
+						<input type="hidden" name="action" value="list">
+						</form>
+					</td>
 					<%-- 変更ボタン --%>
 					<td>
 						<form action="/InnReserve/InnServlet" method="get">

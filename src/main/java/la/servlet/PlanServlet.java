@@ -67,8 +67,16 @@ public class PlanServlet extends HttpServlet {
 				gotoPage(request, response, "/planlist.jsp");
 
 			} else if (action.equals("regist")) {
+				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
+				InnBean inn = inndao.findInnById(inn_id);
+				request.setAttribute("inn", inn);
 				gotoPage(request, response, "/registplan.jsp");
 			} else if (action.equals("add")) {
+				if (customer == null) {
+					view_id = 0;
+				} else {
+					view_id = customer.getId();
+				}
 				int flag = 0;
 				String title = "";
 				int max_people = 0;
@@ -88,7 +96,7 @@ public class PlanServlet extends HttpServlet {
 					request.setAttribute("max_people_msg", "人数を入力してください");
 					flag = 1;
 				} else if (isNumber(request.getParameter("max_people"))) {
-					max_people = Integer.parseInt(request.getParameter("people"));
+					max_people = Integer.parseInt(request.getParameter("max_people"));
 				} else {
 					request.setAttribute("people_msg", "数字を入力してください");
 					flag = 1;
@@ -117,6 +125,15 @@ public class PlanServlet extends HttpServlet {
 				}
 
 				plandao.addPlan(inn_id, title, max_people, price, detail);
+				inndao.calcMinPrice(inn_id);
+
+				//変更したのち、プラン一覧画面を表示
+				InnBean inn = inndao.findInnById(inn_id);
+				request.setAttribute("inn", inn);
+
+				List<PlanBean> plans = plandao.findByInnId(inn_id, view_id);
+				request.setAttribute("plans", plans);
+
 				gotoPage(request, response, "/planlist.jsp");
 
 			} else if (action.equals("edit")) {
@@ -201,7 +218,7 @@ public class PlanServlet extends HttpServlet {
 
 				//プラン情報の変更
 				plandao.updatePlan(plan_id, inn_id, title, max_people, price, detail);
-
+				inndao.calcMinPrice(inn_id);
 				//変更したのち、プラン一覧画面を表示
 				InnBean inn = inndao.findInnById(inn_id);
 				request.setAttribute("inn", inn);
@@ -225,6 +242,7 @@ public class PlanServlet extends HttpServlet {
 				view_id = customer.getId();
 				//予約番号からそのプランを非表示
 				plandao.deletePlan(plan_id);
+				inndao.calcMinPrice(inn_id);
 
 				//キャンセルしたのち、プラン一覧画面を表示
 				InnBean inn = inndao.findInnById(inn_id);

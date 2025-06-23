@@ -105,6 +105,7 @@ body {
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="/InnReserve/PlanServlet?action=regist&inn_id=${inn.id }">新規登録</a>
 	<script type="text/javascript">
 		var dialog = document.querySelectorAll('dialog');
 		var btn_show = document.getElementsByClassName('show');
