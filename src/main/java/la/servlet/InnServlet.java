@@ -229,6 +229,15 @@ public class InnServlet extends HttpServlet {
 
 				// 管理画面へ遷移
 				gotoPage(request, response, "/manager.jsp");
+			} else if (action.equals("search")) {// 検索ボタン押下
+				String name = request.getParameter("name");
+				String address = request.getParameter("address");
+				String min_price = request.getParameter("min_price");
+				String max_price = request.getParameter("max_price");
+
+				List<InnBean> inns = dao.findByNameAndAddressAndPrice(name, address, min_price, max_price);// 検索メソッド
+				request.setAttribute("inns", inns);
+				gotoPage(request, response, "/inn.jsp");
 			}
 
 		} catch (DAOException e) {
