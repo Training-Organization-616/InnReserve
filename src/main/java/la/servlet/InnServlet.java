@@ -77,10 +77,10 @@ public class InnServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
-				String stPrice = request.getParameter("price");
+				String picture = request.getParameter("picture");
 
 				// 未入力エラー処理
-				if (name == "" || address == "" || tel == "" || stPrice == "") {
+				if (name == "" || address == "" || tel == "" || picture == "") {
 					request.setAttribute("message", "値を入力してください。");
 					gotoPage(request, response, "/registInn.jsp");
 					return;
@@ -114,9 +114,9 @@ public class InnServlet extends HttpServlet {
 					gotoPage(request, response, "/registInn.jsp");
 					return;
 				}
-				int price = Integer.parseInt(stPrice);
+				int min_price = 0;
 				// 宿の追加
-				dao.addInn(name, address, tel, price);
+				dao.addInn(name, address, tel, min_price, picture);
 				// 宿一覧の取得
 				List<InnBean> list = dao.findAllInn(Customer.getId());
 				// リクエストスコープで一覧を渡す
@@ -131,13 +131,13 @@ public class InnServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
-				int price = Integer.parseInt(request.getParameter("price"));
+				String picture = request.getParameter("picture");
 				// 宿情報をリクエストスコープで渡す
 				request.setAttribute("inn_id", id);
 				request.setAttribute("name", name);
 				request.setAttribute("address", address);
 				request.setAttribute("tel", tel);
-				request.setAttribute("price", price);
+				request.setAttribute("picture", picture);
 
 				// 一覧の取得
 				List<InnBean> list = dao.findAllInn(Customer.getId());
@@ -152,10 +152,9 @@ public class InnServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String address = request.getParameter("address");
 				String tel = request.getParameter("tel");
-				String stPrice = request.getParameter("price");
 
 				// 未入力エラー処理
-				if (name == "" || address == "" || tel == "" || stPrice == "") {
+				if (name == "" || address == "" || tel == "") {
 					request.setAttribute("message", "値を入力してください。");
 					request.setAttribute("inn_id", id);
 					gotoPage(request, response, "/updateInn.jsp");
@@ -194,10 +193,9 @@ public class InnServlet extends HttpServlet {
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
 				}
-				int price = Integer.parseInt(stPrice);
-
+				String picture = request.getParameter("picture");
 				// 宿情報の変更
-				dao.updateInn(id, name, address, tel, price);
+				dao.updateInn(id, name, address, tel, picture);
 				// 宿一覧の取得
 				List<InnBean> list = dao.findAllInn(Customer.getId());
 				// リクエストスコープで一覧を渡す

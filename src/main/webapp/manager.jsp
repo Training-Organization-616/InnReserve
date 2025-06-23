@@ -57,7 +57,8 @@ body{
 				<th>宿名</th>
 				<th>場所</th>
 				<th>電話番号</th>
-				<th>値段</th>
+				<th>最小金額</th>
+				<th>画像</th>
 				<th>変更</th>
 				<th>削除</th>
 			</tr>
@@ -75,7 +76,8 @@ body{
 					<td>${item.name }</td>
 					<td>${item.address }</td>
 					<td>${item.tel }</td>
-					<td>￥${item.price }</td>
+					<td>￥${item.min_price }</td>
+					<td>${item.picture }</td>
 					<%-- 変更ボタン --%>
 					<td>
 						<form action="/InnReserve/InnServlet" method="get">
@@ -87,7 +89,7 @@ body{
 								type="hidden" name="name" value="${item.name }"> <input
 								type="hidden" name="address" value="${item.address }"> <input
 								type="hidden" name="tel" value="${item.tel }"> <input
-								type="hidden" name="price" value="${item.price }">
+								type="hidden" name="picture" value="${item.picture }">
 						</form>
 					</td>
 					<td>

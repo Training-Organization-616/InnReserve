@@ -39,8 +39,8 @@ ${message }
 					placeholder="ハイフンを含める" maxlength="20" size="30"></td>
 			</tr>
 			<tr>
-				<th>値段</th>
-				<td>￥<input type="text" name="price" size="30"></td>
+				<th>画像</th>
+				<td><input type="text" name="picture" maxlength="50" size="30"></td>
 			</tr>
 		</table>
 		<button type="button" class="show" id="button">登録</button>

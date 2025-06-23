@@ -49,9 +49,10 @@ public class InnDAO {
 					String name = rs.getString("name");
 					String address = rs.getString("address");
 					String tel = rs.getString("tel");
-					int price = rs.getInt("price");
+					int min_price = rs.getInt("min_price");
+					String picture = rs.getString("picture");
 					Boolean delete_flag = rs.getBoolean("delete_flag");
-					InnBean bean = new InnBean(id, name, address, tel, price, delete_flag);
+					InnBean bean = new InnBean(id, name, address, tel, min_price, picture, delete_flag);
 					list.add(bean);
 				}
 				// 商品一覧をListとして返す
@@ -83,9 +84,10 @@ public class InnDAO {
 					String name = rs.getString("name");
 					String address = rs.getString("address");
 					String tel = rs.getString("tel");
-					int price = rs.getInt("price");
+					int min_price = rs.getInt("min_price");
+					String picture = rs.getString("picture");
 					Boolean delete_flag = rs.getBoolean("delete_flag");
-					bean = new InnBean(id, name, address, tel, price, delete_flag);
+					bean = new InnBean(id, name, address, tel, min_price, picture, delete_flag);
 				} else {
 					return null;
 				}
@@ -98,10 +100,10 @@ public class InnDAO {
 	}
 
 	//宿の追加
-	public int addInn(String name, String address, String tel, int price)
+	public int addInn(String name, String address, String tel, int min_price, String picture)
 			throws DAOException {
 		// SQL文の作成
-		String sql = "INSERT INTO inn(name,address,tel,price,delete_flag) VALUES(?, ?, ?, ?,false)";
+		String sql = "INSERT INTO inn(name,address,tel,min_price, picture, delete_flag) VALUES(?, ?, ?, ?, ?, false)";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
@@ -111,7 +113,8 @@ public class InnDAO {
 			st.setString(1, name);
 			st.setString(2, address);
 			st.setString(3, tel);
-			st.setInt(4, price);
+			st.setInt(4, min_price);
+			st.setString(5, picture);
 
 			// SQLの実行
 			int rows = st.executeUpdate();
@@ -125,10 +128,10 @@ public class InnDAO {
 	/**
 	 * 更新処理
 	 */
-	public int updateInn(int id, String name, String address, String tel, int price)
+	public int updateInn(int id, String name, String address, String tel, String picture)
 			throws DAOException {
 		// SQL文の作成
-		String sql = "UPDATE inn SET name = ?,address=?,tel=?,price=? WHERE id = ?";
+		String sql = "UPDATE inn SET name = ?, address=?, tel=?, picture = ? WHERE id = ?";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
@@ -139,7 +142,7 @@ public class InnDAO {
 			st.setString(1, name);
 			st.setString(2, address);
 			st.setString(3, tel);
-			st.setInt(4, price);
+			st.setString(4, picture);
 			st.setInt(5, id);
 
 			// SQLの実行

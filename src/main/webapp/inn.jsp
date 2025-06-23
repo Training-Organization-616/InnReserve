@@ -30,7 +30,8 @@ body{
 			<th>宿名</th>
 			<th>場所</th>
 			<th>電話番号</th>
-			<th>値段</th>
+			<th>最小金額</th>
+			<th>画像</th>
 			<th>詳細</th>
 		</tr>
 		<c:forEach items="${inns }" var="inn">
@@ -39,7 +40,8 @@ body{
 				<td>${inn.name }</td>
 				<td>${inn.address }</td>
 				<td>${inn.tel }</td>
-				<td>￥${inn.price }</td>
+				<td>￥${inn.min_price }</td>
+				<td>${inn.picture }</td>
 				<form action="/InnReserve/ReserveServlet?inn_id=${inn.id }"
 					method="post">
 					<td><button>詳細</button></td> <input

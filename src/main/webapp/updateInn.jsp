@@ -37,8 +37,8 @@ ${message }
 				<td><input type="text" name="tel" value="${tel }" placeholder="ハイフンを含めて入力してください。" maxlength="20"></td>
 			</tr>
 			<tr>
-				<th>値段</th>
-				<td>￥<input type="text" name="price" value="${price }"></td>
+				<th>画像</th>
+				<td><input type="text" name="picture" value="${picture }"></td>
 			</tr>
 		</table>
 		<form action="/InnReserve/InnServlet" method="post">

@@ -41,8 +41,8 @@ body{
 			<td>${inn.getTel() }</td>
 		</tr>
 		<tr>
-			<th>値段</th>
-			<td>￥${inn.getPrice() }</td>
+			<th>最小金額</th>
+			<td>￥${inn.getMin_price() }</td>
 		</tr>
 	</table>
 		<form action="/InnReserve/ReserveServlet?inn_id=${inn.id }"
