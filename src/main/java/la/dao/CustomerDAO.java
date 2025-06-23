@@ -193,4 +193,59 @@ public class CustomerDAO {
 			throw new DAOException("レコードの操作に失敗しました。");
 		}
 	}
+
+	public List<CustomerBean> findByNameAndEmail(String Name, String Email)
+			throws DAOException {
+		// SQL文の作成
+		String sql = "SELECT * FROM customers WHERE 1 = 1 ";
+		// 条件の追加
+		if (Name != null && Name.length() != 0) {
+			sql += "AND name = ? ";
+		}
+		if (Email != null && Email.length() != 0) {
+			sql += "AND email = ? ";
+		}
+		sql += "ORDER BY id ";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// プレースホルダの設定
+			int i = 0; // カウンタ変数
+			if (Name != null && Name.length() != 0) {
+				i++;
+				st.setString(i, Name);
+			}
+			if (Email != null && Email.length() != 0) {
+				i++;
+				st.setString(i, Email);
+			}
+
+			try (// SQLの実行
+					ResultSet rs = st.executeQuery();) {
+				// 結果の取得および表示
+				List<CustomerBean> Customer_List = new ArrayList<CustomerBean>();
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					String tel = rs.getString("tel");
+					String email = rs.getString("email");
+					String password = rs.getString("password");
+					Boolean delete_flag = rs.getBoolean("delete_flag");
+
+					CustomerBean bean = new CustomerBean(id, name, tel, email, password, delete_flag);
+					Customer_List.add(bean);
+				}
+				// 商品一覧をListとして返す
+				return Customer_List;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new DAOException("レコードの取得に失敗しました。");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
 }
