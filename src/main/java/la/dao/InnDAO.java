@@ -281,4 +281,72 @@ public class InnDAO {
 			throw new DAOException("レコードの操作に失敗しました。");
 		}
 	}
+
+	public List<InnBean> findByNameAndAddressAndPrice(String Name, String Address, String Min_price, String Max_price)
+			throws DAOException {
+		// SQL文の作成
+		String sql = "SELECT * FROM inn WHERE 1 = 1 ";
+		// 条件の追加
+		if (Name != null && Name.length() != 0) {
+			sql += "AND name like ? ";
+		}
+		if (Address != null && Address.length() != 0) {
+			sql += "AND address like ? ";
+		}
+		if (Min_price != null && Min_price.length() != 0) {
+			sql += "AND min_price >= ? ";
+		}
+		if (Max_price != null && Max_price.length() != 0) {
+			sql += "AND min_price <= ? ";
+		}
+		sql += "ORDER BY id ";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// プレースホルダの設定
+			int i = 0; // カウンタ変数
+			if (Name != null && Name.length() != 0) {
+				i++;
+				st.setString(i, "%" + Name + "%");
+			}
+			if (Address != null && Address.length() != 0) {
+				i++;
+				st.setString(i, "%" + Address + "%");
+			}
+			if (Min_price != null && Min_price.length() != 0) {
+				i++;
+				st.setInt(i, Integer.parseInt(Min_price));
+			}
+			if (Max_price != null && Max_price.length() != 0) {
+				i++;
+				st.setInt(i, Integer.parseInt(Max_price));
+			}
+
+			try (// SQLの実行
+					ResultSet rs = st.executeQuery();) {
+				// 結果の取得および表示
+				List<InnBean> inn_list = new ArrayList<InnBean>();
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String name = rs.getString("name");
+					String address = rs.getString("address");
+					String tel = rs.getString("tel");
+					int price = rs.getInt("min_price");
+					String picture = rs.getString("picture");
+					Boolean delete_flag = rs.getBoolean("delete_flag");
+					inn_list.add(new InnBean(id, name, address, tel, price, picture, delete_flag));
+				}
+				// 商品一覧をListとして返す
+				return inn_list;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new DAOException("レコードの取得に失敗しました。");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
 }
