@@ -12,68 +12,78 @@ int inn_id = inn.getId();
 <head>
 <meta charset="UTF-8">
 <title>宿予約</title>
-<link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/menu.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
-<style>
-body{
+	<style>
+body {
 	text-align: center;
 }
 </style>
 	<jsp:include page="/menu.jsp" />
 	<c:choose>
 		<c:when test="${Customer.getId() eq 1 }">
-	<p><jsp:include page="/managermenu.jsp" /></p>
+			<p><jsp:include page="/managermenu.jsp" /></p>
 		</c:when>
 		<c:otherwise>
-		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>
+			<p>
+				<jsp:include page="/Customer_Menu.jsp" /></p>
 		</c:otherwise>
 	</c:choose>
-	
+
 	<h1>${inn.getName()}</h1>
-    <img src="${inn.picture }" width="300" height="150">
+	<img src="${inn.picture }" width="300" height="150">
 	<div class="main">
-	
-	<table border="1" align="center">
-		<tr>
-			<th>住所</th>
-			<td>${inn.getAddress() }</td>
-		</tr>
-		<tr>	
-			<th>電話番号</th>
-			<td>${inn.getTel() }</td>
-		</tr>
-	</table>
-	
-	<h1>プラン一覧</h1>
-  	<table border="1" align="center">
-		<tr>
-			<th>NO</th>
-			<th>プラン名</th>
-			<th>最大人数</th>
-			<th>金額</th>
-			<th>プラン説明</th>
-			<th>予約</th>
-		</tr>
-		<c:forEach items="${plans}" var="plan">
-			<tr><form action="/InnReserve/ReserveServlet" method="post">
-				<td>${plan.id}</td>
-				<td>${plan.title}</td>
-				<td>${plan.max_people}</td>
-				<td>${plan.price}</td>
-				<td>${plan.detail}</td>
-				
-				<input type="hidden" name="plan_id" value="${plan.id}">
-				<input type="hidden" name="max_people" value="${plan.max_people}">
-				<input type="hidden" name="price" value="${plan.price}">
-				
-				<td><button>予約へ</button></td> 
-				<input type="hidden" name="inn_id" value="${inn.id}">
-				<input type="hidden" name="action" value="goreserve">
-				</form>
+
+		<table border="1" align="center">
+			<tr>
+				<th>住所</th>
+				<td>${inn.getAddress() }</td>
 			</tr>
-		</c:forEach>
-	</table>
-		</div>
+			<tr>
+				<th>電話番号</th>
+				<td>${inn.getTel() }</td>
+			</tr>
+		</table>
+
+		<h1>プラン一覧</h1
+	<div>
+		<ul>
+			<c:forEach items="${plans}" var="plan">
+				<li class="block m-1">
+					<div class="background border">
+					<a href="/InnReserve/ReserveServlet?inn_id=${plan.inn_id }&action=goreserve"/>
+					<div class="text-color-bk font-bold">${plan.title }</div>
+					<table class="plan-table">
+						<thead>
+							<tr>
+								<th class="color-wh b-no"><span class="text-color-bk">|部屋タイプ・詳細</span></th>
+								<th class="color-wh b-no"><span class="text-color-bk">1名(税込)</span></th>
+								<th class="color-wh b-no"><span class="text-color-bk">合計(税込)/${plan.max_people}名</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-color-bk color-wh b-no">${plan.detail }</td>
+								<td class="text-color-bk color-wh b-no">${plan.price }～</td>
+								<td class="text-color-bk color-wh b-no"><c:choose>
+										<c:when test="${plan.max_people >= 2}">
+${plan.price * plan.max_people}円～
+</c:when>
+										<c:otherwise>
+${plan.price}円～
+</c:otherwise>
+									</c:choose></td>
+							</tr>
+						</tbody>
+					</table>					
+	
+	</div>
+	</li>
+	</c:forEach>
+	</ul>
+	</div>
 </body>
 </html>
