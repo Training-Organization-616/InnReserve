@@ -71,3 +71,12 @@
 .bg-white{
 	--tw-bg-opacity: 1;
 }
+.plan-table{
+	width:100%;
+}
+.color-wh{
+	background-color: white;
+}
+.b-no{
+	border: none;
+}
