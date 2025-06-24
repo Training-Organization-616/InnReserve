@@ -36,6 +36,7 @@ if(customers!=null){
 <meta charset="UTF-8">
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -49,9 +50,9 @@ body{
 	<p><jsp:include page="/managermenu.jsp" /></p>
 	<%-- [menu=1]宿を選択 --%>
 	<c:if test="${menu ==1}">
-	<h1>宿一覧</h1>
+	<h1 class="text-left">|宿一覧</h1>
 		<%-- 一覧表の作成 --%>
-		<table border="1" align="center">
+		<table border="1" align="center" class="fixed-table">
 			<tr>
 				<th>NO</th>
 				<th>宿名</th>
@@ -72,20 +73,20 @@ body{
 						<tr>
 					</c:otherwise>
 				</c:choose>
-					<td>${item.id}</td>
+					<td class="fixed-b-1">${item.id}</td>
 					<td>${item.name }</td>
 					<td>${item.address }</td>
-					<td>${item.tel }</td>
-					<td>￥${item.min_price }</td>
-					<td>
+					<td class="fixed-b-3">${item.tel }</td>
+					<td class="fixed-b-2">￥${item.min_price }</td>
+					<td class="fixed-b-2">
 						<form action="/InnReserve/PlanServlet" method="get">
-						<button class="button">一覧</button>
+						<button class="button fixed-b-2">一覧</button>
 						<input type="hidden" name="action" value="list">
 						<input type="hidden" name="inn_id" value="${item.id }">
 						</form>
 					</td>
 					<%-- 変更ボタン --%>
-					<td>
+					<td class="fixed-b-1">
 						<form action="/InnReserve/InnServlet" method="get">
 							<button class="button">変更</button>
 							<input type="hidden" name="action" value="edit"> <input
@@ -98,7 +99,7 @@ body{
 								type="hidden" name="picture" value="${item.picture }">
 						</form>
 					</td>
-					<td>
+					<td class="fixed-b-1">
 						<%-- 削除ボタン --%>
 						<c:choose>
 						<c:when test="${item.delete_flag eq true }">
@@ -144,15 +145,15 @@ body{
 	<c:if test="${menu ==3}">
 	<%-- 検索 --%>
 			<form action="/InnReserve/CustomerServlet" method="get">
-			<input type="text" name="name" placeholder="?名前:" maxlength="50">
+			<input type="text" name="name" placeholder="?名前:" maxlength="50" class="textbox-size">
 			<input type="text" name="email" placeholder="?メールアドレス:"
-				maxlength="50">
-			<button>検索</button>
-			<input type="hidden" name="action" value="search">
+				maxlength="50"  class="textbox-size">
+			<div><button class="b">検索</button>
+			<input type="hidden" name="action" value="search"></div>
 		</form>
-	<h1>ユーザ一覧</h1>
+	<h1 class="text-left">|ユーザ一覧</h1>
 		<%-- 一覧表の作成 --%>
-		<table border="1" align="center">
+		<table border="1" align="center" class="fixed-table">
 			<tr>
 				<th>NO</th>
 				<th>名前</th>
@@ -171,12 +172,12 @@ body{
 						<tr>
 					</c:otherwise>
 					</c:choose>
-						<td>${item.id}</td>
+						<td class="fixed-b-1">${item.id}</td>
 					<td>${item.name }</td>
-					<td>${item.tel }</td>
+					<td class="fixed-b-3">${item.tel }</td>
 					<td>${item.email }</td>
 					<%-- 変更ボタン --%>
-					<td>
+					<td class="fixed-b-1">
 						<form action="/InnReserve/CustomerServlet" method="get">
 							<button class="button">変更</button>
 							<input type="hidden" name="action" value="edit"> <input
@@ -186,7 +187,7 @@ body{
 						</form>
 					</td>
 					<%-- 削除ボタン --%>
-					<td>
+					<td class="fixed-b-1">
 						<form action="/InnReserve/CustomerServlet" method="post">
 							<input type="hidden" name="userId" value="2">
 							<%-- 管理者[userId:2] --%>
