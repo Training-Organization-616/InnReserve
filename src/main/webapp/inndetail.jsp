@@ -33,11 +33,13 @@ body {
 		</c:otherwise>
 	</c:choose>
 
-	<h1>${inn.getName()}</h1>
+	<h1 class="text-left">|${inn.getName()}</h1>
 	<img src="${inn.picture }" width="300" height="150">
 	<div class="main">
-
-		<table border="1" align="center">
+<div class="b-fit-size m-1">
+<ul style="list-style: none;">
+<li>
+		<table border="1" align="center" class="w-max">
 			<tr>
 				<th>住所</th>
 				<td>${inn.getAddress() }</td>
@@ -47,35 +49,38 @@ body {
 				<td>${inn.getTel() }</td>
 			</tr>
 		</table>
-
-		<h1>プラン一覧</h1
+	</li>
+		</ul>
+</div>
+		<h1 class="text-left">|プラン一覧</h1
 	<div>
 		<ul>
 			<c:forEach items="${plans}" var="plan">
 				<li class="block m-1">
-					<div class="background border">
+					<div class="background border-2">
 					<a href="/InnReserve/ReserveServlet?plan_id=${plan.id }&action=goreserve"/>
-					<div class="text-color-bk font-bold">${plan.title }</div>
-					<table class="plan-table">
+					<div class="text-color-bk font-bold t-size text-left">${plan.title }</div>
+					<table class="plan-table  no-border">
 						<thead>
 							<tr>
-								<th class="color-wh b-no"><span class="text-color-bk">|部屋タイプ・詳細</span></th>
-								<th class="color-wh b-no"><span class="text-color-bk">1名(税込)</span></th>
-								<th class="color-wh b-no"><span class="text-color-bk">合計(税込)/${plan.max_people}名</span></th>
+								<th class="color-wh text-left b-top"><span class="text-color-bk">|部屋タイプ・詳細</span></th>
+								<th class="color-wh b-top text-left"><span class="text-color-bk">1名(税込)</span></th>
+								<th class="color-wh b-top text-left"><span class="text-color-bk">合計(税込)/${plan.max_people}名</span></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-color-bk color-wh b-no">${plan.detail }</td>
-								<td class="text-color-bk color-wh b-no">${plan.price }～</td>
-								<td class="text-color-bk color-wh b-no"><c:choose>
+							<tr class="no-border">
+								<td class="text-color-bk color-wh no-border text-left">${plan.detail }</td>
+								<td class="text-color-bk color-wh no-border text-left">${plan.price }～</td>
+								<td class="text-color-bk color-wh no-border text-left">
+								<c:choose>
 										<c:when test="${plan.max_people >= 2}">
-${plan.price * plan.max_people}円～
-</c:when>
-										<c:otherwise>
-${plan.price}円～
-</c:otherwise>
-									</c:choose></td>
+											${plan.price * plan.max_people}円～
+										</c:when>
+											<c:otherwise>
+											${plan.price}円～
+											</c:otherwise>
+								</c:choose></td>
 							</tr>
 						</tbody>
 					</table>					
