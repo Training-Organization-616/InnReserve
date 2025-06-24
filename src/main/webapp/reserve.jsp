@@ -47,7 +47,7 @@ body{
 			<tr>
 				<th>宿泊日数</th>
 				<td>
-					<p>${days_msg}</p><input type="number" name="days">日
+					<p>${days_msg}</p><input type="number" name="days" min="0">日
 				</td>
 			</tr>
 			<tr>

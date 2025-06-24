@@ -166,7 +166,7 @@ public class ReserveServlet extends HttpServlet {
 					request.setAttribute("price", price);
 					request.setAttribute("inn_id", inn_id);
 					PlanBean plan = plandao.findById(plan_id);
-					request.setAttribute("Plan", plan);
+					request.setAttribute("plan", plan);
 
 					InnBean inn = inndao.findInnById(inn_id);
 					request.setAttribute("inn", inn);
@@ -188,11 +188,11 @@ public class ReserveServlet extends HttpServlet {
 				Date finally_day = new Date(calendar.getTime().getTime());
 
 				//カスタマーのポイントに必要
-				int cus_point = customer.getPoint();
+				//int cus_point = customer.getPoint();
 
 				request.setAttribute("inn_id", inn_id);
 				request.setAttribute("plan_id", plan_id);
-				request.setAttribute("cus_point", cus_point);
+				//request.setAttribute("cus_point", cus_point);
 				request.setAttribute("total_price", total_price);
 				request.setAttribute("first_day", strDate);
 				request.setAttribute("finally_day", finally_day);
@@ -210,9 +210,6 @@ public class ReserveServlet extends HttpServlet {
 				int how_usepoint = 0;
 				int people = Integer.parseInt(request.getParameter("people"));
 				int stay_days = Integer.parseInt(request.getParameter("stay_days"));
-				if (request.getParameter("usePoint").equals("yes")) {
-					how_usepoint = Integer.parseInt(request.getParameter("how_usePoint"));
-				}
 
 				//チェックイン日ーチェックアウト日（チェックアウトはデータ外）
 				String first = request.getParameter("first_day");
@@ -220,6 +217,27 @@ public class ReserveServlet extends HttpServlet {
 
 				String finally_d = request.getParameter("finally_day");
 				Date finally_day = java.sql.Date.valueOf(finally_d);
+
+				//記入ポイントがない場合の処理が未実装
+				if (request.getParameter("usePoint").equals("yes") && (total_price - how_usepoint) > 0) {
+					how_usepoint = Integer.parseInt(request.getParameter("how_usePoint"));
+				} else {
+
+					request.setAttribute("inn_id", inn_id);
+					request.setAttribute("plan_id", plan_id);
+					request.setAttribute("total_price", total_price);
+					request.setAttribute("first_day", first_day);
+					request.setAttribute("finally_day", finally_day);
+					request.setAttribute("people", people);
+					request.setAttribute("stay_days", stay_days);
+
+					gotoPage(request, response, "/payment.jsp");
+
+				}
+
+				if ((total_price - how_usepoint) < 0) {
+
+				}
 
 				InnBean inn = inndao.findInnById(inn_id);
 				PlanBean plan = plandao.findById(plan_id);

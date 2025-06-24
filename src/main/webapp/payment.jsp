@@ -39,6 +39,8 @@ body{
 	<input type="hidden" name="finally_day" value="${finally_day}">
 	<input type="hidden" name="people" value="${people}">
 	<input type="hidden" name="stay_days" value="${stay_days}">
+	<input type="hidden" name="cus_point" value="${cus_point}">
+	
 	
 	<table align="center">
 		<tr><th>金額(税込み)</th><td>${total_price}円</td></tr>
@@ -48,7 +50,7 @@ body{
 			<input type="radio" name="usePoint" value="no" checked>利用しない		
 			</td></tr>
 		<tr><th>利用ポイント</th>
-			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${cus_point}" >ポイント/${Customer.getPoint() }ポイント</td></tr>
+			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${Customer.getPoint()}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
 	</table>
 	
 	<button>予約はこちらから</button>
