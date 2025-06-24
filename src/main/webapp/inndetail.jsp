@@ -71,14 +71,14 @@ body {
 						<tbody>
 							<tr class="no-border">
 								<td class="text-color-bk color-wh no-border text-left">${plan.detail }</td>
-								<td class="text-color-bk color-wh no-border text-left">${plan.price }～</td>
+								<td class="text-color-bk color-wh no-border text-left"><span>&yen</span>${plan.price }～</td>
 								<td class="text-color-bk color-wh no-border text-left">
 								<c:choose>
 										<c:when test="${plan.max_people >= 2}">
-											${plan.price * plan.max_people}円～
+											<span>&yen</span>${plan.price * plan.max_people}～
 										</c:when>
 											<c:otherwise>
-											${plan.price}円～
+											<span>&yen</span>${plan.price}～
 											</c:otherwise>
 								</c:choose></td>
 							</tr>
