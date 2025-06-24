@@ -157,30 +157,35 @@ public class InnDAO {
 	public void calcMinPrice(int id) throws DAOException {
 		// SQL文の作成
 		int min_price = 0;
-		String sql = "SELECT min(price) FROM plan WHERE delete_flag = false";
+		String sql = "SELECT min(price) FROM plan WHERE delete_flag = false AND inn_id = ?";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
-				PreparedStatement st = con.prepareStatement(sql);
-				// SQLの実行
-				ResultSet rs = st.executeQuery();) {
-			if (rs.next()) {
-				min_price = rs.getInt(1);
+				PreparedStatement st = con.prepareStatement(sql);) {
+			st.setInt(1, id);
+			try (// SQLの実行
+					ResultSet rs = st.executeQuery();) {
+				InnBean bean;
+				// 結果の取得および表示
+				if (rs.next()) {
+					min_price = rs.getInt(1);
+				}
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new DAOException("レコードの操作に失敗しました。");
-		} // SQL文の作成
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+		// SQL文の作成
 		sql = "UPDATE inn SET min_price = ? WHERE id = ?";
 		try (// データベースへの接続
-				Connection con = DriverManager.getConnection(url, user, pass);
+				Connection con2 = DriverManager.getConnection(url, user, pass);
 				// PreparedStatementオブジェクトの取得
-				PreparedStatement st = con.prepareStatement(sql);) {
+				PreparedStatement st2 = con2.prepareStatement(sql);) {
 			// プレースホルダの設定
-			st.setInt(1, min_price);
-			st.setInt(2, id);
-			st.executeUpdate();
+			st2.setInt(1, min_price);
+			st2.setInt(2, id);
+			st2.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの取得に失敗しました。");
