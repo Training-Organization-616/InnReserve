@@ -199,6 +199,7 @@ public class CustomerServlet extends HttpServlet {
 				String password = request.getParameter("password");
 				String check_password = request.getParameter("check_password");
 				String origin_email = request.getParameter("original_email");
+
 				if (request.getParameter("point").equals("")) {
 					request.setAttribute("Update_massage", "未記入の記入欄があります");
 
@@ -296,6 +297,8 @@ public class CustomerServlet extends HttpServlet {
 
 				dao.updateCustomer(id, name, tel, email, password, point);
 				CustomerBean ADMIN = (CustomerBean) session.getAttribute("Customer");
+				CustomerBean update_customer = dao.findByID(id);
+				session.setAttribute("Customer", update_customer);
 
 				if (ADMIN.getId() == 1) {
 
