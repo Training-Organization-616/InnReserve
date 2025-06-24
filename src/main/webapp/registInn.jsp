@@ -7,6 +7,8 @@
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css"
+	rel="stylesheet">
 </head>
 <body>
 <style>
@@ -16,7 +18,7 @@ body{
 </style>
 	<%-- メニューのリンク --%>
 	<p id="menu"><jsp:include page="/menu.jsp" /></p>
-	<h1>新規宿登録</h1>
+	<h1 class="text-left">|新規宿登録</h1>
 	<%-- エラーメッセージを表示する --%>
 	<p>
 		<c:if test="${not empty message }">
@@ -27,20 +29,20 @@ ${message }
 		<table border="1" align="center">
 			<tr>
 				<th>宿名</th>
-				<td><input type="text" name="name" maxlength="50" size="30" placeholder="50文字以下"></td>
+				<td><input type="text" name="name" maxlength="50" placeholder="50文字以下" class="textbox-size"></td>
 			</tr>
 			<tr>
 				<th>場所</th>
-				<td><input type="text" name="address" maxlength="50" size="30" placeholder="50文字以下"></td>
+				<td><input type="text" name="address" maxlength="50" placeholder="50文字以下" class="textbox-size"></td>
 			</tr>
 			<tr>
 				<th>電話番号</th>
 				<td><input type="text" name="tel"
-					placeholder="ハイフンを含める" maxlength="20" size="30"></td>
+					placeholder="ハイフンを含める" maxlength="20" class="textbox-size"></td>
 			</tr>
 			<tr>
 				<th>画像</th>
-				<td><input type="text" name="picture" maxlength="50" size="30"></td>
+				<td><input type="text" name="picture" maxlength="50" class="textbox-size"></td>
 			</tr>
 		</table>
 		<button type="button" class="show" id="button">登録</button>
