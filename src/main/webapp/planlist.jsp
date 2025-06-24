@@ -15,6 +15,8 @@
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css"
+	rel="stylesheet">
 </head>
 <body>
 	<style>
@@ -32,9 +34,9 @@ body {
 				<jsp:include page="/Customer_Menu.jsp" /></p>
 		</c:otherwise>
 	</c:choose>
-	<h1>プラン一覧</h1>
-	<h2>${inn.name }</h2>
-	<table border="1" align="center">
+	<h1 class="text-left">|プラン一覧</h1>
+	<h2 class="text-left">|${inn.name }</h2>
+	<table border="1" align="center" style="width:100%;">
 		<tr>
 			<th>NO</th>
 			<th>プラン名</th>
@@ -57,16 +59,16 @@ body {
 								</c:otherwise>
 							</c:choose>
 							<% cnt++; %>
-							<td><%=cnt %></td>
+							<td class="fixed-b-1"><%=cnt %></td>
 
 							<td>${plan.title }</td>
-							<td>${plan.max_people }</td>
-							<td>${plan.price }</td>
+							<td class="fixed-b-2">${plan.max_people }</td>
+							<td class="fixed-b-2">${plan.price }</td>
 							<td>${plan.detail }</td>
 							<form
 								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
 								method="post">
-								<td><button>変更</button></td> <input type="hidden" name="action"
+								<td class="fixed-b-1"><button class="b">変更</button></td> <input type="hidden" name="action"
 									value="edit">
 								<input type="hidden" name="title" value="${plan.title }">
 								<input type="hidden" name="max_people" value="${plan.max_people}">
@@ -79,7 +81,7 @@ body {
 							<form
 								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
 								method="post">
-								<td><button type="button" class="show">削除</button></td>
+								<td class="fixed-b-1"><button type="button" class="show">削除</button></td>
 								<dialog>
 								<p>本当に削除しますか?</p>
 								<button>削除</button>
@@ -92,7 +94,7 @@ body {
 							<form
 								action="/InnReserve/PlanServlet?plan_id=${plan.id }&inn_id=${inn.id}"
 								method="post">
-								<td><button type="button" class="show">削除</button></td>
+								<td class="fixed-b-1"><button type="button" class="show">削除</button></td>
 								<dialog>
 								<p>本当に削除しますか?</p>
 								<button>削除</button>
