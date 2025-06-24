@@ -148,7 +148,7 @@ public class CustomerDAO {
 
 	public void addCustomer(String name, String tel, String email, String password, int point) throws DAOException {
 
-		String sql = "Insert into customers(name, tel, email, password, point, delete_flag) values(?, ?, ?, ?, ? false)";
+		String sql = "Insert into customers(name, tel, email, password, point, delete_flag) values(?, ?, ?, ?, ?, false)";
 
 		try (Connection con = DriverManager.getConnection(url, user, pass);
 				PreparedStatement st = con.prepareStatement(sql);) {
