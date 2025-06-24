@@ -239,6 +239,28 @@ public class InnServlet extends HttpServlet {
 				String min_price = request.getParameter("min_price");
 				String max_price = request.getParameter("max_price");
 
+				// エラー処理
+				// 非数値文字列でないか判別
+				Pattern p = Pattern.compile("^[0-9]+$");// 半角数字のみ許可
+				if ((min_price != null && min_price.length() != 0)) {
+					if (p.matcher(min_price).find() != true) {
+						request.setAttribute("message", "金額は半角数字で入力してください");
+						List<InnBean> inns = dao.findAllInn(100);// 任意の会員番号
+						request.setAttribute("inns", inns);
+						gotoPage(request, response, "/inn.jsp");
+						return;
+					}
+				}
+				if ((max_price != null && max_price.length() != 0)) {
+					if ((p.matcher(max_price).find() != true)) {
+						request.setAttribute("message", "金額は半角数字で入力してください");
+						List<InnBean> inns = dao.findAllInn(100);// 任意の会員番号
+						request.setAttribute("inns", inns);
+						gotoPage(request, response, "/inn.jsp");
+						return;
+					}
+				}
+
 				List<InnBean> inns = dao.findByNameAndAddressAndPrice(name, address, min_price, max_price);// 検索メソッド
 				request.setAttribute("inns", inns);
 				gotoPage(request, response, "/inn.jsp");
