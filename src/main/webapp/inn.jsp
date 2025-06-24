@@ -25,19 +25,19 @@
 			<div><c:if test="${not empty message }">${message }</c:if></div>
 				<form action="/InnReserve/InnServlet" method="get">
 					<span>宿名<input type="text" name="name" placeholder="?宿名:"
-						maxlength="50"></span> <span>場所<input type="text"
-						name="address" placeholder="?場所:" maxlength="50"></span> <span>金額<input
-						type="text" name="min_price" maxlength="10">円 <span>～</span>
-						<span><input type="text" name="max_price" maxlength="10">円</span>
-						<button class="button">検索</button> <input type="hidden"
-						name="action" value="search">
+						maxlength="50" class="textbox-size"></span> <span>場所<input type="text"
+						name="address" placeholder="?場所:" maxlength="50" class="textbox-size"></span> <span>金額<input
+						type="text" name="min_price" maxlength="10" class="textbox-size">円 <span>～</span>
+						<span><input type="text" name="max_price" maxlength="10" class="textbox-size">円</span>
+						<div><button class="b">検索</button> <input type="hidden"
+						name="action" value="search"></div>
 				</form>
 			</div>
 		</c:otherwise>
 	</c:choose>
 	<h1 class="text-left">|宿一覧</h1>
 	<ul>
-		<div class="flex">
+		<div class="flex-fit">
 			<c:forEach items="${inns }" var="inn">
 				<li class="flex relative ml-1 mr-4">
 					<div class="background border">
