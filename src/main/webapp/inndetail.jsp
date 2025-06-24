@@ -34,7 +34,7 @@ body {
 	</c:choose>
 
 	<h1 class="text-left">|${inn.getName()}</h1>
-	<img src="${inn.picture }" width="300" height="150">
+	<img src="${inn.picture }">
 	<div class="main">
 <div class="b-fit-size m-1">
 <ul style="list-style: none;">
