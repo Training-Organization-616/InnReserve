@@ -24,5 +24,6 @@ body{
 		</c:otherwise>
 	</c:choose>
 	<h1>予約完了しました!</h1>
+	<h2 style="color: blue;">${give_point}ポイントを付与しました！</h2>
 </body>
 </html>
