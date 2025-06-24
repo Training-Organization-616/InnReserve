@@ -218,25 +218,21 @@ public class ReserveServlet extends HttpServlet {
 				String finally_d = request.getParameter("finally_day");
 				Date finally_day = java.sql.Date.valueOf(finally_d);
 
-				//記入ポイントがない場合の処理が未実装
-				if (request.getParameter("usePoint").equals("yes") && (total_price - how_usepoint) > 0) {
-					how_usepoint = Integer.parseInt(request.getParameter("how_usePoint"));
-				} else {
+				if (request.getParameter("usePoint").equals("yes")) {
+					if (request.getParameter("how_usePoint") == "") {
+						request.setAttribute("inn_id", inn_id);
+						request.setAttribute("plan_id", plan_id);
+						request.setAttribute("total_price", total_price);
+						request.setAttribute("first_day", first_day);
+						request.setAttribute("finally_day", finally_day);
+						request.setAttribute("people", people);
+						request.setAttribute("stay_days", stay_days);
 
-					request.setAttribute("inn_id", inn_id);
-					request.setAttribute("plan_id", plan_id);
-					request.setAttribute("total_price", total_price);
-					request.setAttribute("first_day", first_day);
-					request.setAttribute("finally_day", finally_day);
-					request.setAttribute("people", people);
-					request.setAttribute("stay_days", stay_days);
-
-					gotoPage(request, response, "/payment.jsp");
-
-				}
-
-				if ((total_price - how_usepoint) < 0) {
-
+						gotoPage(request, response, "/payment.jsp");
+						return;
+					} else {
+						how_usepoint = Integer.parseInt(request.getParameter("how_usePoint"));
+					}
 				}
 
 				InnBean inn = inndao.findInnById(inn_id);
@@ -296,6 +292,9 @@ public class ReserveServlet extends HttpServlet {
 				//int customer_id = 1;
 				List<CustomerBean> customers = customerdao.findAll();
 				request.setAttribute("customers", customers);
+
+				List<PlanBean> plans = plandao.findAll();
+				request.setAttribute("plans", plans);
 
 				//会員IDから予約一覧を検索し表示
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);

@@ -47,12 +47,13 @@ public class ReserveDAO {
 					int id = rs.getInt("id");
 					int customer_id = rs.getInt("customer_id");
 					int inn_id = rs.getInt("inn_id");
+					int plan_id = rs.getInt("plan_id");
 					int people = rs.getInt("people");
 					int stay_days = rs.getInt("stay_days");
 					Date first_day = rs.getDate("first_day");
 					int total_price = rs.getInt("total_price");
 					Boolean cancel_flag = rs.getBoolean("cancel_flag");
-					bean = new ReserveBean(id, customer_id, inn_id, people,
+					bean = new ReserveBean(id, customer_id, inn_id, plan_id, people,
 							stay_days, first_day, total_price, cancel_flag);
 				} else {
 					return null;
@@ -90,12 +91,13 @@ public class ReserveDAO {
 					int id = rs.getInt("id");
 					customer_id = rs.getInt("customer_id");
 					int inn_id = rs.getInt("inn_id");
+					int plan_id = rs.getInt("plan_id");
 					int people = rs.getInt("people");
 					int stay_days = rs.getInt("stay_days");
 					Date first_day = rs.getDate("first_day");
 					int total_price = rs.getInt("total_price");
 					Boolean cancel_flag = rs.getBoolean("cancel_flag");
-					ReserveBean bean = new ReserveBean(id, customer_id, inn_id, people,
+					ReserveBean bean = new ReserveBean(id, customer_id, inn_id, plan_id, people,
 							stay_days, first_day, total_price, cancel_flag);
 					list.add(bean);
 				}

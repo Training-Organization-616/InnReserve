@@ -39,7 +39,6 @@ body{
 	<input type="hidden" name="finally_day" value="${finally_day}">
 	<input type="hidden" name="people" value="${people}">
 	<input type="hidden" name="stay_days" value="${stay_days}">
-	<input type="hidden" name="cus_point" value="${cus_point}">
 	
 	
 	<table align="center">
@@ -50,7 +49,14 @@ body{
 			<input type="radio" name="usePoint" value="no" checked>利用しない		
 			</td></tr>
 		<tr><th>利用ポイント</th>
+		<c:choose>
+		<c:when test="${total_price ge Customer.getPoint() }">
 			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${Customer.getPoint()}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
+		</c:when>
+		<c:otherwise>
+			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${total_price}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
+		</c:otherwise>
+			</c:choose>
 	</table>
 	
 	<button>予約はこちらから</button>

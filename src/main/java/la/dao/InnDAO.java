@@ -304,7 +304,7 @@ public class InnDAO {
 		if (Max_price != null && Max_price.length() != 0) {
 			sql += "AND min_price <= ? ";
 		}
-		sql += "ORDER BY id ";
+		sql += "AND delete_flag = false ORDER BY id ";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);

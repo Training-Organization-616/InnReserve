@@ -42,7 +42,7 @@ ${message }
 			</tr>
 			<tr>
 				<th>画像</th>
-				<td><input type="text" name="picture" maxlength="50" class="textbox-size"></td>
+				<td><input type="file" name="picture" ></td>
 			</tr>
 		</table>
 		<button type="button" class="show" id="button">登録</button>

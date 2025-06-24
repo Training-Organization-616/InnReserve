@@ -40,6 +40,7 @@ body {
 			<th>NO</th>
 
 			<th>宿名</th>
+			<th>プラン名</th>
 			<c:if test="${Customer.getId() eq 1 }">
 				<th>予約者名</th>
 			</c:if>
@@ -54,10 +55,12 @@ body {
 		</tr>
 		<c:forEach items="${reserves }" var="reserve">
 			<c:forEach items="${inns }" var="inn">
+				<c:forEach items="${plans }" var="plan">
 				<c:forEach items="${customers }" var="customer">
 					<c:if test="${customer.getId() eq reserve.customer_id }">
 
 						<c:if test="${inn.getId() eq reserve.inn_id }">
+							<c:if test="${plan.getId() eq reserve.plan_id }">
 							<c:choose>
 								<c:when test="${reserve.cancel_flag eq true }">
 									<tr class="delete_item">
@@ -70,6 +73,7 @@ body {
 							<td class="fixed-b-1"><%=cnt %></td>
 
 							<td>${inn.name }</td>
+							<td>${plan.title }</td>
 							<c:if test="${Customer.getId() eq 1 }">
 								<td>${customer.name }</td>
 							</c:if>
@@ -116,8 +120,10 @@ body {
 							</dialog>
 						</c:otherwise>
 						</c:choose>
+							</c:if>
 						</c:if>
 					</c:if>
+					</c:forEach>
 				</c:forEach>
 			</c:forEach>
 			</tr>
