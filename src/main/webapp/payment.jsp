@@ -49,12 +49,13 @@ body{
 			<input type="radio" name="usePoint" value="no" checked>利用しない		
 			</td></tr>
 		<tr><th>利用ポイント</th>
+		<p>${point_message}</p>
 		<c:choose>
 		<c:when test="${total_price ge Customer.getPoint() }">
-			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${Customer.getPoint()}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
+			<td><input type="number" name="how_usePoint" value="0" min="0" max="${Customer.getPoint()}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
 		</c:when>
 		<c:otherwise>
-			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${total_price}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
+			<td><input type="number" name="how_usePoint" value="0" min="0" max="${total_price}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
 		</c:otherwise>
 			</c:choose>
 	</table>
