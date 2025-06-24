@@ -24,11 +24,46 @@
 			<%-- エラーメッセージを表示 --%>
 			<div><c:if test="${not empty message }">${message }</c:if></div>
 				<form action="/InnReserve/InnServlet" method="get">
-					<span>宿名<input type="text" name="name" placeholder="?宿名:"
-						maxlength="50" class="textbox-size"></span> <span>場所<input type="text"
-						name="address" placeholder="?場所:" maxlength="50" class="textbox-size"></span> <span>金額<span>&yen</span><input
-						type="text" name="min_price" maxlength="10" class="textbox-size"> <span>～</span>
-						<span><span>&yen</span><input type="text" name="max_price" maxlength="10" class="textbox-size"></span>
+					<span>宿名
+					<c:choose>
+					<c:when test="${not empty Name }">
+					<input type="text" name="name" placeholder="?宿名:" maxlength="50" class="textbox-size" value="${Name }">
+					</c:when>
+					<c:otherwise>
+					<input type="text" name="name" placeholder="?宿名:" maxlength="50" class="textbox-size">
+					</c:otherwise>
+					</c:choose>	
+					</span>
+					<span>場所
+					<c:choose>
+					<c:when test="${not empty Address }">
+					<input type="text" name="address" placeholder="?場所:" maxlength="50" class="textbox-size" value="${Address }">
+					</c:when>
+					<c:otherwise>
+					<input type="text" name="address" placeholder="?場所:" maxlength="50" class="textbox-size">
+					</c:otherwise>
+					</c:choose>	
+					</span>
+					<span>金額<span>&yen</span>
+					<c:choose>
+					<c:when test="${not empty Min_price }">
+						<input type="text" name="min_price" maxlength="10" class="textbox-size" value="${Min_price }">
+					</c:when>
+					<c:otherwise>
+					<input type="text" name="min_price" maxlength="10" class="textbox-size">
+					</c:otherwise>
+					</c:choose>
+					<span>～</span>
+					<span><span>&yen</span>
+					<c:choose>
+					<c:when test="${not empty Max_price }">
+					<input type="text" name="max_price" maxlength="10" class="textbox-size" value="${Max_price }">
+					</c:when>
+					<c:otherwise>
+					<input type="text" name="max_price" maxlength="10" class="textbox-size">
+					</c:otherwise>
+					</c:choose>
+					</span>
 						<div><button class="b">検索</button> <input type="hidden"
 						name="action" value="search"></div>
 				</form>
