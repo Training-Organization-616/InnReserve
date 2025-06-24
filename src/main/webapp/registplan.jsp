@@ -7,6 +7,8 @@
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css"
+	rel="stylesheet">
 </head>
 <body>
 <style>
@@ -16,7 +18,7 @@ body{
 </style>
 	<%-- メニューのリンク --%>
 	<p id="menu"><jsp:include page="/menu.jsp" /></p>
-	<h1>新規プラン登録</h1>
+	<h1 class="text-left">|新規プラン登録</h1>
 	<%-- エラーメッセージを表示する --%>
 	<p>
 		<c:if test="${not empty message }">
@@ -31,11 +33,11 @@ ${message }
 			</tr>
 			<tr>
 				<th>最大人数</th>
-				<td><input type="text" name="max_people" maxlength="50" size="30" placeholder="50文字以下"></td>
+				<td><input type="number" name="max_people" min="0" maxlength="50" size="30" placeholder="50文字以下"></td>
 			</tr>
 			<tr>
 				<th>金額</th>
-				<td><input type="text" name="price" maxlength="20" size="30"></td>
+				<td><input type="number" name="price" maxlength="20" min="0" size="30"></td>
 			</tr>
 			<tr>
 				<th>詳細</th>
