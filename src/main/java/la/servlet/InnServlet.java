@@ -249,6 +249,8 @@ public class InnServlet extends HttpServlet {
 						request.setAttribute("inns", inns);
 						gotoPage(request, response, "/inn.jsp");
 						return;
+					} else {
+						request.setAttribute("Min_price", min_price);
 					}
 				}
 				if ((max_price != null && max_price.length() != 0)) {
@@ -258,7 +260,16 @@ public class InnServlet extends HttpServlet {
 						request.setAttribute("inns", inns);
 						gotoPage(request, response, "/inn.jsp");
 						return;
+					} else {
+						request.setAttribute("Max_price", max_price);
 					}
+				}
+
+				if ((name != null && name.length() != 0)) {
+					request.setAttribute("Name", name);
+				}
+				if ((address != null && address.length() != 0)) {
+					request.setAttribute("Address", address);
 				}
 
 				List<InnBean> inns = dao.findByNameAndAddressAndPrice(name, address, min_price, max_price);// 検索メソッド
