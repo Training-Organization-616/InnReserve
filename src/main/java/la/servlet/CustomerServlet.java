@@ -109,7 +109,8 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "/Customer_Regist.jsp");
 					return;
 				}
-				Pattern p = Pattern.compile(".*-.*-.*");
+				Pattern p = Pattern
+						.compile("^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$");
 				if (name.length() >= 20) {
 					request.setAttribute("Regist_message", "名前は20文字以下で入力してください");
 					gotoPage(request, response, "/Customer_Regist.jsp");
@@ -119,7 +120,7 @@ public class CustomerServlet extends HttpServlet {
 					gotoPage(request, response, "/Customer_Regist.jsp");
 					return;
 				} else if (p.matcher(tel).find() != true) {
-					request.setAttribute("Regist_message", "電話番号に「-：ハイフン」がありません");
+					request.setAttribute("Regist_message", "電話番号のフォーマットが正しくありません");
 					gotoPage(request, response, "/Customer_Regist.jsp");
 					return;
 				} else if (email.length() >= 50) {
@@ -234,9 +235,10 @@ public class CustomerServlet extends HttpServlet {
 				}
 
 				//エラー処理
-				Pattern p = Pattern.compile(".*-.*-.*");
+				Pattern p = Pattern
+						.compile("^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$");
 				if (p.matcher(tel).find() != true) {
-					request.setAttribute("Update_massage", "電話番号に「-：ハイフン」がありません");
+					request.setAttribute("Update_massage", "電話番号のフォーマットが正しくありません");
 
 					CustomerBean Customer = dao.findByID(id);
 
