@@ -15,6 +15,8 @@
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css"
+	rel="stylesheet">
 </head>
 <body>
 	<style>
@@ -32,10 +34,10 @@ body {
 				<jsp:include page="/Customer_Menu.jsp" /></p>
 		</c:otherwise>
 	</c:choose>
-	<h1>予約一覧</h1>
-	<table border="1" align="center">
+	<h1 class="text-left">|予約一覧</h1>
+	<table border="1" align="center" class="fixed-table">
 		<tr>
-			<th>予約</th>
+			<th>NO</th>
 
 			<th>宿名</th>
 			<c:if test="${Customer.getId() eq 1 }">
@@ -65,7 +67,7 @@ body {
 								</c:otherwise>
 							</c:choose>
 							<% cnt++; %>
-							<td><%=cnt %></td>
+							<td class="fixed-b-1"><%=cnt %></td>
 
 							<td>${inn.name }</td>
 							<c:if test="${Customer.getId() eq 1 }">
@@ -73,15 +75,15 @@ body {
 							</c:if>
 
 
-							<td>${reserve.stay_days }</td>
-							<td>${reserve.people }</td>
-							<td>${reserve.first_day }</td>
-							<td>￥${reserve.total_price }</td>
+							<td class="fixed-b-1">${reserve.stay_days }</td>
+							<td class="fixed-b-1">${reserve.people }</td>
+							<td class="fixed-b-3">${reserve.first_day }</td>
+							<td class="fixed-b-2">￥${reserve.total_price }</td>
 							<c:if test="${Customer.getId() eq 1 }">
 							<form
 								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 								method="post">
-								<td><button>変更</button></td> <input type="hidden" name="action"
+								<td class="fixed-b-1"><button class="b">変更</button></td> <input type="hidden" name="action"
 									value="edit">
 							</form>
 							</c:if>
@@ -90,7 +92,7 @@ body {
 							<form
 								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 								method="post">
-								<td><button type="button" class="show">削除</button></td>
+								<td class="fixed-b-2"><button type="button" class="show">削除</button></td>
 								<dialog>
 								<p>本当に削除しますか?</p>
 								<p>※二度と復旧はできません</p>
@@ -104,7 +106,7 @@ body {
 							<form
 								action="/InnReserve/ReserveServlet?reserve_id=${reserve.id }&inn_id=${inn.getId()}"
 								method="post">
-								<td><button type="button" class="show">キャンセル</button></td>
+								<td class="fixed-b-2"><button type="button" class="show fixed-b-2">キャンセル</button></td>
 								<dialog>
 								<p>本当にキャンセルしますか?</p>
 								<button>OK</button>
