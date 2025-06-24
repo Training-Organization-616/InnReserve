@@ -77,10 +77,10 @@ ${Update_massage}
 	<c:choose>
 	<c:when test="${Customer.getId() ne 1 || id eq 1}">
 	<tr><th>パスワード</th>
-		<td><input type="text" name="password" value="${original_password}" placeholder="パスワード" maxlength="20" class="text_box"></td>
+		<td><input type="password" name="password" value="${original_password}" placeholder="パスワード" maxlength="20" class="text_box"></td>
 	</tr>
 	<tr><th>パスワード確認</th>
-		<td><input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box"></td>
+		<td><input type="password" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box"></td>
 	</tr>	
 	</c:when>
 	<c:otherwise>

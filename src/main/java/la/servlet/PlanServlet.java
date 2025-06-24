@@ -177,40 +177,49 @@ public class PlanServlet extends HttpServlet {
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 
 				if (request.getParameter("title") == "") {
-					request.setAttribute("detail_msg", "詳細を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else {
 					title = request.getParameter("title");
 				}
 
 				if (request.getParameter("max_people") == "") {
-					request.setAttribute("max_people_msg", "人数を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else if (isNumber(request.getParameter("max_people"))) {
 					max_people = Integer.parseInt(request.getParameter("max_people"));
 				} else {
-					request.setAttribute("people_msg", "数字を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				}
 				if (request.getParameter("price") == "") {
-					request.setAttribute("price_msg", "金額を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else if (isNumber(request.getParameter("price"))) {
 					price = Integer.parseInt(request.getParameter("price"));
 				} else {
-					request.setAttribute("days_msg", "数字を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				}
 				if (request.getParameter("detail") == "") {
-					request.setAttribute("detail_msg", "詳細を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else {
 					detail = request.getParameter("detail");
 				}
 
 				if (flag == 1) {
-					InnBean inn = inndao.findInnById(inn_id);
-					request.setAttribute("inn", inn);
+
+					String original_title = request.getParameter("original_title");
+					int original_max_people = Integer.parseInt(request.getParameter("original_max_people"));
+					int original_price = Integer.parseInt(request.getParameter("original_price"));
+					String original_detail = request.getParameter("original_detail");
+					request.setAttribute("title", original_title);
+					request.setAttribute("max_people", original_max_people);
+					request.setAttribute("price", original_price);
+					request.setAttribute("detail", original_detail);
+					request.setAttribute("plan_id", plan_id);
+					request.setAttribute("inn_id", inn_id);
 					gotoPage(request, response, "/updateplan.jsp");
 					return;
 				}

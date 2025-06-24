@@ -378,13 +378,22 @@ public class ReserveServlet extends HttpServlet {
 				dao.updateReserve(reserve_id, people, stay_days, first_day, total_price);
 
 				//変更したのち、予約一覧画面を表示
+				//宿名や宿金額を持ってくるために全宿を検索
+				view_id = customer.getId();
+				//全宿をリストに入れる
 				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
 
 				List<CustomerBean> customers = customerdao.findAll();
 				request.setAttribute("customers", customers);
+
+				List<PlanBean> plans = plandao.findAll();
+				request.setAttribute("plans", plans);
+
+				//会員IDから予約一覧を検索し表示
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
 				request.setAttribute("reserves", reserves);
+
 				gotoPage(request, response, "/reservelist.jsp");
 
 				//予約キャンセル
@@ -398,13 +407,50 @@ public class ReserveServlet extends HttpServlet {
 				dao.deleteReserve(reserve_id);
 
 				//キャンセルしたのち、予約一覧画面を表示
+				//宿名や宿金額を持ってくるために全宿を検索
+				view_id = customer.getId();
+				//全宿をリストに入れる
 				List<InnBean> inns = inndao.findAllInn(view_id);
 				request.setAttribute("inns", inns);
+
 				List<CustomerBean> customers = customerdao.findAll();
 				request.setAttribute("customers", customers);
 
+				List<PlanBean> plans = plandao.findAll();
+				request.setAttribute("plans", plans);
+
+				//会員IDから予約一覧を検索し表示
 				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
 				request.setAttribute("reserves", reserves);
+
+				gotoPage(request, response, "/reservelist.jsp");
+
+			} else if (action.equals("truedelete")) {
+				//予約番号を型変換
+				int reserve_id = Integer.parseInt(request.getParameter("reserve_id"));
+				int customer_id = customer.getId();
+
+				view_id = customer.getId();
+				//予約番号からその予約を非表示にしてキャンセル
+				dao.truedeleteReserve(reserve_id);
+
+				//キャンセルしたのち、予約一覧画面を表示
+				//宿名や宿金額を持ってくるために全宿を検索
+				view_id = customer.getId();
+				//全宿をリストに入れる
+				List<InnBean> inns = inndao.findAllInn(view_id);
+				request.setAttribute("inns", inns);
+
+				List<CustomerBean> customers = customerdao.findAll();
+				request.setAttribute("customers", customers);
+
+				List<PlanBean> plans = plandao.findAll();
+				request.setAttribute("plans", plans);
+
+				//会員IDから予約一覧を検索し表示
+				List<ReserveBean> reserves = dao.findByCustomerId(customer_id);
+				request.setAttribute("reserves", reserves);
+
 				gotoPage(request, response, "/reservelist.jsp");
 
 			} else {

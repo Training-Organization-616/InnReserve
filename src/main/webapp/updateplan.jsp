@@ -30,21 +30,25 @@ ${message }
 			</tr>
 			<tr>
 				<th>最大人数</th>
-				<td><input type="text" name="max_people" value="${max_people }" maxlength="50"></td>
+				<td><input type="number" name="max_people" value="${max_people }" maxlength="50" min="0"></td>
 			</tr>
 			<tr>
 				<th>金額</th>
-				<td><input type="text" name="price" value="${price }" maxlength="20"></td>
+				<td><input type="number" name="price" value="${price }" maxlength="20" min="0"></td>
 			</tr>
 			<tr>
 				<th>詳細</th>
-				<td><input type="text" name="detail" value="${detail }">			
+				<td><input type="text" name="detail" value="${detail }">
 				</td>
 			</tr>
 		</table>
 		<form action="/InnReserve/InnServlet" method="post">
 			<input type="hidden" name="inn_id" value="${inn_id}">
 			<input type="hidden" name="plan_id" value="${plan_id}">
+			<input type="hidden" name="original_title" value="${title}">
+			<input type="hidden" name="original_max_people" value="${max_people}">
+			<input type="hidden" name="original_price" value="${price}">
+			<input type="hidden" name="original_detail" value="${detail}">
 			<input type="hidden" name="action" value="update">
 			<%-- 変更(ダイアログ付き) --%>
 			<button type="button" class="show">変更</button>

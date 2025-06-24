@@ -188,4 +188,20 @@ public class ReserveDAO {
 		}
 	}
 
+	public void truedeleteReserve(int reserve_id) throws DAOException {
+		String sql = "DELETE FROM reserve WHERE id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// プレースホルダの設定
+			st.setInt(1, reserve_id);
+			st.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+	}
+
 }

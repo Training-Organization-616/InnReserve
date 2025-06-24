@@ -52,9 +52,9 @@ ${Regist_message}
 	<tr><th>アドレス</th>
 		<td><input type="text" name="email" placeholder="メールアドレス：５０文字以下" maxlength="50" class="text_box"></td></tr>
 	<tr><th>パスワード</th>
-		<td><input type="text" name="password" placeholder="パスワード：２０文字以下"maxlength="20" class="text_box"></td></tr>
+		<td><input type="password" name="password" placeholder="パスワード：２０文字以下"maxlength="20" class="text_box"></td></tr>
 	<tr><th>パスワード確認</th>
-		<td><input type="text" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box"></td></tr>
+		<td><input type="password" name="check_password" placeholder="パスワード(確認)" maxlength="20" class="text_box"></td></tr>
 	
 </table>	
 	<input type="hidden" name="action" value="add">
