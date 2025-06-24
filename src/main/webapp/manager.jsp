@@ -144,8 +144,8 @@ body{
 	<%-- [menu=3]ユーザーを選択 --%>
 	<c:if test="${menu ==3}">
 	<%-- 検索 --%>
+	<div class="text-center background-box border m-1 bg-white">
 			<form action="/InnReserve/CustomerServlet" method="get">
-
 					<c:choose>
 					<c:when test="${not empty Name }">
 						<input type="text" name="name" placeholder="?名前:" maxlength="50" class="textbox-size" value="${Name}">
@@ -165,6 +165,7 @@ body{
 			<div><button class="b">検索</button>
 			<input type="hidden" name="action" value="search"></div>
 		</form>
+		</div>
 	<h1 class="text-left">|ユーザ一覧</h1>
 		<%-- 一覧表の作成 --%>
 		<table border="1" align="center" class="fixed-table">
