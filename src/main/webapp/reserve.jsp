@@ -31,7 +31,7 @@ body{
 		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>			
 		</c:otherwise>
 	</c:choose>
-	<h1>${inn.name}の予約：プラン${plan.id}:${plan.title}</h1>
+	<h1>${inn.name}の予約</h1>
 	
 	<div class="main">
 	<form action="/InnReserve/ReserveServlet" method="post">
@@ -41,6 +41,9 @@ body{
 	<input type="hidden" name="max_people" value="${plan.max_people}">
 	
 		<table border="1" align="center">
+			<tr>
+				<th>プラン${plan.id}</th>
+				<td>${plan.title}</td>
 			<tr>
 				<th>宿泊日数</th>
 				<td>

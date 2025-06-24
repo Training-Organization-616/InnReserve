@@ -40,8 +40,8 @@ body{
 	<input type="hidden" name="people" value="${people}">
 	<input type="hidden" name="stay_days" value="${stay_days}">
 	
-	<table>
-		<tr><th>金額(税込み)</th><td>${total_price}</td></tr>
+	<table align="center">
+		<tr><th>金額(税込み)</th><td>${total_price}円</td></tr>
 		<tr><th>利用有無</th>
 			<td>
 			<input type="radio" name="usePoint" value="yes">利用する
