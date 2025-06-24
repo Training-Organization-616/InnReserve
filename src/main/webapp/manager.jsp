@@ -145,9 +145,23 @@ body{
 	<c:if test="${menu ==3}">
 	<%-- 検索 --%>
 			<form action="/InnReserve/CustomerServlet" method="get">
-			<input type="text" name="name" placeholder="?名前:" maxlength="50" class="textbox-size">
-			<input type="text" name="email" placeholder="?メールアドレス:"
-				maxlength="50"  class="textbox-size">
+
+					<c:choose>
+					<c:when test="${not empty Name }">
+						<input type="text" name="name" placeholder="?名前:" maxlength="50" class="textbox-size" value="${Name}">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="name" placeholder="?名前:" maxlength="50" class="textbox-size">
+					</c:otherwise>
+					</c:choose>	
+					<c:choose>
+					<c:when test="${not empty Email }">
+						<input type="text" name="email" placeholder="?メールアドレス:" maxlength="50" class="textbox-size" value="${Email }">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="email" placeholder="?メールアドレス:" maxlength="50" class="textbox-size">
+					</c:otherwise>
+					</c:choose>	
 			<div><button class="b">検索</button>
 			<input type="hidden" name="action" value="search"></div>
 		</form>
