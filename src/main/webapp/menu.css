@@ -88,3 +88,6 @@ button{
 .headline{
 	object-fit: cover;
 }
+img{
+	cursor: pointer;
+}

@@ -11,10 +11,16 @@ h1{
 <div style="background-color: orange; color: black;  margin-top: -30px;">
 		<c:choose>
 		 <c:when test="${Customer.getId() eq 1 }">
-	<h1><a href="/InnReserve/InnServlet?action=list">宿予約システム</a></h1>
+	<h1>
+<!--	<a href="/InnReserve/InnServlet?action=list">宿予約システム</a>-->
+	<img  src="title.png" width="600px" height = "150px"onclick="location.href='/InnReserve/InnServlet?action=list';">
+	</h1>
 		</c:when>
 		<c:otherwise>
-	<h1><a href="/InnReserve/ReserveServlet?action=list">宿予約システム</a></h1>
+	<h1>
+	<img  src="title.png" width="600px" height = "150px"onclick="location.href='/InnReserve/ReserveServlet?action=list';">
+<!--	<a href="/InnReserve/ReserveServlet?action=list">宿予約システム</a>-->
+	</h1>
 		</c:otherwise>
 			</c:choose>
 	<p align="right" style="margin-top: -30px;">
