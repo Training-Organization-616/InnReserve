@@ -80,3 +80,37 @@
 .b-no{
 	border: none;
 }
+.fixed-table{
+	width:100%;
+}
+.fixed-b-1{
+	width: 50px;
+}
+.fixed-b-2{
+	width:130px;
+}
+.fixed-b-3{
+	width:190px;
+}
+th{
+	font-size: 25px;
+}
+td{
+	font-size: 25px;
+}
+button{
+	background-color: lightyellow;
+	font-size: 15px;
+}
+.show{
+	background-color: lightyellow;
+	font-size: 15px;
+}
+.b{
+	background-color: lightyellow;
+	font-size: 15px;
+}
+.textbox-size{
+	width:200px;
+	height: 30px;
+}
