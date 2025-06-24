@@ -21,6 +21,8 @@
 				<jsp:include page="/Customer_Menu.jsp" /></div>
 			<%-- 検索 --%>
 			<div class="text-center background-box border m-1 bg-white">
+			<%-- エラーメッセージを表示 --%>
+			<div><c:if test="${not empty message }">${message }</c:if></div>
 				<form action="/InnReserve/InnServlet" method="get">
 					<span>宿名<input type="text" name="name" placeholder="?宿名:"
 						maxlength="50"></span> <span>場所<input type="text"
@@ -29,6 +31,7 @@
 						<span><input type="text" name="max_price" maxlength="10">円</span>
 						<button class="button">検索</button> <input type="hidden"
 						name="action" value="search">
+						<input type="hidden" name="customer_id" value="${Customer.getId() }">
 				</form>
 			</div>
 		</c:otherwise>
