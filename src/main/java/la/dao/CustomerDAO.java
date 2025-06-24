@@ -123,9 +123,10 @@ public class CustomerDAO {
 
 	}
 
-	public void updateCustomer(int id, String name, String tel, String email, String password) throws DAOException {
+	public void updateCustomer(int id, String name, String tel, String email, String password, int point)
+			throws DAOException {
 
-		String sql = "update customers set name = ?, tel = ?, email = ?, password = ? where id = ?";
+		String sql = "update customers set name = ?, tel = ?, email = ?, password = ?, point = ? where id = ?";
 
 		try (Connection con = DriverManager.getConnection(url, user, pass);
 				PreparedStatement st = con.prepareStatement(sql);) {
@@ -134,7 +135,8 @@ public class CustomerDAO {
 			st.setString(2, tel);
 			st.setString(3, email);
 			st.setString(4, password);
-			st.setInt(5, id);
+			st.setInt(5, point);
+			st.setInt(6, id);
 
 			st.executeUpdate();
 		} catch (SQLException e) {

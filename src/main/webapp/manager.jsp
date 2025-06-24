@@ -159,6 +159,7 @@ body{
 				<th>名前</th>
 				<th>電話番号</th>
 				<th>メールアドレス</th>
+				<th>ポイント</th>
 				<th>変更</th>
 				<th>削除</th>
 			</tr>
@@ -176,6 +177,7 @@ body{
 					<td>${item.name }</td>
 					<td class="fixed-b-3">${item.tel }</td>
 					<td>${item.email }</td>
+					<td>${item.point }pt</td>
 					<%-- 変更ボタン --%>
 					<td class="fixed-b-1">
 						<form action="/InnReserve/CustomerServlet" method="get">

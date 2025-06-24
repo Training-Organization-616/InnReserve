@@ -252,7 +252,7 @@ public class ReserveServlet extends HttpServlet {
 				PlanBean plan = plandao.findById(plan_id);
 				int inn_id = plan.getInn_id();
 
-				int give_point = (int) (original_price * 0.1);
+				int give_point = (int) (original_price * 0.05);
 
 				int now_point = customer.getPoint();
 

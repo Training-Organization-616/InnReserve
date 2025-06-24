@@ -185,6 +185,7 @@ public class CustomerServlet extends HttpServlet {
 				request.setAttribute("original_email", Customer.getEmail());
 				request.setAttribute("password", Customer.getPassword());
 				request.setAttribute("original_password", Customer.getPassword());
+				request.setAttribute("point", Customer.getPoint());
 
 				gotoPage(request, response, "/Customer_Update.jsp");
 
@@ -197,6 +198,23 @@ public class CustomerServlet extends HttpServlet {
 				String password = request.getParameter("password");
 				String check_password = request.getParameter("check_password");
 				String origin_email = request.getParameter("original_email");
+				if (request.getParameter("point").equals("")) {
+					request.setAttribute("Update_massage", "未記入の記入欄があります");
+
+					CustomerBean Customer = dao.findByID(id);
+
+					request.setAttribute("id", Customer.getId());
+					request.setAttribute("name", Customer.getName());
+					request.setAttribute("tel", Customer.getTel());
+					request.setAttribute("email", Customer.getEmail());
+					request.setAttribute("original_email", Customer.getEmail());
+					request.setAttribute("original_password", Customer.getPassword());
+					request.setAttribute("point", Customer.getPoint());
+					gotoPage(request, response, "/Customer_Update.jsp");
+					return;
+				}
+
+				int point = Integer.parseInt(request.getParameter("point"));
 				//エラー処理
 				if (name.equals("") || tel.equals("") || email.equals("") || password.equals("")
 						|| check_password.equals("")) {
@@ -210,7 +228,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("email", Customer.getEmail());
 					request.setAttribute("original_email", Customer.getEmail());
 					request.setAttribute("original_password", Customer.getPassword());
-
+					request.setAttribute("point", Customer.getPoint());
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
 				}
@@ -228,6 +246,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("email", Customer.getEmail());
 					request.setAttribute("original_email", Customer.getEmail());
 					request.setAttribute("original_password", Customer.getPassword());
+					request.setAttribute("point", Customer.getPoint());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -243,6 +262,7 @@ public class CustomerServlet extends HttpServlet {
 					request.setAttribute("email", Customer.getEmail());
 					request.setAttribute("original_email", Customer.getEmail());
 					request.setAttribute("original_password", Customer.getPassword());
+					request.setAttribute("point", Customer.getPoint());
 
 					gotoPage(request, response, "/Customer_Update.jsp");
 					return;
@@ -263,6 +283,7 @@ public class CustomerServlet extends HttpServlet {
 							request.setAttribute("email", Customer.getEmail());
 							request.setAttribute("original_email", Customer.getEmail());
 							request.setAttribute("original_password", Customer.getPassword());
+							request.setAttribute("point", Customer.getPoint());
 
 							gotoPage(request, response, "/Customer_Update.jsp");
 							return;
@@ -271,7 +292,7 @@ public class CustomerServlet extends HttpServlet {
 				}
 				//-----------------------------------------------------------
 
-				dao.updateCustomer(id, name, tel, email, password);
+				dao.updateCustomer(id, name, tel, email, password, point);
 				CustomerBean ADMIN = (CustomerBean) session.getAttribute("Customer");
 
 				if (ADMIN.getId() == 1) {

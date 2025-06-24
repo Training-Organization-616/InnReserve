@@ -64,6 +64,11 @@ ${Update_massage}
 	<tr><th>アドレス</th>
 		<td><input type="text" name="email" value="${email}" placeholder="メールアドレス" maxlength="50" class="text_box"></td>
 	</tr>
+	<c:if test="${Customer.getId() eq 1}">
+	<tr><th>ポイント</th>
+		<td><input type="text" name="point" value="${point}" maxlength="50" class="text_box"></td>
+	</tr>
+	</c:if>
 	<c:choose>
 	<c:when test="${Customer.getId() ne 1 || id eq 1}">
 	<tr><th>パスワード</th>
