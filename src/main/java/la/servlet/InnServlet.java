@@ -108,9 +108,10 @@ public class InnServlet extends HttpServlet {
 				}
 
 				// 電話番号に-がなく、形式が誤り
-				Pattern p = Pattern.compile(".*-.*-.*");
+				Pattern p = Pattern
+						.compile("^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$");
 				if (p.matcher(tel).find() != true) {
-					request.setAttribute("message", "電話番号は-を含めて入力してください。");
+					request.setAttribute("message", "電話番号のフォーマットが正しくありません");
 					gotoPage(request, response, "/registInn.jsp");
 					return;
 				}
@@ -186,9 +187,10 @@ public class InnServlet extends HttpServlet {
 				}
 
 				// 電話番号に-がなく、形式が誤り
-				Pattern p = Pattern.compile(".*-.*-.*");
+				Pattern p = Pattern
+						.compile("^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$");
 				if (p.matcher(tel).find() != true) {
-					request.setAttribute("message", "電話番号は-を含めて入力してください。");
+					request.setAttribute("message", "電話番号のフォーマットが正しくありません");
 					request.setAttribute("inn_id", id);
 					gotoPage(request, response, "/updateInn.jsp");
 					return;
