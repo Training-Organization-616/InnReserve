@@ -15,6 +15,7 @@ InnBean inn = (InnBean) request.getAttribute("inn");
 <meta charset="UTF-8">
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -31,7 +32,7 @@ body{
 		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>			
 		</c:otherwise>
 	</c:choose>
-	<h1>${inn.name}の予約</h1>
+	<h1 class="text-left">|${inn.name}の予約</h1>
 	
 	<div class="main">
 	<form action="/InnReserve/ReserveServlet" method="post">
@@ -43,16 +44,16 @@ body{
 		<table border="1" align="center">
 			<tr>
 				<th>プラン${plan.id}</th>
-				<td>${plan.title}</td>
+				<td class="fixed-b-4">${plan.title}</td>
 			<tr>
 				<th>宿泊日数</th>
-				<td>
+				<td class="fixed-b-4">
 					<p>${days_msg}</p><input type="number" name="days" min="0">日
 				</td>
 			</tr>
 			<tr>
 				<th>宿泊人数</th>
-				<td>
+				<td class="fixed-b-4">
 					<p>${people_msg}</p>
 					<select name="people">
 					<c:forEach begin="1" end="${plan.max_people}" varStatus="num">
@@ -65,8 +66,8 @@ body{
 
 			<tr>
 				<th>チェックイン日</th>
-				<td>
-				<p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>"></div></td>
+				<td class="fixed-b-4">
+				<p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>" class="w-9"></div></td>
 			</tr>		
 		</table>
 		<button>予約</button>

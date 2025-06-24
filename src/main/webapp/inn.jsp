@@ -26,9 +26,9 @@
 				<form action="/InnReserve/InnServlet" method="get">
 					<span>宿名<input type="text" name="name" placeholder="?宿名:"
 						maxlength="50" class="textbox-size"></span> <span>場所<input type="text"
-						name="address" placeholder="?場所:" maxlength="50" class="textbox-size"></span> <span>金額<input
-						type="text" name="min_price" maxlength="10" class="textbox-size">円 <span>～</span>
-						<span><input type="text" name="max_price" maxlength="10" class="textbox-size">円</span>
+						name="address" placeholder="?場所:" maxlength="50" class="textbox-size"></span> <span>金額<span>&yen</span><input
+						type="text" name="min_price" maxlength="10" class="textbox-size"> <span>～</span>
+						<span><span>&yen</span><input type="text" name="max_price" maxlength="10" class="textbox-size"></span>
 						<div><button class="b">検索</button> <input type="hidden"
 						name="action" value="search"></div>
 				</form>

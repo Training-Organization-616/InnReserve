@@ -102,6 +102,9 @@
 .fixed-b-3{
 	width:190px;
 }
+.fixed-b-4{
+	width:300px;
+}
 th{
 	font-size: 25px;
 }
@@ -140,6 +143,9 @@ button{
 }
 .w-max{
 	width: 100%;
+}
+.w-9{
+	width: 95%;
 }
 .b-fit-size{
 	background-color: darkseagreen;

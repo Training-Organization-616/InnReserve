@@ -228,6 +228,8 @@ public class ReserveServlet extends HttpServlet {
 						request.setAttribute("people", people);
 						request.setAttribute("stay_days", stay_days);
 
+						request.setAttribute("point_message", "ポイントが記入されていません");
+
 						gotoPage(request, response, "/payment.jsp");
 						return;
 					} else {

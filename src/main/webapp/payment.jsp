@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -28,7 +29,7 @@ body{
 		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>			
 		</c:otherwise>
 	</c:choose>
-	<h1>ポイント利用</h1>
+	<h1 class="text-left">|ポイント利用</h1>
 	
 	<form action="/InnReserve/ReserveServlet">
 	<input type="hidden" name="action" value="comfirm">
@@ -49,12 +50,13 @@ body{
 			<input type="radio" name="usePoint" value="no" checked>利用しない		
 			</td></tr>
 		<tr><th>利用ポイント</th>
+		<p>${point_message}</p>
 		<c:choose>
 		<c:when test="${total_price ge Customer.getPoint() }">
-			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${Customer.getPoint()}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
+			<td><input type="number" name="how_usePoint" value="0" min="0" max="${Customer.getPoint()}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
 		</c:when>
 		<c:otherwise>
-			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${total_price}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
+			<td><input type="number" name="how_usePoint" value="0" min="0" max="${total_price}" >ポイント/${Customer.getPoint()}ポイント</td></tr>
 		</c:otherwise>
 			</c:choose>
 	</table>
