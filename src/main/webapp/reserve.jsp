@@ -31,14 +31,14 @@ body{
 		<p>	<jsp:include page="/Customer_Menu.jsp" /></p>			
 		</c:otherwise>
 	</c:choose>
-	<h1>${inn.name}の予約：プラン${plan_id}:${Plan.title}</h1>
+	<h1>${inn.name}の予約：プラン${plan.id}:${plan.title}</h1>
 	
 	<div class="main">
 	<form action="/InnReserve/ReserveServlet" method="post">
-	<input type="hidden" name="inn_id" value="${inn_id}">
-	<input type="hidden" name="price" value="${price}">
-	<input type="hidden" name="plan_id" value="${plan_id}">
-	<input type="hidden" name="max_people" value="${max_people}">
+	<input type="hidden" name="inn_id" value="${plan.inn_id}">
+	<input type="hidden" name="price" value="${plan.price}">
+	<input type="hidden" name="plan_id" value="${plan.id}">
+	<input type="hidden" name="max_people" value="${plan.max_people}">
 	
 		<table border="1" align="center">
 			<tr>
@@ -52,11 +52,11 @@ body{
 				<td>
 					<p>${people_msg}</p>
 					<select name="people">
-					<c:forEach begin="1" end="${max_people}" varStatus="num">
+					<c:forEach begin="1" end="${plan.max_people}" varStatus="num">
 						<option value="${num.count}">${num.count}</option>
 					</c:forEach>
 					</select>
-					人 / ${max_people}人
+					人 / ${plan.max_people}人
 				</td>
 			</tr>
 

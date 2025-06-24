@@ -20,6 +20,7 @@ h1{
 	<p align="right" style="margin-top: -30px;">
 		<c:if test="${not empty Customer}">
 こんにちは、${Customer.name}さん<br>
+利用可能ポイント : ${Customer.point }pt<br>
 		<c:choose>
 		 <c:when test="${Customer.getId() eq 1 }">
 			<a href="/InnReserve/CustomerServlet?action=edit&id=${Customer.getId()}">管理者情報の変更</a>|

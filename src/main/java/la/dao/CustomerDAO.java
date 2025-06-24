@@ -144,9 +144,9 @@ public class CustomerDAO {
 
 	}
 
-	public void addCustomer(String name, String tel, String email, String password) throws DAOException {
+	public void addCustomer(String name, String tel, String email, String password, int point) throws DAOException {
 
-		String sql = "Insert into customers(name, tel, email, password, delete_flag) values(?, ?, ?, ?, false)";
+		String sql = "Insert into customers(name, tel, email, password, point, delete_flag) values(?, ?, ?, ?, ? false)";
 
 		try (Connection con = DriverManager.getConnection(url, user, pass);
 				PreparedStatement st = con.prepareStatement(sql);) {
@@ -155,6 +155,7 @@ public class CustomerDAO {
 			st.setString(2, tel);
 			st.setString(3, email);
 			st.setString(4, password);
+			st.setInt(5, point);
 
 			st.executeUpdate();
 
@@ -251,5 +252,23 @@ public class CustomerDAO {
 			e.printStackTrace();
 			throw new DAOException("レコードの取得に失敗しました。");
 		}
+	}
+
+	public void updatePoint(int id, int point) throws DAOException {
+
+		String sql = "update customers set point = ? where id = ?";
+
+		try (Connection con = DriverManager.getConnection(url, user, pass);
+				PreparedStatement st = con.prepareStatement(sql);) {
+
+			st.setInt(1, point);
+			st.setInt(2, id);
+
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+
 	}
 }

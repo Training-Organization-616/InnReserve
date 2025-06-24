@@ -100,17 +100,12 @@ public class ReserveServlet extends HttpServlet {
 					//プラン情報を検索
 
 					int plan_id = Integer.parseInt(request.getParameter("plan_id"));
-					int max_people = Integer.parseInt(request.getParameter("max_people"));
-					int price = Integer.parseInt(request.getParameter("price"));
-					int inn_id = Integer.parseInt(request.getParameter("inn_id"));
-
-					request.setAttribute("plan_id", plan_id);
-					request.setAttribute("max_people", max_people);
-					request.setAttribute("price", price);
-					request.setAttribute("inn_id", inn_id);
 
 					PlanBean plan = plandao.findById(plan_id);
-					request.setAttribute("Plan", plan);
+
+					request.setAttribute("plan", plan);
+
+					int inn_id = plan.getInn_id();
 
 					InnBean inn = inndao.findInnById(inn_id);
 					request.setAttribute("inn", inn);
@@ -131,7 +126,6 @@ public class ReserveServlet extends HttpServlet {
 				int stay_days = 0;
 				String strDate = "";
 				Date first_day = null;
-				int customer_id = customer.getId();
 				//入力された予約情報を型変換
 
 				if (request.getParameter("people") == "") {
@@ -199,10 +193,11 @@ public class ReserveServlet extends HttpServlet {
 				request.setAttribute("inn_id", inn_id);
 				request.setAttribute("plan_id", plan_id);
 				request.setAttribute("cus_point", cus_point);
-				//request.setAttribute("customer_id", customer_id);
 				request.setAttribute("total_price", total_price);
 				request.setAttribute("first_day", strDate);
 				request.setAttribute("finally_day", finally_day);
+				request.setAttribute("people", people);
+				request.setAttribute("stay_days", stay_days);
 
 				gotoPage(request, response, "/payment.jsp");
 
@@ -212,39 +207,64 @@ public class ReserveServlet extends HttpServlet {
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 				int plan_id = Integer.parseInt(request.getParameter("plan_id"));
 				int total_price = Integer.parseInt(request.getParameter("total_price"));
-				int how_usepoint = Integer.parseInt(request.getParameter("how_usepoint"));
-				request.setAttribute("how_usepoint", 23);
-
-				String usePoint = request.getParameter("usePoint");
+				int how_usepoint = 0;
+				int people = Integer.parseInt(request.getParameter("people"));
+				int stay_days = Integer.parseInt(request.getParameter("stay_days"));
+				if (request.getParameter("usePoint").equals("yes")) {
+					how_usepoint = Integer.parseInt(request.getParameter("how_usePoint"));
+				}
 
 				//チェックイン日ーチェックアウト日（チェックアウトはデータ外）
 				String first = request.getParameter("first_day");
-				first = request.getParameter("check_in");
 				Date first_day = java.sql.Date.valueOf(first);
 
 				String finally_d = request.getParameter("finally_day");
-				finally_d = request.getParameter("check_in");
 				Date finally_day = java.sql.Date.valueOf(finally_d);
-
-				//if (usePoint.equals("no")) {
-				//	how_usepoint = 0;
-				//}
 
 				InnBean inn = inndao.findInnById(inn_id);
 				PlanBean plan = plandao.findById(plan_id);
-				CustomerBean customer_date = customerdao.findByID(customer.getId());
+
+				request.setAttribute("original_price", total_price);
+
 				total_price -= how_usepoint;
-				//System.out.println(inn + "+" + plan + "+" + total_price + "+" + how_usepoint + first_day + finally_day);
 
 				request.setAttribute("inn", inn);
 				request.setAttribute("plan", plan);
-				request.setAttribute("customer", customer_date);
 				request.setAttribute("total_price", total_price);
-				request.setAttribute("how_usepoint", 23);
+				request.setAttribute("how_usepoint", how_usepoint);
 				request.setAttribute("first_day", first_day);
 				request.setAttribute("finally_day", finally_day);
+				request.setAttribute("people", people);
+				request.setAttribute("stay_days", stay_days);
 
 				gotoPage(request, response, "/reservecheck.jsp");
+
+			} else if (action.equals("reservecomp")) {
+				int customer_id = Integer.parseInt(request.getParameter("customer_id"));
+				int plan_id = Integer.parseInt(request.getParameter("plan_id"));
+				int original_price = Integer.parseInt(request.getParameter("original_price"));
+				int people = Integer.parseInt(request.getParameter("people"));
+				int stay_days = Integer.parseInt(request.getParameter("stay_days"));
+				String first = request.getParameter("first_day");
+				Date first_day = java.sql.Date.valueOf(first);
+				int how_usepoint = Integer.parseInt(request.getParameter("how_usepoint"));
+
+				PlanBean plan = plandao.findById(plan_id);
+				int inn_id = plan.getInn_id();
+
+				int give_point = (int) (original_price * 0.1);
+
+				int now_point = customer.getPoint();
+
+				now_point = now_point - how_usepoint + give_point;
+				customerdao.updatePoint(customer_id, now_point);
+
+				dao.addReserve(customer_id, inn_id, plan.getId(), people, stay_days, first_day, original_price);
+
+				request.setAttribute("give_point", give_point);
+				CustomerBean update_customer = customerdao.findByID(customer_id);
+				session.setAttribute("Customer", update_customer);
+				gotoPage(request, response, "/reservecomp.jsp");
 
 				//予約一覧画面の表示
 			} else if (action.equals("reservelist")) {

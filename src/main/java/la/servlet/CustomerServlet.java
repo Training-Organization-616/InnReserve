@@ -155,7 +155,7 @@ public class CustomerServlet extends HttpServlet {
 				}
 				//-----------------------------------------------------------
 
-				dao.addCustomer(name, tel, email, password);
+				dao.addCustomer(name, tel, email, password, 1000);
 
 				request.setAttribute("Login_message", "会員登録が完了しました\n ログインして下さい");
 

@@ -109,7 +109,7 @@ public class ReserveDAO {
 		}
 	}
 
-	public void addReserve(int customer_id, int inn_id, int people, int stay_days,
+	public void addReserve(int customer_id, int inn_id, int plan_id, int people, int stay_days,
 			Date first_day, int total_price) throws DAOException {
 		int reserveNumber = 0;
 		String sql = "SELECT nextval('reserve_id_seq')";
@@ -127,7 +127,7 @@ public class ReserveDAO {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
 		} // SQL文の作成
-		sql = "INSERT INTO reserve VALUES(?, ?, ?, ?, ?, ?, ?, false)";
+		sql = "INSERT INTO reserve VALUES(?, ?, ?, ?, ?, ?, ?, ?, false)";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);
@@ -137,10 +137,11 @@ public class ReserveDAO {
 			st.setInt(1, reserveNumber);
 			st.setInt(2, customer_id);
 			st.setInt(3, inn_id);
-			st.setInt(4, people);
-			st.setInt(5, stay_days);
-			st.setDate(6, first_day);
-			st.setInt(7, total_price);
+			st.setInt(4, plan_id);
+			st.setInt(5, people);
+			st.setInt(6, stay_days);
+			st.setDate(7, first_day);
+			st.setInt(8, total_price);
 			st.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

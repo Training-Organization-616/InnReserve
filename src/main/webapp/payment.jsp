@@ -30,13 +30,15 @@ body{
 	</c:choose>
 	<h1>ポイント利用</h1>
 	
-	<form action="/InnReserve/reservecheck.jsp">
+	<form action="/InnReserve/ReserveServlet">
 	<input type="hidden" name="action" value="comfirm">
-	<input type="hidden" name="inn_id" value="${inn_id}>"
+	<input type="hidden" name="inn_id" value="${inn_id}">
 	<input type="hidden" name="plan_id" value="${plan_id}">
 	<input type="hidden" name="total_price" value="${total_price}">
 	<input type="hidden" name="first_day" value="${first_day}">
 	<input type="hidden" name="finally_day" value="${finally_day}">
+	<input type="hidden" name="people" value="${people}">
+	<input type="hidden" name="stay_days" value="${stay_days}">
 	
 	<table>
 		<tr><th>金額(税込み)</th><td>${total_price}</td></tr>
@@ -46,7 +48,7 @@ body{
 			<input type="radio" name="usePoint" value="no" checked>利用しない		
 			</td></tr>
 		<tr><th>利用ポイント</th>
-			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${cus_point}" >ポイント</td></tr>
+			<td><input type="number" name="how_usePoint" velue="0" min="0" max="${cus_point}" >ポイント/${Customer.getPoint() }ポイント</td></tr>
 	</table>
 	
 	<button>予約はこちらから</button>

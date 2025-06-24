@@ -54,7 +54,7 @@ body {
 			<c:forEach items="${plans}" var="plan">
 				<li class="block m-1">
 					<div class="background border">
-					<a href="/InnReserve/ReserveServlet?inn_id=${plan.inn_id }&action=goreserve"/>
+					<a href="/InnReserve/ReserveServlet?plan_id=${plan.id }&action=goreserve"/>
 					<div class="text-color-bk font-bold">${plan.title }</div>
 					<table class="plan-table">
 						<thead>

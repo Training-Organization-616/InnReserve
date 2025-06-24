@@ -16,7 +16,6 @@ InnBean inn = (InnBean) request.getAttribute("inn");
 %>
 <%
 int inn_id = inn.getId();
-int price = inn.getPrice();
 %>
 <% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); %>
 <% String today = sdf.format(new Date()); %>
@@ -43,7 +42,7 @@ body{
 		</c:otherwise>
 	</c:choose>
 	<h1>${inn.getName() }</h1>
-	<form action="/InnReserve/ReserveServlet?reserve_id=<%=reserve_id%>&price=<%=price %>&inn_id=<%=inn_id %>"
+	<form action="/InnReserve/ReserveServlet?reserve_id=<%=reserve_id%>&price=<%=reserve.getTotal_price() %>&inn_id=<%=inn_id %>"
 		method="post">
 		<table border="1" align="center">
 			<tr>
@@ -55,7 +54,12 @@ body{
 			<tr>
 				<th>宿泊人数</th>
 				<td>
-					<p>${people_msg}</p><input type="text" name="people" cal="2"value="${reserve.getPeople() }">
+					<p>${people_msg}</p>
+					<select name="people">
+					<c:forEach begin="1" end="${reserve.getPeople()}" varStatus="num">
+						<option value="${num.count}">${num.count}</option>
+					</c:forEach>
+					</select>
 				</td>
 			</tr>
 			<tr>
