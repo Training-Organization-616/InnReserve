@@ -22,6 +22,14 @@ InnBean inn = (InnBean) request.getAttribute("inn");
 body{
 	text-align: center;
 }
+
+input{
+	font-size: 20px;
+}
+
+select{
+	font-size: 22px;
+}
 </style>
 	<jsp:include page="/menu.jsp" />
 	<c:choose>
@@ -43,7 +51,7 @@ body{
 	
 		<table border="1" align="center">
 			<tr>
-				<th>プラン${plan.id}</th>
+				<th>プラン名</th>
 				<td class="fixed-b-4">${plan.title}</td>
 			<tr>
 				<th>宿泊日数</th>

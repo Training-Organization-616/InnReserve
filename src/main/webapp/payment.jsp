@@ -19,6 +19,10 @@
 body{
 	text-align: center;
 }
+
+input{
+	font-size: 20px;
+}
 </style>
 	<jsp:include page="/menu.jsp" />
 	<c:choose>
@@ -61,7 +65,7 @@ body{
 			</c:choose>
 	</table>
 	
-	<button>予約はこちらから</button>
+	<button style="width: 120px">予約はこちら</button>
 	</form>
 </body>
 </html>

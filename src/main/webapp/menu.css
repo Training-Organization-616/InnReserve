@@ -84,10 +84,17 @@ dialog{
 button{
 	color: black;
 	background-color: rgb(230,230,230);
+	width: 120px;
+	height: 35px;
+	font-size: 20px;
 }
 .headline{
 	object-fit: cover;
 }
 img{
 	cursor: pointer;
+}
+
+input{
+	font-size: 20px;
 }

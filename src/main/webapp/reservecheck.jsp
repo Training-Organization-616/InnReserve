@@ -35,15 +35,15 @@ h3{
 	
 	
 	
-	<span style="text-align: right;">以下の内容で予約いたします。</span>
-	<h3 class="text-left">|会員情報</h3>
+	<h2>以下の内容で予約いたします。</h2>
+	<h1 class="text-left">|会員情報</h1>
 	<table align="center">
 	<tr><th>名前</th><td>${Customer.getName()}</td></tr>
 	<tr><th>電話番号</th><td>${Customer.getTel()}</td></tr>
 	
 	</table>
 	
-	<h3 class="text-left">|宿・プラン・料金</h3>
+	<h1 class="text-left">|宿・プラン・料金</h1>
 	
 	<table align="center">
 	<tr><th>宿名</th><td>${inn.name}</td></tr>

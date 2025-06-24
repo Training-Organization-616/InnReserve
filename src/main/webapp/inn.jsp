@@ -24,7 +24,7 @@
 			<%-- エラーメッセージを表示 --%>
 			<div><c:if test="${not empty message }">${message }</c:if></div>
 				<form action="/InnReserve/InnServlet" method="get">
-					<span>宿名
+					<span>宿名:
 					<c:choose>
 					<c:when test="${not empty Name }">
 					<input type="text" name="name" placeholder="?宿名:" maxlength="50" class="textbox-size" value="${Name }">
@@ -34,7 +34,7 @@
 					</c:otherwise>
 					</c:choose>	
 					</span>
-					<span>場所
+					<span>場所:
 					<c:choose>
 					<c:when test="${not empty Address }">
 					<input type="text" name="address" placeholder="?場所:" maxlength="50" class="textbox-size" value="${Address }">
@@ -44,7 +44,7 @@
 					</c:otherwise>
 					</c:choose>	
 					</span>
-					<span>金額<span>&yen</span>
+					<span>金額:<span>&yen</span>
 					<c:choose>
 					<c:when test="${not empty Min_price }">
 						<input type="text" name="min_price" maxlength="10" class="textbox-size" value="${Min_price }">
@@ -70,7 +70,7 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-	<h1 class="text-left">|宿一覧</h1>
+	<h1 class="text-left">|宿一覧:</h1>
 	<ul>
 		<div class="flex-fit">
 			<c:forEach items="${inns }" var="inn">
