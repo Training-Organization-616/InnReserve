@@ -31,7 +31,6 @@
 						<span><input type="text" name="max_price" maxlength="10">円</span>
 						<button class="button">検索</button> <input type="hidden"
 						name="action" value="search">
-						<input type="hidden" name="customer_id" value="${Customer.getId() }">
 				</form>
 			</div>
 		</c:otherwise>
