@@ -340,6 +340,13 @@ public class CustomerServlet extends HttpServlet {
 				String name = request.getParameter("name");
 				String email = request.getParameter("email");
 
+				if ((name != null && name.length() != 0)) {
+					request.setAttribute("Name", name);
+				}
+				if ((email != null && email.length() != 0)) {
+					request.setAttribute("Email", email);
+				}
+
 				List<CustomerBean> Customers = dao.findByNameAndEmail(name, email);// 検索メソッド
 				request.setAttribute("Customers_list", Customers);
 				request.setAttribute("menu", 3);
