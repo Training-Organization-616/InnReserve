@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
 <style>
@@ -22,23 +23,24 @@ body{
 ${message }
 </c:if></p>
 <div class="main">
+<h1 class="text-left">|宿情報の変更</h1>
 	<form action="/InnReserve/InnServlet" method="post">
 		<table border="1" align="center">
 			<tr>
 				<th>宿名</th>
-				<td><input type="text" name="name" value="${name }" maxlength="50"></td>
+				<td class="fixed-b-5"><input type="text" name="name" class="w-9" value="${name }" maxlength="50"></td>
 			</tr>
 			<tr>
 				<th>場所</th>
-				<td><input type="text" name="address" value="${address }" maxlength="50"></td>
+				<td class="fixed-b-5"><input type="text" name="address" class="w-9" value="${address }" maxlength="50"></td>
 			</tr>
 			<tr>
 				<th>電話番号</th>
-				<td><input type="text" name="tel" value="${tel }" placeholder="ハイフンを含めて入力してください。" maxlength="20"></td>
+				<td class="fixed-b-5"><input type="text" name="tel" class="w-9" value="${tel }" placeholder="ハイフンを含めて入力してください。" maxlength="20"></td>
 			</tr>
 			<tr>
 				<th>画像</th>
-				<td><input type="file" name="picture" onchange="previewFile(this);"></td>
+				<td class="fixed-b-5"><input type="file" name="picture" class="w-9" onchange="previewFile(this);"></td>
 <img id="preview">
  
   <script>
