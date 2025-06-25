@@ -29,19 +29,19 @@ ${message }
 		<table border="1" align="center">
 			<tr>
 				<th>プラン名</th>
-				<td><input type="text" name="title" maxlength="50" size="30" placeholder="50文字以下"></td>
+				<td><input type="text" name="title" maxlength="50" size="30" placeholder="50文字以下" class="w-9"></td>
 			</tr>
 			<tr>
 				<th>最大人数</th>
-				<td><input type="number" name="max_people" min="0" maxlength="50" size="30" placeholder="50文字以下"></td>
+				<td><input type="number" name="max_people" min="0" maxlength="50" size="30" placeholder="50文字以下" class="w-9"></td>
 			</tr>
 			<tr>
 				<th>金額</th>
-				<td><input type="number" name="price" maxlength="20" min="0" size="30"></td>
+				<td><input type="number" name="price" maxlength="20" min="0" size="30" class="w-9"></td>
 			</tr>
 			<tr>
 				<th>詳細</th>
-				<td><input type="textarea" name="detail" size="30"></td>
+				<td><input type="textarea" name="detail" size="30"class="w-9"></td>
 			</tr>
 		</table>
 		<button type="button" class="show" id="button">登録</button>
