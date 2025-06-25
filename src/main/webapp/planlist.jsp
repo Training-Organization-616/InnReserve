@@ -84,6 +84,7 @@ body {
 								<td class="fixed-b-1"><button type="button" class="show">削除</button></td>
 								<dialog>
 								<p>本当に削除しますか?</p>
+								<p>※二度と復旧はできません</p>
 								<button>削除</button>
 								<input type="hidden" name="action" value="truedelete">
 							</form>

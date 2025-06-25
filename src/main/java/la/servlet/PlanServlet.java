@@ -85,32 +85,32 @@ public class PlanServlet extends HttpServlet {
 				int inn_id = Integer.parseInt(request.getParameter("inn_id"));
 
 				if (request.getParameter("title") == "") {
-					request.setAttribute("detail_msg", "詳細を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else {
 					title = request.getParameter("title");
 				}
 
 				if (request.getParameter("max_people") == "") {
-					request.setAttribute("max_people_msg", "人数を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else if (isNumber(request.getParameter("max_people"))) {
 					max_people = Integer.parseInt(request.getParameter("max_people"));
 				} else {
-					request.setAttribute("people_msg", "数字を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				}
 				if (request.getParameter("price") == "") {
-					request.setAttribute("price_msg", "金額を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else if (isNumber(request.getParameter("price"))) {
 					price = Integer.parseInt(request.getParameter("price"));
 				} else {
-					request.setAttribute("days_msg", "数字を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				}
 				if (request.getParameter("detail") == "") {
-					request.setAttribute("detail_msg", "詳細を入力してください");
+					request.setAttribute("message", "値を入力してください");
 					flag = 1;
 				} else {
 					detail = request.getParameter("detail");
