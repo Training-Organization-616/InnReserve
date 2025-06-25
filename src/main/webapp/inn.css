@@ -105,6 +105,12 @@
 .fixed-b-4{
 	width:300px;
 }
+.fixed-b-5{
+	width:500px;
+}
+.fixed-b-6{
+	width:1000px;
+}
 th{
 	font-size: 25px;
 }
@@ -113,15 +119,27 @@ td{
 }
 button{
 	background-color: lightyellow;
-	font-size: 15px;
+	font-size: 20px;
 }
 .show{
 	background-color: lightyellow;
-	font-size: 15px;
+	font-size: 20px;
+}
+#show{
+	background-color: lightyellow;
+	font-size: 20px;
 }
 .b{
 	background-color: lightyellow;
-	font-size: 15px;
+	font-size: 20px;
+}
+.close{
+	background-color: lightyellow;
+	font-size: 20px;
+}
+#close{
+	background-color: lightyellow;
+	font-size: 20px;
 }
 .textbox-size{
 	width:200px;
@@ -147,7 +165,15 @@ button{
 .w-9{
 	width: 95%;
 }
+.w-9-2{
+	width: 98%;
+}
+.w-9-2{
+	width: 87%;
+}
 .b-fit-size{
 	background-color: darkseagreen;
 }
-
+.f-size{
+	font-size: 22px;
+}
