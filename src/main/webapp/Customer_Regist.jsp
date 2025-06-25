@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
 
@@ -39,7 +40,7 @@ body{
 	<jsp:include page="/menu.jsp" />
 <br>
 
-<h1 style="text-align: center;">新規会員登録</h1>
+<h1 class="text-left">|新規会員登録</h1>
 
 ${Regist_message}
 
