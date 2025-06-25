@@ -63,7 +63,7 @@ select{
 				<th>宿泊人数</th>
 				<td class="fixed-b-4">
 					<p>${people_msg}</p>
-					<select name="people w-9-2">
+					<select name="people" class="w-9-2">
 					<c:forEach begin="1" end="${plan.max_people}" varStatus="num">
 						<option value="${num.count}">${num.count}</option>
 					</c:forEach>

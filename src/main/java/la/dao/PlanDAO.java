@@ -203,7 +203,7 @@ public class PlanDAO {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
 		}
-		sql = "UPDATE reserve SET cancel_flag = true WHERE inn_id = ?";
+		sql = "UPDATE reserve SET cancel_flag = true WHERE plan_id = ?";
 
 		try (// データベースへの接続
 				Connection con = DriverManager.getConnection(url, user, pass);

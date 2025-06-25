@@ -19,11 +19,11 @@ body{
 	<%-- 管理者メニューのリンク --%>
 	<p><jsp:include page="/managermenu.jsp" /></p>
 	<%-- エラーメッセージを表示する --%>
+<div class="main">
+<h1 class="text-left">|宿情報の変更</h1>
 	<p><c:if test="${not empty message }">
 ${message }
 </c:if></p>
-<div class="main">
-<h1 class="text-left">|宿情報の変更</h1>
 	<form action="/InnReserve/InnServlet" method="post">
 		<table border="1" align="center">
 			<tr>
