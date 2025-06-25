@@ -18,12 +18,12 @@ body{
 	<jsp:include page="/menu.jsp" />
 	<%-- 管理者メニューのリンク --%>
 	<p><jsp:include page="/managermenu.jsp" /></p>
+	<h1 class="text-left">|プラン変更</h1>
 	<%-- エラーメッセージを表示する --%>
 	<p><c:if test="${not empty message }">
 ${message }
 </c:if></p>
 <div class="main">
-<h1 class="text-left">|プラン変更</h1>
 	<form action="/InnReserve/PlanServlet" method="post">
 		<table border="1" align="center">
 			<tr>
