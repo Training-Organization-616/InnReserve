@@ -62,7 +62,7 @@ box-shadow: none;
 }
 
 .btn:hover {
-  background-color:lightgreen;
+  background-color:rgb(170,220,170);
 }
 .bu{
 	cursor: pointer;

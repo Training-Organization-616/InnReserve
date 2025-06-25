@@ -24,6 +24,13 @@
 }
 .background{
 	background-color: white;
+-webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all  0.3s ease;
+}
+.background:hover{
+		background-color: rgb(200,255,200);
 }
 .block{
 	display: block;
@@ -94,7 +101,7 @@
 	width:100%;
 }
 .fixed-b-1{
-	width: 50px;
+	width: 70px;
 }
 .fixed-b-2{
 	width:130px;
@@ -120,6 +127,9 @@ td{
 button{
 	background-color: lightyellow;
 	font-size: 20px;
+}
+button:hover{
+	background-color: rgb(230,230,200);
 }
 .show{
 	background-color: lightyellow;

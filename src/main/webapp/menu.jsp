@@ -29,16 +29,16 @@ h1{
 利用可能ポイント : ${Customer.point }pt<br>
 		<c:choose>
 		 <c:when test="${Customer.getId() eq 1 }">
-			<a href="/InnReserve/CustomerServlet?action=edit&id=${Customer.getId()}">管理者情報の変更</a>|
+			<a href="/InnReserve/CustomerServlet?action=edit&id=${Customer.getId()}" class="link">管理者情報の変更</a>|
 		</c:when>
 		<c:otherwise>
-			<a href="/InnReserve/CustomerServlet?action=edit&id=${Customer.getId()}">会員情報の変更</a>|
+			<a href="/InnReserve/CustomerServlet?action=edit&id=${Customer.getId()}" class="link">会員情報の変更</a>|
 		</c:otherwise>
 			</c:choose>
-			<a href="/InnReserve/CustomerServlet?action=logout">ログアウト</a>
+			<a href="/InnReserve/CustomerServlet?action=logout" class="link">ログアウト</a>
 		</c:if>
 		<c:if test="${empty Customer}">
-			<a href="/InnReserve/CustomerServlet?action=gologin">ログイン</a> 
+			<a href="/InnReserve/CustomerServlet?action=gologin" class="link">ログイン</a> 
 </c:if>
 </p>
 </div>

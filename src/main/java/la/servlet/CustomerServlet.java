@@ -308,7 +308,9 @@ public class CustomerServlet extends HttpServlet {
 						session.setAttribute("Customer", update_customer);
 					}
 
-					gotoPage(request, response, "/InnServlet?action=list");
+					request.setAttribute("Customers_list", Customers);
+					request.setAttribute("menu", 3);
+					gotoPage(request, response, "/manager.jsp");
 					return;
 
 				} else {

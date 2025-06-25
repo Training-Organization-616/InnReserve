@@ -100,10 +100,10 @@ body {
 								<dialog>
 								<p>本当に削除しますか?</p>
 								<p>※二度と復旧はできません</p>
-								<button>削除</button>
+								<button>はい</button>
 								<input type="hidden" name="action" value="truedelete">
 							</form>
-							<button type="button" class="close">キャンセル</button>
+							<button type="button" class="close">いいえ</button>
 							</dialog>
 							</c:when>
 						<c:otherwise>
@@ -113,10 +113,10 @@ body {
 								<td class="fixed-b-2"><button type="button" class="show fixed-b-2">キャンセル</button></td>
 								<dialog>
 								<p>本当にキャンセルしますか?</p>
-								<button>OK</button>
+								<button>はい</button>
 								<input type="hidden" name="action" value="delete">
 							</form>
-							<button type="button" class="close">キャンセル</button>
+							<button type="button" class="close">いいえ</button>
 							</dialog>
 						</c:otherwise>
 						</c:choose>

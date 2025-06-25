@@ -26,15 +26,15 @@
 	background-color: rgb(180, 180, 180);
 }
 
-a:link {
+.link {
  color:white;
 }
 
-a:visited {
+.link:visited {
  color:white;
 }
 
-a:hover{
+.link:hover{
 	color: red;
 }
 
