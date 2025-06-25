@@ -79,8 +79,8 @@ body {
 							</c:if>
 
 
-							<td class="fixed-b-1">${reserve.stay_days }</td>
-							<td class="fixed-b-1">${reserve.people }</td>
+							<td class="fixed-b-1">${reserve.stay_days }日</td>
+							<td class="fixed-b-1">${reserve.people }人</td>
 							<td class="fixed-b-3">${reserve.first_day }</td>
 							<td class="fixed-b-2">￥${reserve.total_price }</td>
 							<c:if test="${Customer.getId() eq 1 }">

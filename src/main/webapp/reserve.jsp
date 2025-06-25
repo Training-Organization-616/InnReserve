@@ -56,7 +56,7 @@ select{
 			<tr>
 				<th>宿泊日数</th>
 				<td class="fixed-b-4">
-					<p>${days_msg}</p><input type="number" name="days" min="0" class="w-9-3">日
+					<p>${days_msg}</p><input type="number" name="days" min="1" class="w-9-3">日
 				</td>
 			</tr>
 			<tr>

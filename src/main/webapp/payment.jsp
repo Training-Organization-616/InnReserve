@@ -65,7 +65,7 @@ input{
 			</c:choose>
 	</table>
 	
-	<button style="width: 120px">予約はこちら</button>
+	<button style="width: 170px">予約はこちら</button>
 	</form>
 </body>
 </html>
