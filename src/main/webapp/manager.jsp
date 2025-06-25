@@ -112,6 +112,7 @@ body{
 							<button type="button" class="show">削除</button>
 							<dialog>
 							<p>本当に削除しますか?</p>
+							<p>※二度と復旧はできません</p>
 							<button>削除</button>
 							<input type="hidden" name="action" value="delete">
 							<button type="button" class="close">キャンセル</button>
@@ -205,6 +206,24 @@ body{
 					</td>
 					<%-- 削除ボタン --%>
 					<td class="fixed-b-1">
+					<c:choose>
+						<c:when test="${item.delete_flag eq true }">
+						<form action="/InnReserve/CustomerServlet" method="post">
+							<input type="hidden" name="userId" value="2">
+							<%-- 管理者[userId:2] --%>
+							<input type="hidden" name="id" value="${item.id}">
+							<%-- 削除(ダイアログ付き) --%>
+							<button type="button" class="show">削除</button>
+							<dialog id="dialog"> 
+							<p>本当に削除しますか?</p>
+							<p>※二度と復旧はできません</p>
+							<button>削除</button>
+							<input type="hidden" name="action" value="truedelete">
+							<button type="button" class="close">キャンセル</button>
+							</dialog>
+						</form>
+						</c:when>
+						<c:otherwise>
 						<form action="/InnReserve/CustomerServlet" method="post">
 							<input type="hidden" name="userId" value="2">
 							<%-- 管理者[userId:2] --%>
@@ -218,6 +237,8 @@ body{
 							<button type="button" class="close">キャンセル</button>
 							</dialog>
 						</form>
+						</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 			</c:forEach>

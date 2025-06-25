@@ -200,6 +200,36 @@ public class CustomerDAO {
 		}
 	}
 
+	public void truedeleteCustomer(int id) throws DAOException {
+
+		String sql = "DELETE FROM reserve WHERE customer_id = ?";
+
+		try (Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+
+			st.setInt(1, id);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの取得に失敗しました。");
+		}
+		sql = "DELETE FROM customers WHERE id = ?";
+
+		try (// データベースへの接続
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
+			// コードを指定
+			st.setInt(1, id);
+			// SQLの実行
+			st.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DAOException("レコードの操作に失敗しました。");
+		}
+	}
+
 	public void trueDeleteCustomer(int id) throws DAOException {
 		String sql = "DELETE FROM reserve WHERE customer_id = ?";
 

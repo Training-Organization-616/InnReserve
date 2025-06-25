@@ -341,6 +341,30 @@ public class CustomerServlet extends HttpServlet {
 
 				gotoPage(request, response, "/ReserveServlet?action=list"); //////////////////////要宿
 
+			} else if (action.equals("truedelete")) {//会員削除
+
+				int id = Integer.parseInt(request.getParameter("id"));
+
+				dao.truedeleteCustomer(id);
+
+				CustomerBean ADMIN = (CustomerBean) session.getAttribute("Customer");
+
+				if (ADMIN.getId() == 1) {
+
+					List<CustomerBean> Customers = dao.findAll();
+
+					request.setAttribute("Customers_list", Customers);
+
+					gotoPage(request, response, "/InnServlet?action=list");
+					return;
+
+				}
+
+				session = request.getSession(false);
+				session.removeAttribute("Customer");
+
+				gotoPage(request, response, "/ReserveServlet?action=list");
+
 			} else if (action.equals("search")) {//会員検索
 				String name = request.getParameter("name");
 				String email = request.getParameter("email");

@@ -68,7 +68,7 @@ ${Update_massage}
 	<c:choose>
 	<c:when test="${Customer.getId() eq 1}">
 	<tr><th>ポイント</th>
-		<td><input type="text" name="point" value="${point}" maxlength="50" class="text_box"></td>
+		<td><input type="number" name="point" value="${point}" maxlength="50" class="text_box"></td>
 	</tr>
 	</c:when>
 	<c:otherwise>
