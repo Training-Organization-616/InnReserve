@@ -56,14 +56,14 @@ select{
 			<tr>
 				<th>宿泊日数</th>
 				<td class="fixed-b-4">
-					<p>${days_msg}</p><input type="number" name="days" min="0">日
+					<p>${days_msg}</p><input type="number" name="days" min="0" class="w-9-3">日
 				</td>
 			</tr>
 			<tr>
 				<th>宿泊人数</th>
 				<td class="fixed-b-4">
 					<p>${people_msg}</p>
-					<select name="people">
+					<select name="people w-9-2">
 					<c:forEach begin="1" end="${plan.max_people}" varStatus="num">
 						<option value="${num.count}">${num.count}</option>
 					</c:forEach>
@@ -75,7 +75,7 @@ select{
 			<tr>
 				<th>チェックイン日</th>
 				<td class="fixed-b-4">
-				<p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" value="<%= today %>" min="<%= today %>" class="w-9"></div></td>
+				<p>${check_in_msg}</p><div id="app"><input type="date" name="check_in" class="w-9" value="<%= today %>" min="<%= today %>" class="w-9"></div></td>
 			</tr>		
 		</table>
 		<button>予約</button>
