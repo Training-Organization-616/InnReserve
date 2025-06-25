@@ -29,16 +29,16 @@ ${message }
 		<table border="1" align="center">
 			<tr>
 				<th>宿名</th>
-				<td><input type="text" name="name" maxlength="50" placeholder="50文字以下" class="textbox-size"></td>
+				<td><input type="text" name="name" maxlength="50" placeholder="50文字以下" class="textbox-size w-9"></td>
 			</tr>
 			<tr>
 				<th>場所</th>
-				<td><input type="text" name="address" maxlength="50" placeholder="50文字以下" class="textbox-size"></td>
+				<td><input type="text" name="address" maxlength="50" placeholder="50文字以下" class="textbox-size w-9"></td>
 			</tr>
 			<tr>
 				<th>電話番号</th>
 				<td><input type="text" name="tel"
-					placeholder="ハイフンを含める" maxlength="20" class="textbox-size"></td>
+					placeholder="ハイフンを含める" maxlength="20" class="textbox-size w-9"></td>
 			</tr>
 			<tr>
 				<th>画像</th>
