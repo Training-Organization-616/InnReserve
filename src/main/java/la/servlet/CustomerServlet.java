@@ -110,7 +110,7 @@ public class CustomerServlet extends HttpServlet {
 					return;
 				}
 				Pattern p = Pattern
-						.compile("^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$");
+						.compile("0\\d{1,4}-\\d{1,4}-\\d{4}");
 				if (name.length() >= 20) {
 					request.setAttribute("Regist_message", "名前は20文字以下で入力してください");
 					gotoPage(request, response, "/Customer_Regist.jsp");
@@ -237,7 +237,7 @@ public class CustomerServlet extends HttpServlet {
 
 				//エラー処理
 				Pattern p = Pattern
-						.compile("^0([0-9]-[0-9]{4}|[0-9]{2}-[0-9]{3}|[0-9]{3}-[0-9]{2}|[0-9]{4}-[0-9])-[0-9]{4}$");
+						.compile("0\\d{1,4}-\\d{1,4}-\\d{4}");
 				if (p.matcher(tel).find() != true) {
 					request.setAttribute("Update_massage", "電話番号のフォーマットが正しくありません");
 
@@ -297,14 +297,16 @@ public class CustomerServlet extends HttpServlet {
 
 				dao.updateCustomer(id, name, tel, email, password, point);
 				CustomerBean ADMIN = (CustomerBean) session.getAttribute("Customer");
-				CustomerBean update_customer = dao.findByID(id);
-				session.setAttribute("Customer", update_customer);
 
 				if (ADMIN.getId() == 1) {
 
 					List<CustomerBean> Customers = dao.findAll();
 
 					request.setAttribute("Customers_list", Customers);
+					if (id == 1) {
+						CustomerBean update_customer = dao.findByID(id);
+						session.setAttribute("Customer", update_customer);
+					}
 
 					gotoPage(request, response, "/InnServlet?action=list");
 					return;
@@ -330,8 +332,8 @@ public class CustomerServlet extends HttpServlet {
 					List<CustomerBean> Customers = dao.findAll();
 
 					request.setAttribute("Customers_list", Customers);
-
-					gotoPage(request, response, "/InnServlet?action=list");
+					request.setAttribute("menu", 3);
+					gotoPage(request, response, "/manager.jsp");
 					return;
 
 				}
@@ -354,8 +356,8 @@ public class CustomerServlet extends HttpServlet {
 					List<CustomerBean> Customers = dao.findAll();
 
 					request.setAttribute("Customers_list", Customers);
-
-					gotoPage(request, response, "/InnServlet?action=list");
+					request.setAttribute("menu", 3);
+					gotoPage(request, response, "/manager.jsp");
 					return;
 
 				}
