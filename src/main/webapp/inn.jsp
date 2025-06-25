@@ -70,7 +70,7 @@
 			</div>
 		</c:otherwise>
 	</c:choose>
-	<h1 class="text-left">|宿一覧:</h1>
+	<h1 class="text-left">|宿一覧</h1>
 	<ul>
 		<div class="flex-fit">
 			<c:forEach items="${inns }" var="inn">
