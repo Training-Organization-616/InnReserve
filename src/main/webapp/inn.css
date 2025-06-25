@@ -190,3 +190,28 @@ button:hover{
 .t-w{
 	width: 70%;
 }
+.confirm{
+/*	background-color: orange;*/
+/*	color: white;*/
+	width: 200px;
+	height:60px;
+/*-webkit-transition: all 0.3s ease;*/
+/*    -moz-transition: all 0.3s ease;*/
+/*    -o-transition: all 0.3s ease;*/
+/*    transition: all  0.3s ease;*/
+display: inline-block;
+  color:rgb(0, 0, 0);
+  font-size:120%;
+  text-decoration:none;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 50%, rgba(238,126 , 0, 1) 50%);
+  background-position: 0 0;
+  background-size: 200% auto;
+  transition: .3s;
+  cursor: pointer;
+}
+.confirm:hover{
+/*	background-color: white;*/
+/*	color: orange;*/
+background-position: -100% 0;
+  color: #fff;
+}

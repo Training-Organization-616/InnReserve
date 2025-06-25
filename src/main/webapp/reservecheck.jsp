@@ -68,7 +68,7 @@ h3{
 		<input type="hidden" name="first_day" value="${first_day }">
 		<input type="hidden" name="how_usepoint" value="${how_usepoint }">
 
-		<button>予約確定！</button>
+		<button class="confirm">予約確定！</button>
 	</form>
 	
 </body>
