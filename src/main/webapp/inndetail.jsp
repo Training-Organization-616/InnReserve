@@ -63,16 +63,16 @@ body {
 					<table class="plan-table  no-border">
 						<thead>
 							<tr>
-								<th class="color-wh text-left b-top"><span class="text-color-bk">|部屋タイプ・詳細</span></th>
-								<th class="color-wh b-top text-left"><span class="text-color-bk">1名(税込)</span></th>
-								<th class="color-wh b-top text-left"><span class="text-color-bk">合計(税込)/${plan.max_people}名</span></th>
+								<th class="color-wh text-left b-top"><span class="text-color-bk fixed-b-6">|部屋タイプ・詳細</span></th>
+								<th class="color-wh b-top text-left"><span class="text-color-bk fixed-b-4">1名(税込)</span></th>
+								<th class="color-wh b-top text-left"><span class="text-color-bk fixed-b-4">合計(税込)/${plan.max_people}名</span></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr class="no-border">
-								<td class="text-color-bk color-wh no-border text-left">${plan.detail }</td>
-								<td class="text-color-bk color-wh no-border text-left"><span>&yen</span>${plan.price }～</td>
-								<td class="text-color-bk color-wh no-border text-left">
+								<td class="text-color-bk color-wh no-border text-left fixed-b-6">${plan.detail }</td>
+								<td class="text-color-bk color-wh no-border text-left fixed-b-4"><span>&yen</span>${plan.price }～</td>
+								<td class="text-color-bk color-wh no-border text-left fixed-b-4">
 								<c:choose>
 										<c:when test="${plan.max_people >= 2}">
 											<span>&yen</span>${plan.price * plan.max_people}～
