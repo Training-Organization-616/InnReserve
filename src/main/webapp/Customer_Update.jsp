@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>宿予約</title>
 <link href="${pageContext.request.contextPath}/menu.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/inn.css" rel="stylesheet">
 </head>
 <body>
 
@@ -47,7 +48,7 @@ body{
 	</c:choose>
 
 
-<h1 style="text-align: center;">会員情報変更</h1>
+<h1 class="text-left">|会員情報変更</h1>
 
 ${Update_massage}
 
