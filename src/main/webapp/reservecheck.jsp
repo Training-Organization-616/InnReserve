@@ -37,24 +37,27 @@ h3{
 	
 	<h2>以下の内容で予約いたします。</h2>
 	<h1 class="text-left">|会員情報</h1>
-	<table align="center">
-	<tr><th>名前</th><td>${Customer.getName()}</td></tr>
-	<tr><th>電話番号</th><td>${Customer.getTel()}</td></tr>
+
+	<table align="center" class="t-w">
+	<tr><th class="fixed-b-3">名前</th><td>${Customer.getName()}</td></tr>
+	<tr><th class="fixed-b-3">電話番号</th><td>${Customer.getTel()}</td></tr>
 	
 	</table>
-	
+
 	<h1 class="text-left">|宿・プラン・料金</h1>
 	
-	<table align="center">
-	<tr><th>宿名</th><td>${inn.name}</td></tr>
-	<tr><th>場所</th><td>${inn.address}</td></tr>
-	<tr><th>電話番号</th><td>${inn.tel}</td></tr>
-	<tr><th>プラン</th><td>${plan.title}</td></tr>
-	<tr><th>人数</th><td>${people }人</td>
-	<tr><th>日時</th><td>${first_day} ～ ${finally_day}(${stay_days }日)</td></tr>
-	<tr><th>金額(税込)</th><td>${total_price}円(${how_usepoint}ポイント利用)</td></tr>
-	
+
+	<table align="center" class="t-w">
+	<tr><th class="fixed-b-3">宿名</th><td>${inn.name}</td></tr>
+	<tr><th class="fixed-b-3">場所</th><td>${inn.address}</td></tr>
+	<tr><th class="fixed-b-3">電話番号</th><td>${inn.tel}</td></tr>
+	<tr><th class="fixed-b-3">プラン</th><td>${plan.title}</td></tr>
+	<tr><th class="fixed-b-3">人数</th><td>${people }人</td>
+	<tr><th class="fixed-b-3">日時</th><td>${first_day} ～ ${finally_day}(${stay_days }日)</td></tr>
+	<tr><th class="fixed-b-3">金額(税込)</th><td>${total_price}円(${how_usepoint}ポイント利用)</td></tr>
 	</table>
+
+	
 	<form action="/InnReserve/ReserveServlet">
 		<input type="hidden" name="action" value="reservecomp"> 
 		<input type="hidden" name="plan_id" value="${plan.id }">
