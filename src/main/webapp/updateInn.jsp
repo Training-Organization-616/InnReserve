@@ -18,9 +18,9 @@ body{
 	<jsp:include page="/menu.jsp" />
 	<%-- 管理者メニューのリンク --%>
 	<p><jsp:include page="/managermenu.jsp" /></p>
+	<h1 class="text-left">|宿情報の変更</h1>
 	<%-- エラーメッセージを表示する --%>
 <div class="main">
-<h1 class="text-left">|宿情報の変更</h1>
 	<p><c:if test="${not empty message }">
 ${message }
 </c:if></p>
